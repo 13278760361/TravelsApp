@@ -1,0 +1,104 @@
+<!DOCTYPE html>	
+<html>	
+<head>	
+    <meta charset="utf-8">	
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>	
+    <title>frame</title>	
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/tripDetail.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
+</head>		
+<body>	
+	<div id="wrap">
+		<div id="main">
+	<script id="act-template" type="text/x-dot-template">
+	<div id='slide' class='swipe'>
+		<div class='swipe-wrap' id="banner-content">
+		
+		{{ for(var i=0; i<it.is_banner.length; i++) { }}
+		<div>
+			<img src="../image/nophoto.png" data-echo="{{=it.is_banner[i]}}" />
+		</div>
+		{{ } }}
+		</div>
+		<ul id="pointer">
+			{{ for(var j in it.is_banner) { }}
+			<li><a></a></li>
+			{{ } }}
+		</ul>
+	</div>
+<div class="base-info">	
+    <div class="title">	
+        <span>{{=it.goods_name}}</span>	
+        
+    </div>	
+    <div class="price">	
+        <div class="">促销价:<span class="price-text">￥{{=it.goods_price}}</span>起	
+            <del>￥{{=it.goods_marketprice}}</del>	
+        </div>	
+       
+    </div>	
+</div>	
+	
+<div class="custorm">	
+    <ul>	
+       <!-- <li class="arrow-right">	
+            <div>顾客满意度</div>	
+            <span>累积有919人出游 共179条评价</span>
+        </li>	-->
+        <li class="custorm-detail">	
+            <div class="custorm-detail-title">	
+                <span>{{=it.store_name}}</span>	
+                <span>{{=it.starthour}}</span>	
+            </div>	
+            <span class="custorm-detail-con">	
+              		  {{=it.goods_jingle}}	
+            </span>	
+        </li>	
+    </ul>	
+</div>	
+<div class="productFeature">	
+    <ul>	
+        <li><span>预定须知</span></li>	
+        <li class="productFeature-detail">	
+            {{=it.mb_goods_tp}}
+        </li>	
+    </ul>	
+</div>	
+<div class="journey-detail">	
+    <div class="day-title">	
+        <span>图文详情</span>	
+    </div>	
+    <div class="arrow-down"></div>	
+    
+    <div class="day-con">	
+      {{=it.goods_content}} 
+    </div>	
+    
+	
+</div>	
+<div class="notice-question">	
+    <ul>	
+        <li class="arrow-right">	
+            <a class="notes">周边提示</a>
+            <a class="notes-dat">{{=it.mb_goods_tip}}</a>
+        </li>	
+    </ul>	
+</div>
+
+</script>
+<div id="act-content"></div>
+</div>
+</div>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/zepto.js"></script>
+<script type="text/javascript" src="../script/template.js"></script>
+<script src='../script/swipe.js'></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/echo.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/actDetail-con.js"></script>
+</body>	
+</html>	

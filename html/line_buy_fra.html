@@ -1,0 +1,191 @@
+<!DOCTYPE html>	
+<html>	
+<head>	
+    <meta charset="utf-8">	
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>	
+    <title>frame</title>	
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>	
+    <link rel="stylesheet" type="text/css" href="../css/trip_buy.css"/>	
+</head>		
+<body>
+<style>
+.clearfix:before, .clearfix:after, .dl-horizontal dd:before, .dl-horizontal dd:after, .container:before, .container:after, .container-fluid:before, .container-fluid:after, .row:before, .row:after, .form-horizontal .form-group:before, .form-horizontal .form-group:after, .header:before, .header:after, .index_fy:before, .index_fy:after, .nameinfo p:before, .nameinfo p:after, .lc_date:before, .lc_date:after, .tagtitle:before, .tagtitle:after, .bottomfix:before, .bottomfix:after, .orderlist li:before, .orderlist li:after, .myordertitle:before, .myordertitle:after, .myordercon .buttoncon:before, .myordercon .buttoncon:after, .chooselist li a:before, .chooselist li a:after, .choose_info:before, .choose_info:after, .choose_info .numAddSub .add_reduce:before, .choose_info .numAddSub .add_reduce:after, .banklist .infolist li:before, .banklist .infolist li:after, .paylist li a:before, .paylist li a:after, .orderformlist li:before, .orderformlist li:after, .radiolist li:before, .radiolist li:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after, .dl-horizontal dd:after, .container:after, .container-fluid:after, .row:after, .form-horizontal .form-group:after, .header:after, .index_fy:after, .nameinfo p:after, .lc_date:after, .tagtitle:after, .bottomfix:after, .orderlist li:after, .myordertitle:after, .myordercon .buttoncon:after, .chooselist li a:after, .choose_info:after, .choose_info .numAddSub .add_reduce:after, .banklist .infolist li:after, .paylist li a:after, .orderformlist li:after, .radiolist li:after {
+    clear: both;
+}
+.header-title h1 {
+	font-size: 0.8rem;
+	line-height: 0.4rem;
+	height: 0.4rem;
+	color: #fff;
+}
+#header {
+	background: #00a776;
+	border-bottom: solid #198d6b 1px;
+}
+.d-list li span.d-data {
+	padding-top: 9px;
+}
+.d-list li span {
+	-webkit-box-flex: 1;
+	box-flex: 1;
+	display: block;
+	text-align: center;
+}
+.d-list li.hover {
+	border: 1px #CF8404 solid;
+	background-color: #FFF3DF;
+	color: #CF8404;
+}
+.d-list li {
+	height: 45px;
+	line-height: 20px;
+	display: -webkit-box;
+	display: box;
+	border: 1px #ccc solid;
+	margin-bottom: 10px;
+	font-size: 15px;
+	cursor: pointer;
+	padding-top: 3px;
+}
+.chooselist li {
+    padding: 0 14px;
+    display: block;
+}
+.chooselist li a.hover {
+    border: 1px solid #198d6b;
+    background: #f2fefa;
+    font-size: 14px;
+    color: #00a776;
+}
+.chooselist li a {
+    border: #dfdfdf solid 1px;
+    border-radius: 2px;
+    padding: 12px 20%;
+    display: block;
+    color: #585858;
+    font-size: 14px;
+    margin-top: 12px;
+}
+.chooselist li a span{float:left}
+.chooselist li a span+span {
+    float: right;
+}
+.choose_info {
+    margin-top: 12px;
+    padding: 14px 14px 10px 14px;
+    border-top: #f0f0f0 solid 1px;
+}.choose_info span {
+    float: left;
+    color: #949494;
+    font-size: 14px;
+    padding-top: 14px;
+}
+.choose_info .numAddSub {
+    float: right;
+}
+.choose_info .numAddSub .add_reduce {
+    border-radius: 2px;
+    border: #dfdfdf solid 1px;
+    font-size: 0;
+}
+.choose_info .numAddSub .add_reduce a.btnReduce {
+    background: url(../image/iconfont-jian.png) center center no-repeat;
+    background-size: 12px 12px;
+    border-right: 1px solid #dfdfdf;
+}
+.choose_info .numAddSub .add_reduce input.number {
+    border: 0 none;
+    text-align: center;
+    font-size: 14px;
+    height: 36px;
+    width: 50px;
+    float: left;
+    border-radius: 0;
+}
+.choose_info .numAddSub .add_reduce a.add {
+    background: url(../image/iconfont-l-jia.png) center center no-repeat;
+    background-size: 12px 12px;
+    border-left: 1px solid #dfdfdf;
+}
+.choose_info .numAddSub .add_reduce a.add.active {
+    background: url("../image/iconfont-l-jia-c.png") center center no-repeat;
+    background-size: 12px 12px;
+}
+.choose_info .numAddSub .add_reduce a.btnReduce.active {
+    background: url("../image/iconfont-jian-c.png") center center no-repeat;
+    background-size: 12px 12px;
+}
+.choose_info .numAddSub em.orange {
+    font-size: 12px;
+    color: #ff7e00;
+    padding: 10px 35px 0 0;
+    text-align: right;
+    display: block;
+}
+.bottomfix .fl {
+    float: left;
+}.bottomfix .fl span {
+    display: block;
+    text-align: left;
+    padding-top: 2px;
+}
+.bottomfix .fl span.gray {
+    font-size: 14px;
+}
+.bottomfix .fl span.orange {
+    color: #ff7e00;
+    font-size: 14px;
+}
+.choose_info .numAddSub .add_reduce a {
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    float: left;
+}
+</style>
+</head>
+<body>
+<div class="container-fluid docs-container">
+<div id="cart-list-wp" >
+<div class="chooselist">
+<ul id="line-buy-content">
+<ul>
+</div>
+</div>
+</div>
+<script id="line-buy-template" type="text/x-dot-template">
+        {{? it.length>0}}
+        {{ for(var i=0;i<it.length;i++){ }}
+            <li class="choose-time" >            
+            	<a href="javascript:void(0);" id="choose-time{{=it[i].id}}" spec_id="{{=it[i].id}}" stock="6" onclick="change({{=it[i].id}})"><span>{{=it[i].time}}</span><span>{{=it[i].price}}元/人</span></a>
+            </li>
+		 {{ } }}
+	{{? }}
+   <div class="choose_info">
+        <span>出行人数</span>
+        <div class="numAddSub">
+            <div class="add_reduce">
+                <a href="javascript:void(0);" class="btnReduce" id="btn_reduce" onclick="numJian()"></a>
+                <input type='tel' class="number buy-num" maxlength="3" name="quantity" value="1" id="qty" onlyNumber="true" onkeyup="format(this,this.value)" onBlur="inputqty()"/>
+                <a href="javascript:void(0);" class="add"  id="btn_add" onclick="numJia()"></a>
+            </div>
+            <em class="orange" id="stock"></em>
+        </div>			
+    </div>
+
+    <input type="hidden" name="app" value="order">
+    <input type="hidden" name="spec_id" id="spec_id">
+    <input type="hidden" name="quantity" id="quantity" value="1">
+    <input type="hidden" name="islogin" id="islogin" value="0">
+</script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/line_buy1.js"></script>
+</body>
+</html>	

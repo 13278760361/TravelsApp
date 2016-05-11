@@ -1,0 +1,63 @@
+html,body{height: 100%}
+body{
+    background-color: #f2f2f2; font-size: 14px;
+}
+.nctouch-default-list {
+    overflow: hidden;
+    padding: 0 0 0 0.5rem;
+    background-color: #FFF;
+    border-top: solid 0.05rem #EEE;
+    border-bottom: solid 0.05rem #EEE;
+}
+
+.nctouch-default-list li {
+    position: relative;
+    z-index: 1;
+    display: block;
+    clear: both;
+    overflow: hidden;
+    padding: 0.5rem 0;
+    line-height: 1rem;
+    border-top: solid 0.05rem #EEE;
+}
+.nctouch-default-list li:first-child {
+    border-top: none;
+}
+.nctouch-default-list li a {
+    display: block;
+    overflow: hidden;
+    font-size: 0.65rem;
+    color: #000;
+}
+.nctouch-default-list li h4 {
+    float: left;
+    margin-left: 0.3rem;
+    font-size: 0.7rem;
+    line-height: 1rem;
+    color: #333;
+}
+.nctouch-default-list li h6 {
+    float: left;
+    clear: both;
+    margin-left: 0.3rem;
+    font-size: 0.55rem;
+    line-height: 1rem;
+    color: #888;
+}
+.nctouch-default-list li span.arrow-r {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: 0.5rem;
+    display: block;
+    width: 0.6rem;
+    height: 0.6rem;
+    margin-top: -0.3rem;
+    background-image: url(../image/arrow_right_b.png);
+    background-repeat: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    opacity: 0.65;
+}
+
+

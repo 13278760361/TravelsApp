@@ -1,0 +1,143 @@
+body {
+    background-color: #efeff4;
+}
+.aui-content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    overflow: hidden;
+}
+#header {
+    background-color: #1abc9c;
+}
+/*列表样式重置*/
+.aui-list-view:after {
+    height: 0px;
+}
+.aui-list-view:before {
+    height: 0px;
+}
+.aui-content .aui-list-view:last-child {
+    margin-bottom: 0;
+}
+.activity-tab {
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    background: #ffffff;
+    font-size: 14px;
+    color: #8f8f94;
+    border-bottom: 1px solid #efeff4;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+.activity-tab .active {
+    color: #16A085;
+}
+.activity-tab .active:after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    content: '';
+    background-color: #16A085;
+    -webkit-transform: scaleY(1);
+          transform: scaleY(1);
+}
+.activity-type {
+    width: 100%;
+    height: 90px;
+    background: #ffffff;
+    font-size: 12px;
+    color: #8f8f94;
+}
+.activity-type .activity-type-list {
+    height: 65px;
+    padding-top: 25px;
+}
+.activity-type .activity-type-list .aui-iconfont {
+    padding: 3px;
+    border-radius: 3px;
+    font-size: 20px;
+    color: #ffffff;
+}
+.activity-type .activity-type-list p {
+    padding-top: 5px;
+    font-size: 12px;
+}
+.activity-aa-list, .activity-service-list {
+    float: left;
+    width: 100%;
+}
+.aui-list-view.activity-aa-list, .aui-list-view.activity-service-list {
+    margin-bottom: 5px;
+}
+.activity-aa-list .activity-aa-thumb, .activity-service-list .activity-service-thumb {
+    float: left;
+    width: 96px;
+    height: 128px;
+    position: relative;
+    
+}
+.activity-aa-list .activity-aa-thumb img, .activity-service-list .activity-service-thumb img {
+    width: 100%;
+    height: 100%;
+}
+.activity-aa-list .activity-aa-info, .activity-service-list .activity-service-info {
+    overflow: hidden;
+    width: 100%;
+    float: left;
+    padding: 10px;
+}
+
+.activity-aa-list .activity-aa-info .activity-aa-title{
+    font-size: 16px;
+    color: #333333;
+    line-height: 20px;
+    margin-bottom: 5px;
+}
+.activity-service-list .activity-service-info .activity-service-title {
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.activity-aa-list .activity-aa-info p, .activity-service-list .activity-service-info p {
+    margin-bottom: 0px;
+}
+.activity-aa-list span, .activity-service-list span {
+    font-size: 12px;
+    color: #8f8f94;
+}
+.activity-aa-list span.aui-iconfont, .activity-service-list span.aui-iconfont {
+    font-size: 14px;
+}
+.activity-service-list span.service-price {
+    font-size: 14px;
+    color: #E67E22;
+}
+.activity-btn {
+    width: 100%;
+    padding: 10px;
+    overflow: hidden;
+    text-align: center;
+    color: #8f8f94;
+}
+.activity-btn div {
+    font-size: 14px;
+    border-right: 1px solid #efeff4;
+    color: #8f8f94;
+}
+.activity-btn {
+    color: #8f8f94;
+}
+.activity-btn .aui-iconfont {
+    color: #8f8f94;
+}
+.activity-btn div:last-child {
+    border: none;
+}

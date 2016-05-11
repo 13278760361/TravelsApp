@@ -1,0 +1,345 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<meta name="format-detection" content="telephone=no"/>
+<title>注册</title>
+<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+</head>
+<style type="text/css">
+body {
+	background: #f5f5f5;
+	overflow: hidden;
+}
+.aui-input-row {
+	position: relative;
+	display: block;
+ padding:0;
+}
+.aui-content, .aui-input-group, .aui-input-group input {
+	background: none;
+}
+.aui-content {
+	overflow: hidden;
+}
+.aui-input-row label {
+	text-align: right;
+	color: #999999;
+}
+.avatar {
+	width: 100%;
+	text-align: center;
+	margin-top: 100px;
+	margin-bottom: 30px;
+}
+.avatar img {
+	width: 120px;
+	height: 120px;
+	margin-bottom: 15px;
+	border: 3px solid #ffffff;
+}
+.aui-pull-left, .aui-pull-right {
+	width: 45px;
+	height: 45px;
+	border: 1px solid #eeeeee;
+	text-align: center;
+	margin: 0 10px;
+}
+#imageclipTool {
+	display: none;
+	height: 50px;
+	padding-top: 5px;
+	background: #ffffff;
+}
+.aui-iconfont {
+	line-height: 45px;
+	font-size: 18px;
+	font-weight: 700;
+	color: #666666;
+}
+#wrap {
+	width: 100%;
+	-webkit-animation: fadeIn .5s ease both;
+	animation: fadeIn .5s ease both;
+}
+@-webkit-keyframes fadeIn {
+ from {
+opacity: 0.3;
+}
+ to {
+}
+}
+@keyframes fadeIn {
+ from {
+opacity: 0.3;
+}
+ to {
+}
+}
+</style>
+<body>
+<div id="wrap">
+  <div class="aui-content">
+    <div class="avatar"> <img src="../image/noavatar.gif" onclick="changeAvatar();" id="avatarImg">
+      <p>他们说头像越漂亮 吸引力才越大</p>
+    </div>
+    <input type="hidden" id="avatar">
+  </div>
+  <div class="aui-nav aui-bar-tab" id="imageclipTool">
+    <div class="aui-pull-left" tapmode onclick="imageClipClose();"> <span class="aui-iconfont aui-icon-closed"></span> </div>
+    <div class="aui-pull-right" tapmode onclick="imageClipSave();"> <span class="aui-iconfont aui-icon-check"></span> </div>
+  </div>
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/echo.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/aui_compress.min.js"></script>
+<script type="text/javascript">
+    var imageClip;
+    apiready = function(){
+        imageClip = api.require('imageClip');
+    }
+    function writeData(){
+        var regAvatar = $api.val($api.byId('avatar'));
+        $api.setStorage('regAvatar',''+regAvatar+'');
+        if($api.getStorage('regAvatar')){
+            api.sendEvent({
+                name:'registerTwoDone',
+                extra:{
+                    status:'true',
+                    avatar:$api.getStorage('regAvatar')
+                }
+            })
+        }else{
+            api.toast({
+                msg: '请上传头像',
+                duration:1000,
+                location: 'top'
+            });
+        }
+    }
+    function imageClipSave(){
+        imageClip.save(function(ret, err){
+           
+            if(ret){
+                api.showProgress({
+                    style: 'default',
+                    animationType: 'fade',
+                    title: '正在上传',
+                    text: '请稍候',
+                    modal: false
+                });
+                //头像上传处理
+                var img = new Image();
+                    img.src = ret.savePath;//图片路径
+                img.onload = function () {
+                    var that = this;
+                    //生成比例 
+                    var w = that.width,
+                        h = that.height;
+                    //生成canvas
+                    var canvas = document.createElement('canvas');
+                    var ctx = canvas.getContext('2d');
+                    $api.attr(canvas,'width',''+w+'');
+                    $api.attr(canvas,'height',''+h+'');
+                    ctx.drawImage(that, 0, 0, w, h);
+                    var base64 = canvas.toDataURL('image/jpeg');
+                    //alert(base64);
+                    //上传图片
+                    var upData = {
+                        id: 0,
+                        base64: base64
+                    }
+                    
+                    var uploadPhotosUrl = ApiUrl + '/index.php?act=login&op=uploadPhotoIn';
+                    api.ajax({
+	                    url:uploadPhotosUrl,
+	                    method:'post',
+	                    dataType:'json',
+	                    data:{values:{},files:{upAvatar:ret.savePath}}
+                    },function(retIi, errIi){
+                    	//coding...
+                    	if(retIi.datas.status==1){
+                    	
+                                var logoDom = $api.byId("avatar");
+                                $api.val(logoDom,''+retIi.datas.url+'');
+                                api.hideProgress();
+                            }
+                    });
+                  /*  ajaxRequest(uploadPhotosUrl, 'post', upData, function (retIi, errIi) {
+                        if(retIi){
+                            
+                        }
+                    }) */
+                }
+                var logoImgDom = $api.byId('avatarImg');
+                $api.attr(logoImgDom,'data-echo',''+ret.savePath+'');
+                echo.init({
+                    offset: 0,
+                    throttle: 250
+                });
+                imageClipClose();
+            }
+        });
+    }
+    function imageClipClose(){
+        imageClip.close();
+        var toolDom = $api.byId('imageclipTool');
+        $api.css(toolDom,'display:none');
+    }
+    function changeAvatar(){
+        api.actionSheet({
+            title: '请选择图片来源',
+            cancelTitle: '取消',
+            buttons: ['相册选取','魅力自拍']
+        },function(ret,err){
+            var winWidth = api.winWidth;
+            var listHeight = winWidth/3-12;
+            if(ret.buttonIndex==1){
+                api.getPicture({
+                    sourceType: 'library',
+                    encodingType: 'jpg',
+                    mediaValue: 'pic',
+                    destinationType: 'url',
+                    allowEdit: true,
+                    quality: 80,
+                    targetWidth: 360
+                }, function(ret, err){ 
+                    if (ret.data) {
+                        if(api.systemType=='ios'){
+                            api.showProgress({
+                                style: 'default',
+                                animationType: 'fade',
+                                title: '正在上传',
+                                text: '请稍候',
+                                modal: false
+                            });
+                            var logoImgDom = $api.byId('avatarImg');
+                            $api.attr(logoImgDom,'data-echo',''+ret.data+'');
+                            echo.init({
+                                offset: 0,
+                                throttle: 250
+                            });
+                            auiCompress(ret.data,{
+                                        width:200,
+                                        quantity:1,
+                                success: function (ret) {
+                                    var upData = {
+                                            id: 0,
+                                            base64: ret.base64
+                                        };
+                                    var uploadPhotosUrl = '&c=upload&a=uploadPhotoIn';
+                                    ajaxRequest(uploadPhotosUrl, 'post', upData, function (retIi, errIi) {
+                                        if(retIi){
+                                            if(retIi.id==0){
+                                                var logoDom = $api.byId("avatar");
+                                                $api.val(logoDom,''+retIi.url+'');
+                                                api.hideProgress();
+                                            }
+                                        }
+                                    })
+                                }
+                            });
+                        }else{
+                       
+                            var toolDom = $api.byId('imageclipTool');
+                            $api.css(toolDom,'display:block');
+                            var winWidth = api.winWidth;
+                            var winHeight = api.winHeight;
+                            imageClip.open({
+                                path:ret.data,
+                                h:winHeight-45,
+                                clipRect:{
+                                    x:winWidth/2-100,
+                                    y:winHeight/2-100,
+                                    w:200,
+                                    h:200
+                                }
+                            },function(ret, err){
+                            });
+                            api.sendEvent({
+                                name: 'circleLogoClipClose',
+                                extra:{key:'true'}
+                            });
+                        }
+                        
+                    }
+                });
+            }else if(ret.buttonIndex==2){
+                //TAKE A PHOTO
+                api.getPicture({
+                    sourceType: 'camera',
+                    encodingType: 'jpg',
+                    mediaValue: 'pic',
+                    destinationType: 'url',
+                    allowEdit: true,
+                    quality: 80,
+                    targetWidth: 360
+                }, function(ret, err){ 
+                    if (ret.data) {
+                        if(api.systemType=='ios'){
+                            api.showProgress({
+                                style: 'default',
+                                animationType: 'fade',
+                                title: '正在上传',
+                                text: '请稍候',
+                                modal: false
+                            });
+                            var logoImgDom = $api.byId('avatarImg');
+                            $api.attr(logoImgDom,'data-echo',''+ret.data+'');
+                            echo.init({
+                                offset: 0,
+                                throttle: 250
+                            });
+                            auiCompress(ret.data,{
+                                        width:200,
+                                        quantity:1,
+                                success: function (ret) {
+                                    var upData = {
+                                            id: 0,
+                                            base64: ret.base64
+                                        };
+                                    var uploadPhotosUrl = '&c=upload&a=uploadPhotoIn';
+                                    ajaxRequest(uploadPhotosUrl, 'post', upData, function (retIi, errIi) {
+                                        if(retIi){
+                                            if(retIi.id==0){
+                                                var logoDom = $api.byId("avatar");
+                                                $api.val(logoDom,''+retIi.url+'');
+                                                api.hideProgress();
+                                            }
+                                        }
+                                    })
+                                }
+                            });
+                        }else{
+                            var toolDom = $api.byId('imageclipTool');
+                            $api.css(toolDom,'display:block');
+                            var winWidth = api.winWidth;
+                            var winHeight = api.winHeight;
+                            imageClip.open({
+                                path:ret.data,
+                                h:winHeight-45,
+                                clipRect:{
+                                    x:winWidth/2-100,
+                                    y:winHeight/2-100,
+                                    w:200,
+                                    h:200
+                                }
+                            },function(ret, err){
+                            });
+                            api.sendEvent({
+                                name: 'circleLogoClipClose',
+                                extra:{key:'true'}
+                            });
+                        }
+                        
+                    }
+                });
+            }
+        })
+    }
+</script>
+</html>

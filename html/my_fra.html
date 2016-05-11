@@ -1,0 +1,348 @@
+<!DOCTYPE html>	
+<html>	
+<head>	
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>	
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>	
+    <title>我的</title>	
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>	
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>	
+    <style>	
+        body, html {	
+        }	
+	
+        .header {	
+            display: -webkit-box;	
+            display: -webkit-flex;	
+            display: flex;	
+        }	
+        .title {	
+            -webkit-box-flex: 1;	
+            -webkit-flex: 1;	
+            flex: 1;	
+        }	
+	
+        .login-header a {	
+            padding: 30px;	
+            background-size: 50px;	
+        }	
+        .index-header a,.detail-header a{	
+            display: block;	
+            background-size: 30px;	
+            padding: 20px;	
+        }	
+        .header a{	
+            background-repeat: no-repeat;	
+            background-position: center;	
+        }	
+        .close {	
+            background-image: url("../image/close_icon_normal@2x.png");	
+        }	
+	
+        .setting {	
+            background-image: url("../image/setting_icon_normal@2x.png");	
+        }	
+	
+        .login-header .nologin-user {	
+            -webkit-transform: rotateY(0deg);	
+            background-image: url("../image/user_defaulthead@2x.png");
+           
+        }	
+        .nologin-user img{
+        	width: 120px; height: 120px;
+        	 border-radius: 100%;
+        }
+	
+	
+        .login-header {	
+            height: 100%;	
+            background-color: #6ab494;	
+        }	
+	
+        .title {	
+            text-align: center;	
+            padding-top: 15px;	
+            display: -webkit-box;	
+            display: -webkit-flex;	
+            display: flex;	
+            -webkit-box-orient: vertical;	
+            -webkit-flex-flow: column;	
+            flex-flow: column;	
+        }	
+	
+        .login {	
+            color: #323237;	
+            font-size: 18px;	
+        }	
+	
+	
+        .mine {	
+            background-color: #6ab494;	
+            padding-top: 5px;	
+        }	
+	
+        .mine li, .bottom li {	
+            display: inline-block;	
+            width: 23.5%;	
+            text-align: center;	
+            padding: 20px 0 6px;	
+            background-size: 30px;	
+            background-repeat: no-repeat;	
+            background-position: top;	
+        }	
+	
+        .bottom li {	
+            width: 18.89%;	
+            background-size: 30px;	
+        }	
+	
+        .mine li a {	
+            margin: 15px 10px 0 10px;	
+            color: #323237;	
+        }	
+	
+        .bottom li a {	
+            margin: 15px 10px 0 10px;	
+            color: #737377;	
+            font-size: 12px;	
+        }	
+	
+        .read {	
+            background-image: url("../image/my_gushi.png");	
+        }	
+	
+        .star {	
+            background-image: url("../image/my_bianqian.png");	
+        }	
+	
+        .comment {	
+            background-image: url("../image/my_yueban.png");	
+        }	
+        .daren {	
+            background-image: url("../image/my_daren.png");	
+        }	
+        .activity {	
+            margin: 0 10px;	
+        }	
+	
+        .activity li {	
+            padding: 15px 0;	
+            background-size: 8px;	
+            background-repeat: no-repeat;	
+            background-position: right;	
+            background-image: url("../image/setting_cell_arrow@2x.png");	
+            border-bottom: 1px solid #F6F6F6;	
+        }	
+	
+        .activity li:last-child {	
+            border-bottom: none;	
+        }	
+
+        .subtitle {	
+        	display: block;
+            font-size: 16px;	
+            margin-left: 10px;	
+        }	
+	
+        .tag {		
+            padding: 20px 0 6px;	
+            background-size: 30px;	
+            background-repeat: no-repeat;
+        }	
+	
+        .a1 {	
+           
+            background-image: url(../image/my_xiugai.png);	
+        }	
+	
+        .a2 {	
+            background-color: #2CA6E6;	
+        }	
+	
+        .a3 {	
+            background-color: #FC5E48;	
+        }	
+	
+        .a4 {	
+            background-color: #04BC6F;	
+        }	
+        .plugin {	
+            background-image: url("../image/plugin_icon_setting@2x.png");	
+        }	
+	
+        .offline {	
+            background-image: url("../image/pluginboard_icon_offline@2x.png");	
+        }	
+	
+        .night {	
+            background-image: url("../image/pluginboard_icon_night@2x.png");	
+        }	
+	
+        .search {	
+            background-image: url("../image/pluginboard_icon_search@2x.png");	
+        }	
+	
+        .more {	
+            background-image: url("../image/pluginboard_icon_more@2x.png");	
+        }
+	    .h10 {height: 10px;background: #f0f0f0;}	
+		.h1 {height: 1px;margin-left: 15px;background: #f0f0f0;}	
+		.fr {float: right;}	
+		.hint {color: #666;font-size: 12px;margin-right: 5px;}	
+	
+		.firstblock, .secondblock, .thirdblock {background-color: #fff;}	
+		/* 头部登陆 */	
+		.login {position:relative;background-image: url(../image/api_31.png);background-repeat: no-repeat; background-size: contain;}	
+		.loginbg { width: 100%;}	
+		.login .personal_logo {position: absolute; left:0;top: 55px; width: 70px; margin-left: 20px;}	
+		.person_arrow {position: absolute;height: 20px; right: 10px; top: 90px;}	
+		.login .userinfo {position: absolute; top: 60px; margin-left: 100px;}	
+		.login .userinfo .title {font-size: 20px; color: #fff;}	
+		.login .userinfo .subtitle {font-size: 14px; color: #fff;border: 1px solid #fff;display: inline-block;padding: 3px;border-radius: 4px;margin-top: 5px;}	
+	
+		/* 设置条目 */	
+		.item {height: 50px;line-height: 50px;padding-left: 15px;background-color: #fff;}	
+		.item_ico {float: left;width: 30px;padding: 10px 10px 10px 0;}	
+		.item_arrow {float: right;width: 16px;padding: 17px 15px 15px 0;}	
+		.item:visited{background-color: #C0C0C0;}
+		.presshover {background-color: #FAFAFA;}
+		.hide{
+			display:none;
+		}
+		.show{
+			display:block;
+		}
+/*角标*/
+
+.aui-badge-warning {
+	color: #f1c40f;
+	
+}
+    </style>	
+</head>	
+<body>	
+<header>	
+    <div class="login-header header ">	
+        
+        <div class="hidden title">	
+            <a class="nologin-user" id="user" data-echo-background="" tapmode="" onclick="changeAccount();">
+            	<img src="../image/user_defaulthead@2x.png" data-echo="" id = "header-img"/>
+            </a>	
+            <div class="login" id="signText">立即登录</div>
+       
+        </div>	
+     <!--
+      <a class="setting" tapmode=""></a>
+      --> 	
+    </div>	
+</header>	
+<ul class="mine">	
+    <li class="read" onclick="my('dynamic_add_win');">	
+        <a>	
+            故事	
+        </a>	
+    </li>	
+    <li class="star" onclick="my('my_notepaper_win');">	
+        <a>	
+            便签	
+        </a>	
+    </li>	
+    <li class="comment" onclick="my('activity_add_aa_win');">	
+        <a>	
+            约伴	
+        </a>	
+    </li>
+    <li class="daren" onclick="my('activity_add_service_win');">	
+        <a>	
+            达人	
+        </a>	
+    </li>
+</ul>	
+<div class="h10"></div>	
+<div class="firstblock">	
+	<div class="item" tapmode="presshover" onclick="my('my_order_win');">	
+		<img src="../image/my_order_user_icon_normal.png" alt="" class="item_ico">	
+		<span>我的订单</span>	
+		<img src="../image/arrow.png" alt="" class="item_arrow">	
+	</div><div class="h1"></div>	
+	<div class="item" tapmode="presshover" onclick="my('my_datum_win');">	
+		<img src="../image/my_xiugai1.png" alt="" class="item_ico">	
+		<span>修改资料</span>	
+		<img src="../image/arrow.png" alt="" class="item_arrow">	
+	</div>
+	<div class="h1"></div>	
+	<div class="item" tapmode="presshover" onclick="my('my_wallet_win');">	
+		<img src="../image/my_wallet_user_icon_normal.png" alt="" class="item_ico">	
+		<span>我的钱包</span>	
+		<img src="../image/arrow.png" alt="" class="item_arrow">	
+		<span class="fr hint">余额/返现/抵用券/会员卡</span>	
+	</div>
+	<div class="h1"></div>	
+	<div class="item" tapmode="presshover" onclick="my('my_collect_win');">	
+		<img src="../image/my_favorite_user_icon_normal.png" alt="" class="item_ico">	
+		<span>我的收藏</span>	
+		<img src="../image/arrow.png" alt="" class="item_arrow">	
+	</div>
+	<div class="h1"></div>	
+	<div class="item" tapmode="presshover" onclick="my('my_browse_win');">	
+		<img src="../image/my_history_user_icon_normal.png" alt="" class="item_ico">	
+		<span>最近浏览</span>	
+		<img src="../image/arrow.png" alt="" class="item_arrow">	
+	</div><div class="h1"></div>	
+	<div class="item" tapmode="presshover" onclick="">	
+		<img src="../image/my_review_user_icon_normal.png" alt="" class="item_ico">	
+		<span>待点评</span>	
+		<img src="../image/arrow.png" alt="" class="item_arrow">	
+	</div>	
+</div>	
+	<!-- 第二块 -->	
+	<div class="h10"></div>	
+	<div class="thirdblock">	
+		<div class="item" tapmode="presshover" onclick="my('my_realname_win');">	
+			<img src="../image/my_rel_name1.png" alt="" class="item_ico">	
+			<span>实名认证</span>	
+			<img src="../image/arrow.png" alt="" class="item_arrow">
+			<span class="fr hint" id="realNameStatus">待认证</span>
+		</div>
+		<div class="h1"></div>
+		<div class="item" tapmode="presshover" onclick="my('my_notepaper_win');">	
+			<img src="../image/my_o_bianqian.png" alt="" class="item_ico">	
+			<span>我的便签</span>	
+			<img src="../image/arrow.png" alt="" class="item_arrow">	
+		</div>
+		<div class="h1"></div>
+		<div class="item" tapmode="presshover" onclick="my('my_activity_win');">	
+			<img src="../image/my_i_service1.png" alt="" class="item_ico">	
+			<span>我的活动/服务</span>	
+			<img src="../image/arrow.png" alt="" class="item_arrow">	
+		</div>
+		<div class="h1"></div>	
+		<div class="item" tapmode="presshover" onclick="changeAccount();">	
+			<img src="../image/my_o_qiehuan1.png" alt="" class="item_ico">	
+			<span>切换账号</span>	
+			<img src="../image/arrow.png" alt="" class="item_arrow">	
+		</div>
+		<div class="h1"></div>	
+		<div class="item" tapmode="presshover" onclick="clearCache();">	
+			<img src="../image/my_o_cache1.png" alt="" class="item_ico">	
+			<span>清除缓存</span>	
+			<img src="../image/arrow.png" alt="" class="item_arrow">	
+		</div>
+		<div class="h1"></div>	
+		<div class="item" tapmode="presshover" onclick="loginout();">	
+			<img src="../image/my_o_loginout1.png" alt="" class="item_ico">	
+			<span>退出登录</span>	
+			<img src="../image/arrow.png" alt="" class="item_arrow">	
+		</div>	
+	</div>	
+		
+	
+	<div class="h10"></div><div class="h10"></div>	
+	
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/config.js"></script>
+	<script type="text/javascript" src="../script/my_info.js"></script>
+	<script type="text/javascript" src="../script/echo.js"></script>
+	<script type="text/javascript" src="../script/my_fra.js"></script>
+	<script type="text/javascript" src="../script/common.js"></script>
+</body>	
+</html>	

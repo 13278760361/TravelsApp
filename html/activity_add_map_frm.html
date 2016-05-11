@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<meta name="format-detection" content="telephone=no"/>
+<title>地图</title>
+<link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+<link rel="stylesheet" type="text/css" href="../css/activity.css" />
+</head>
+<body>
+<div class="aui-content map-search">
+  <div class="aui-iconfont aui-icon-search"></div>
+  <div class="map-search-input">
+    <input type="text" id="keyword" placeholder="输入目的地或地址搜索" required>
+  </div>
+  <div class="map-searchbtn aui-pull-right" onclick="search();">搜索</div>
+</div>
+<p class="aui-content" style="padding-top:0; padding-bottom:0; margin-bottom:0;" id="status">为你找到附近以下目的地</p>
+<div class="aui-content" id="map-place"></div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    var page = 0, load = true;
+    apiready = function(){
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '载入数据中',
+            text: '请稍等',
+            modal: false
+        });
+        var baiduLocation = api.require('baiduLocation');
+        baiduLocation.startLocation({
+            accuracy: '100m',
+            filter:1,
+            autoStop: true
+        }, function(ret, err){
+            var sta = ret.status;
+            var lat = ret.latitude;
+            var lon = ret.longitude;
+            if(sta){
+                getPlace('景区',''+lat+','+lon+'');
+                
+                api.addEventListener({
+                    name : 'scrolltobottom'
+                }, function(ret, err) {
+                    if(load == true){
+                        api.showProgress({
+                            style: 'default',
+                            animationType: 'fade',
+                            title: '返回地球中',
+                            text: '请稍等',
+                            modal: false
+                        });
+                    
+                        page++;
+                        getPlace('景区',''+lat+','+lon+'');
+                    }
+                });
+            }
+        });
+        
+    }
+    //默认加载
+    function getPlace(query,location){
+        var query = query;
+        var location = location;
+        var ak = '4gETIEIM4vaBICqqGCTbFymR';
+        api.ajax({
+            url: 'http://api.map.baidu.com/place/v2/search?q='+query+'&location='+location+'&output=json&page_size=20&page_num='+page+'&radius=10000&scope=2&ak='+ak+'',
+            method: 'get',
+            timeout: 30,
+            dataType: 'json',
+            returnAll:false,
+            data:{
+                //values: {query: '九寨沟',region: '全国',ak: 'irvgjBfbN31Ejwbz7O6eWUwW'}
+            }
+        },function(ret,err){
+            if (ret) {
+                var str = ret.results;
+                var html = '';
+                var $placeList = $api.byId('map-place');
+
+                if(ret.total>=0){
+                    for(var i=0; i<str.length;i++){
+                        if(str[i].address){
+                            var address = str[i].address;
+                        }else{
+                            var address = '';
+                        }
+                        var distance = str[i].detail_info.distance/1000;
+                        html += '<div class="aui-list-view map-place-list" tapmode onclick="returnPlace(\''+str[i].name+'\',\''+address+'\',\''+str[i].location.lat+'\',\''+str[i].location.lng+'\')">';
+                        html += '<div class="map-place-title">';
+                        html += str[i].name;
+                        html += '<span class="aui-pull-right">'+distance.toFixed(2)+' km</span>';
+                        html += '</div>';
+                        html += '<p>'+address+'</p>';
+                        html += '</div>';
+                        
+                    }
+                    $api.append($placeList,html);
+                    api.hideProgress();
+                    api.parseTapmode();
+                }else{
+                    load = false;
+                }
+            }else {
+                load = false;
+            };
+        });
+    }
+    function search(){
+        load = false;
+        api.hideProgress();
+        var $keyword = $api.byId('keyword');
+        var query = $api.val($keyword);
+        var region = '全国';
+        var ak = '4gETIEIM4vaBICqqGCTbFymR';
+
+        api.ajax({
+            url: 'http://api.map.baidu.com/place/v2/search?q='+query+'&region='+region+'&output=json&page_size=20&page_num='+page+'&ak='+ak+'',
+            method: 'get',
+            timeout: 30,
+            dataType: 'json',
+            returnAll:false,
+            data:{}
+        },function(ret,err){
+          
+            if (ret) {
+                var str = ret.results;
+                var html = '';
+                var $placeList = $api.byId('map-place');
+                var $status = $api.byId('status');
+                $api.html($placeList,'');
+                if(ret.total>=0){
+                    $api.html($status,'为你找到附近以下目的地');
+                  
+                    for(var i=0; i<str.length;i++){
+                        
+                        if(str[i].uid){
+                            if(str[i].address){
+                                var address = str[i].address;
+                            }else{
+                                var address = '';
+                            }
+                            html += '<div class="aui-list-view map-place-list" onclick="returnPlace(\''+str[i].name+'\',\''+address+'\',\''+str[i].location.lat+'\',\''+str[i].location.lng+'\')">';
+                            html += '<div class="map-place-title">';
+                            html += str[i].name;
+                            //html += '<span class="aui-pull-right">'+str[i].detail_info.distance+'</span>';
+                            html += '</div>';
+                            html += '<p>'+address+'</p>';
+                            html += '</div>';
+                        }
+                    }
+                    if(html){
+                        $api.append($placeList,html);
+                    }else{
+                        $api.html($status,'没有搜索结果，请更换关键词重新输入');
+                    }
+                    if(ret.total==0){
+                        $api.append($placeList,'<p class="aui-content" style="padding-top:0; padding-bottom:0;">TIP：结果不准确请尝试更换搜索内容</p>');
+                    }
+                    
+                }else{
+                    $api.html($status,'没有搜索结果，请更换关键词重新输入');
+                }
+            };
+        });
+    }
+
+    function returnPlace(name,address,lat,lon){
+        //发送一个返回地址的事件，在发布页面监听
+        api.sendEvent({
+            name: 'returnPlace',
+            extra:{
+                name:''+name+'',
+                address:''+address+'',
+                lat: ''+lat+'',
+                lon: ''+lon+''
+            }
+        });
+        api.closeWin({
+            name: 'activity_add_map_win',
+            animation: {
+                type: 'fade',
+                duration: 300
+            }
+        });
+    }
+    function back(){
+        api.closeWin();
+    }
+</script>
+</html>

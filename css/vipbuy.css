@@ -1,0 +1,91 @@
+body {
+    background-color: #efeff4;
+    -webkit-animation: fadeIn .5s ease both;
+    animation: fadeIn .5s ease both;
+}
+.aui-content {
+    padding: 0;
+    overflow: hidden;
+}
+#header {
+    background-color: #1abc9c;
+}
+
+.edit label {
+    padding-top: 13px;
+    font-size: 14px;
+}
+.my-manager-list {
+    padding-bottom: 0;
+}
+.my-manager-list .aui-img-object {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+}
+.my-manager-list {
+    color: #999999;
+}
+.aui-list-view-cell .aui-col-xs-12 {
+    margin: 5px 0;
+}
+.aui-list-view-cell .aui-col-xs-12 span {
+    line-height: 35px;
+    margin-left: 10px;
+}
+input[type="number"]{
+    width: 60px;
+    margin-bottom: 0;
+    height: 35px;
+    border: none;
+    background: #eeeeee;
+    color: #1abc9c;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+.aui-label {
+    padding: 10px 14px;
+    font-size: 14px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+.aui-label.payment {
+    text-align: center;
+    padding-left: 30px;
+    border: 1px solid #dddddd;
+}
+.payment.alipay {
+    background:url('../image/alipay.png') no-repeat;
+    background-size: 16px;
+    background-position: 8px 9px;
+}
+.payment.weixin {
+    background:url('../image/weixin.png') no-repeat;
+    background-size: 16px;
+    background-position: 10px 9px;
+}
+.aui-label.active {
+    background-color: #1ABC9C;
+    color: #ffffff;
+    -webkit-animation: fadeIn .7s ease both;
+    animation: fadeIn .7s ease both;
+}
+.aui-label.payment.active {
+    border: 1px solid #1ABC9C;
+    -webkit-animation: fadeIn .7s ease both;
+    animation: fadeIn .7s ease both;
+}
+.aui-list-view-cell:active {
+    background: none;
+}
+@-webkit-keyframes fadeIn {
+    from { opacity: 0.3; }
+    to {  }
+}
+@keyframes fadeIn {
+    from { opacity: 0.3; }
+    to {  }
+}

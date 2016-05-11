@@ -1,0 +1,432 @@
+.swipe {
+	overflow: hidden;
+	position: relative;
+}
+.swipe-wrap {
+	overflow: hidden;
+	position: relative;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.swipe-wrap > div {
+	float: left;
+	width: 100%;
+	position: relative;
+}
+.swipe-wrap > div {
+	overflow: hidden;
+	position: relative;
+}
+.swipe-wrap img {
+	width: 100%;
+	height: auto;
+	max-height: 240px;
+	min-height: 132px;
+	min-width: 320px;
+	max-width: 640px;
+}
+#slide {
+	margin: 0 auto;
+	position: relative;
+}
+#pointer {
+	position: absolute;
+	bottom: 12px;
+	overflow: hidden;
+	width: 100%;
+	text-align: center;
+}
+#pointer a {
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	border-radius: 6px;
+	margin-right: 4px;
+	background-color: #FFFFFF;
+}
+#pointer a.active {
+	background-color: #5edbb6;
+}
+.nameinfo {
+	background: #fff;
+	border-bottom: #f2f2f2 1px solid;
+	padding-bottom: 14px;
+}
+.nameinfo .title {
+	font-weight: bold;
+	font-size: 18px;
+	margin: 0;
+	padding: 14px 14px 0 14px;
+	line-height: 1.3;
+	color: #585858;
+}
+.date-content img {
+	width: 100%;
+	height: auto;
+	max-height: 240px;
+	min-height: 132px;
+	min-width: 320px;
+	max-width: 640px;
+}
+.nameinfo p {
+	padding: 8px 14px 0 14px;
+	margin: 0;
+}
+.nameinfo p span i {
+	font-size: 10px;
+}
+.nameinfo p span {
+	float: left;
+	font-size: 18px;
+	font-weight: 600;
+	color: #ff7800;
+}
+.nameinfo p em {
+	float: right;
+	font-size: 10px;
+	color: #949494;
+	padding-top: 5px;
+}
+.lc_date {
+	padding: 0 20px 13px 20px;
+	border-bottom: 1px solid #e5e5e5;
+	background-color: #fff;
+	font-size: 12px;
+	position: relative;
+	overflow: hidden;
+}
+.lc_date .lc {
+	padding: 16px 0 17px 0;
+	width: 49%;
+	float: left;
+	height: 52px;
+	overflow: hidden;
+}
+.lc_date .date {
+	padding: 16px 0 17px 20px;
+	width: 49%;
+	float: right;
+	height: 52px;
+	overflow: hidden;
+}
+.lc_date .icn-area {
+	background: url("../icon/icn-area.png") center center no-repeat;
+	background-size: auto 20px;
+}
+.lc_date [class^="icn-"] {
+	background-color: #6aceb0 !important;
+	border-radius: 3px;
+	width: 33px;
+	height: 33px;
+	float: left;
+	margin-right: 12px;
+	position: relative;
+}
+.lc_date .greentag {
+	color: #00a776;
+	word-break: keep-all;           /* 不换行 */
+	white-space: nowrap;          /* 不换行 */
+	overflow: hidden;               /* 内容超出宽度时隐藏超出部分的内容 */
+	text-overflow: ellipsis;
+}
+.lc_date .icn-time {
+	background: url(../icon/icn-time.png) 6px 6px no-repeat;
+	background-size: auto 22px;
+}
+.lc_date [class^="icn-"]:after {
+	content: "";
+	position: absolute;
+	border-top: 6px solid rgba(0, 0, 0, 0);
+	border-left: 6px solid #6aceb0;
+	border-bottom: 6px solid rgba(0, 0, 0, 0);
+	right: -5px;
+	top: 10px;
+}
+.lc_date [class^="icn-"]:after {
+	content: "";
+	position: absolute;
+	border-top: 6px solid rgba(0, 0, 0, 0);
+	border-left: 6px solid #6aceb0;
+	border-bottom: 6px solid rgba(0, 0, 0, 0);
+	right: -5px;
+	top: 10px;
+}
+.date_tel {
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+	background-color: #fff;
+	margin: 6px 0;
+}
+.date_tel .date {
+	padding: 13px 0 13px 14px;
+	position: relative;
+	display: block;
+}
+.clearfix:after, .dl-horizontal dd:after, .container:after, .container-fluid:after, .row:after, .form-horizontal .form-group:after, .header:after, .index_fy:after, .nameinfo p:after, .lc_date:after, .tagtitle:after, .bottomfix:after, .orderlist li:after, .myordertitle:after, .myordercon .buttoncon:after, .chooselist li a:after, .choose_info:after, .choose_info .numAddSub .add_reduce:after, .banklist .infolist li:after, .paylist li a:after, .orderformlist li:after, .radiolist li:after {
+	clear: both;
+}
+.clearfix:before, .clearfix:after, .dl-horizontal dd:before, .dl-horizontal dd:after, .container:before, .container:after, .container-fluid:before, .container-fluid:after, .row:before, .row:after, .form-horizontal .form-group:before, .form-horizontal .form-group:after, .header:before, .header:after, .index_fy:before, .index_fy:after, .nameinfo p:before, .nameinfo p:after, .lc_date:before, .lc_date:after, .tagtitle:before, .tagtitle:after, .bottomfix:before, .bottomfix:after, .orderlist li:before, .orderlist li:after, .myordertitle:before, .myordertitle:after, .myordercon .buttoncon:before, .myordercon .buttoncon:after, .chooselist li a:before, .chooselist li a:after, .choose_info:before, .choose_info:after, .choose_info .numAddSub .add_reduce:before, .choose_info .numAddSub .add_reduce:after, .banklist .infolist li:before, .banklist .infolist li:after, .paylist li a:before, .paylist li a:after, .orderformlist li:before, .orderformlist li:after, .radiolist li:before, .radiolist li:after {
+	content: " ";
+	display: table;
+}
+.date_tel .date .dateicon {
+	background: url(../icon/time.png) 0 2px no-repeat;
+	background-size: auto 14px;
+	font-size: 14px;
+	color: #949494;
+	padding: 0 10px 0 18px;
+	float: left;
+}
+.date_tel .date .dateinfo {
+	font-size: 14px;
+	color: #585858;
+	padding-right: 45px;
+	overflow: hidden;
+	height: 18px;
+	display: block;
+}
+.grayarrow_right {
+	position: absolute;
+	width: 45px;
+	display: block;
+	right: 0;
+	top: 0;
+	background: url(../icon/right.png) 22px 14px no-repeat;
+	background-size: auto 15px;
+	padding: 20px 0;
+}
+.date_tel .tel {
+	position: relative;
+	padding: 13px 0 13px 0;
+	margin-left: 14px;
+	border-top: 1px solid #f2f2f2;
+}
+.date_tel .tel .telicon {
+	background: url(../icon/tel.png) 0 3px no-repeat;
+	background-size: auto 14px;
+	font-size: 14px;
+	color: #949494;
+	padding: 0 10px 0 18px;
+	float: left;
+}
+.date_tel .tel .telinfo {
+	font-size: 14px;
+	color: #585858;
+	padding-right: 45px;
+	overflow: hidden;
+	height: 18px;
+	display: block;
+}
+.lc_date:after {
+	content: "";
+	height: 77px;
+	position: absolute;
+	width: 1px;
+	background: #f2f2f2;
+	top: 0px;
+	right: 50%;
+	bottom: 0px;
+}
+.tagtitle {
+	border-top: 1px solid #e5e5e5;
+	background-color: #fff;
+	font-size: 0;
+	margin-bottom: -1px;
+	color: #585858;
+	position: relative;
+	z-index: 1;
+}
+.tagtitle span.hover {
+	color: #00a776;
+	border-bottom: #00a776 solid 2px;
+	padding: 12px 0 11px 0;
+}
+.tagtitle span {
+	display: block;
+	float: left;
+	font-size: 15px;
+	width: 50%;
+	text-align: center;
+	padding: 12px 0;
+	border-bottom: 1px solid #e5e5e5;
+}
+.tagcon {
+	background-color: #fff;
+	width: 100%;
+	overflow: hidden;
+}
+.lineinfo .cost {
+	background: url(../icon/feiyong.png) 14px 17px no-repeat;
+	background-size: 18px 16px;
+}
+.lineinfo .titletag {
+	border-top: 1px solid #e5e5e5;
+	padding: 14px 14px 12px 37px;
+	font-size: 15px;
+	color: #585858;
+	position: relative;
+}
+.lineinfo .security {
+	background: url(../icon/security.png) 14px 17px no-repeat;
+	background-size: 18px 13px;
+}
+lineinfo .ask {
+	background: url(../icon/ask.png) 14px 16px no-repeat;
+	background-size: 20px 16px;
+}
+.tripinfocon.graybg {
+	background: #f6f6f6;
+}
+.tripinfocon {
+	padding: 14px;
+	font-size: 15px;
+	color: #585858;
+	width: 100%;
+	word-break: break-all;
+	word-wrap: break-word;
+	overflow: hidden;
+}
+.lineinfo .titletag .grayarrow_bottom {
+	padding: 24px 0;
+}
+.grayarrow_bottom {
+	position: absolute;
+	width: 45px;
+	display: block;
+	right: 0;
+	top: 0;
+	background: url(../icon/down.png) center center no-repeat;
+	background-size: 14px 8px;
+	padding: 20px 0;
+}
+.tripinfocon p {
+	margin: 0px 0px 0px 0px;
+}
+.back-to-top {
+	width: 49px;
+	height: 49px;
+	position: fixed;
+	bottom: 84px;
+	right: 14px;
+	z-index: 99;
+}
+.back-to-top a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background: url("../icon/top.png") 0 0 no-repeat;
+	background-size: 49px auto;
+}
+.mr-desc-wrap {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.5);
+    color: #FFF;
+    padding: 0 5px;
+}.rel {
+    position: relative;
+}.good-item {
+    overflow: hidden;
+    margin: 5px;
+}.tripinfocon.graybg {
+    background: #f6f6f6;
+}
+.tripinfocon {
+    padding: 14px;
+    font-size: 15px;
+    color: #585858;
+    width: 100%;
+    word-break: break-all;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+    .journey-detail {	
+        padding: 10px 10px;	
+    }
+   .journey-detail, .notice-question {	
+        position: relative;	
+        background: #fff;	
+        margin: 10px 0;	
+        padding: 0 10px;	
+        border-top: 1px solid #d8d8d8;	
+        border-bottom: 1px solid #d8d8d8;	
+    }
+    .time, .day-con, .day-con-wrap {	
+        border-left: 1px solid #1dbd8d;	
+    }	
+    .day-con {	
+        padding-left: 20px;	
+        font-size: 13px;	
+        line-height: 20px;	
+    }	
+    .time {	
+        background-image: url("../image/time.png");	
+        background-position-x: 20px;	
+        background-position-y: center;;	
+        background-repeat: no-repeat no-repeat;	
+        background-size: 15px;	
+        padding: 10px 20px;	
+        padding-left: 40px;	
+        font-size: 13px;	
+        color: #1dbd8d;	
+    }
+    .day-time{
+    	
+    	width:100%;
+    	margin-top:15px;
+    	
+    	border-bottom:2px solid #1DBD8D;
+    }
+    .arrow-down {	
+        margin-left: 7px;	
+        width: 0px;	
+        height: 0px;	
+        border-left: 4px solid transparent;	
+        border-right: 4px solid transparent;	
+        border-top: 4px solid #1dbd8d;	
+    }
+    .arrow-left {	
+      	
+        width: 0px;	
+        height: 0px;	
+        border-top: 4px solid transparent;	
+        border-right: 4px solid transparent;	
+        border-left: 4px solid #1dbd8d;	
+    }		
+    .day-title {	
+        display: inline-block;	
+        background-color: #1dbd8d;	
+        line-height: 20px;	
+        padding: 3px;	
+        font-size: 13px;	
+    }	
+	
+    .day-title span {	
+        color: #fff;	
+        position: relative;	
+    }	
+	
+    .day-title span:not(:first-child) {	
+        padding-left: 20px;	
+    }
+    .day-time-t{
+   		text-align: center;
+   		line-height:24px;
+   		font-size:12px;
+   		color:#1DBD8D; 
+   		margin:0px 10px;
+   		padding:5px 10px;
+    }
+    .day-title-t{color:#1DBD8D;}
+    .day-con img{
+		height: 200px;
+		width: 100%;
+    }
+    	
+	

@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>故事</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/dynamic.css" />
+</head>
+<body>
+	<script id="dynamic-template" type="text/x-dot-template">
+    {{ for(var i in it) { }}
+    <div class="aui-list-view dynamic-list" id="dynamic_{{=it[i].id}}">
+    	{{? it[i].isvip==1 }}
+    	<div class="vipicon">
+			<img src="../image/vipicon.png">
+		</div>
+		{{? }}
+		<div class="aui-col-xs-12 aui-padded-10">
+			<div class="dynamic-user-avatar">
+				<img src="../image/noavatar.gif" {{? it[i].avatar}}data-echo="{{=it[i].avatar}}"{{? }}>
+			</div>
+			<div class="dynamic-user-info">
+				<div class="aui-pull-right dynamic-time">{{=it[i].inputtime}}</div>
+				{{? }}
+				<div class="dynamic-user-nickname">
+					<span {{? it[i].isvip==1 }}class="aui-text-danger"{{? }}>{{=it[i].nickname}}</span>
+					{{? it[i].sex==1 }}
+					<small class="aui-iconfont aui-icon-man boy"> {{=it[i].age}}岁</small>
+					{{?? it[i].sex==2 }}
+					<small class="aui-iconfont aui-icon-women girl"> {{=it[i].age}}岁</small>
+					{{? }}
+					
+				</div>
+				<p>
+					{{? it[i].mate==2 }}
+					<small class="feidanshen">非单身</small>
+					{{?? }}
+					<small class="danshen">单身</small>
+					{{? }}
+					{{=it[i].company}}
+				</p>
+			</div>
+		</div>
+		<div class="aui-line-x aui-clearfix"></div>
+		<div class="aui-col-xs-12" tapmode {{? it[i].inputtime!=0}}onclick="show('{{=it[i].id}}');"{{? }} >
+			<div class="aui-padded-10 dynamic-content">{{=it[i].description}}</div>
+			{{? it[i].photos }}
+			<ul class="aui-thumb-view">
+				{{ for(var k in it[i].photos) { }}
+					{{? it[i].photos.length>=3}}
+						{{? k<6 }}
+			            <li class="aui-list-view-cell aui-img aui-col-xs-4">
+			                <img class="aui-img-object" src="../image/nophoto.png" data-echo="{{=it[i].photos[k]}}">
+			            </li>
+			            {{? }}
+			        {{?? it[i].photos.length==2}}
+			        	<li class="aui-list-view-cell aui-img aui-col-xs-6">
+			                <img class="aui-img-object" src="../image/nophoto.png" data-echo="{{=it[i].photos[k]}}">
+			            </li>
+			        {{?? it[i].photos.length==1}}
+			        	<li class="aui-list-view-cell aui-img aui-col-xs-12">
+			                <img class="aui-img-object" src="../image/nophoto.png" data-echo="{{=it[i].photos[k]}}">
+			            </li>
+			        {{? }}
+			    {{ } }}    
+	        </ul>
+
+			{{? }}
+		</div>	
+		<div class="dynamic-otherinfo aui-clearfix">
+			{{? it[i].vendor}}
+	        <p><small class="aui-iconfont aui-icon-phone">{{=it[i].vendor}}</small></p>
+	        {{? }}
+	        {{? it[i].myaddress && it[i].showaddress==1}}
+	        <p><small>{{=it[i].myaddress}}</small></p>
+	        {{? }}
+        </div>
+        <div class="aui-line-x"></div>
+        {{? it[i].id>0}}
+        <div class="aui-col-xs-12 dynamic-btn">
+        	<div class="aui-col-xs-4 aui-iconfont aui-icon-duihuaxinxi"  tapmode {{? it[i].inputtime!=0}}onclick="show('{{=it[i].id}}');"{{? }} id="replyTotal_{{=it[i].id}}"> {{=it[i].replyTotal}}</div>
+        	<div class="aui-col-xs-4 aui-iconfont aui-icon-zan" tapmode {{? it[i].inputtime!=0}}onclick="show('{{=it[i].id}}');"{{? }} id="laudTotal_{{=it[i].id}}"> {{=it[i].laudTotal}}</div>
+        	<div class="aui-col-xs-4 aui-iconfont aui-icon-goods" tapmode onclick="reward({{=it[i].id}})"> 打赏</div>
+        </div>
+        {{? }}
+    </div>
+    {{ } }}
+    </script>
+	<div class="aui-content" id="dynamic-content"></div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+<script type="text/javascript" src="../script/space_dynamic_list.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/echo.js"></script>
+</html>

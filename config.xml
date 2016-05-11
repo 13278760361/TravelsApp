@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget id="A6907040918155" version="0.0.1"> 
+  <name>e+天下</name>  
+  <description/>  
+  <author email="13278760361@163.com" href="http://www.apicloud.com">sasaosasa</author>  
+  <content src="index.html"/>  
+  <preference name="appBackground" value="rgba(0,0,0,0)"/>  
+  <preference name="windowBackground" value="rgba(0,0,0,0)"/>  
+  <preference name="frameBackgroundColor" value="rgba(0,0,0,0)"/>  
+  <preference name="autoLaunch" value="true"/>  
+  <preference name="autoUpdate" value="true"/>  
+  <preference name="smartUpdate" value="false"/>  
+  <preference name="debug" value="true"/>  
+  <preference name="statusBarAppearance" value="true"/>  
+  <permission name="location"/>  
+  <permission name="internet"/>  
+  <access origin="*"/>  
+  <feature name="baiduMap"> 
+    <param name="android_api_key" value="MAtuPFSjtllrz9Y2IYMAwaC0"/>  
+    <param name="ios_api_key" value="j7gSMKGU1A4npRPpPvYth8an"/> 
+  </feature>  
+  <feature name="weiXin"> 
+    <param name="urlScheme" value="wx14aff8086e157742"/>  
+    <param name="apiKey" value="wx14aff8086e157742"/>  
+    <param name="apiSecret" value="f6a5d5dfc5a9e04664493961e1995bea"/> 
+  </feature>  
+  <feature name="wx"> 
+    <param name="urlScheme" value="wx3eb37ad7c295118c"/>  
+    <param name="apiKey" value="wx3eb37ad7c295118c"/>  
+    <param name="apiSecret" value="58486d0704545ea088134abe7c22e906"/> 
+  </feature>  
+  <feature name="wxPay"> 
+    <param name="urlScheme" value="wx14aff8086e157742"/>  
+    <param name="apiKey" value="wx14aff8086e157742"/>  
+    <param name="apiSecret" value="f6a5d5dfc5a9e04664493961e1995bea"/> 
+  </feature>  
+  <feature name="qq"> 
+    <param name="urlScheme" value="rCczqEDhDv0yx18T"/>  
+    <param name="apiKey" value="1105148137"/> 
+  </feature>  
+  <feature name="aliPay"> 
+    <param name="urlScheme" value="AliPayA6907040918155"/> 
+  </feature>  
+  <feature name="sinaWeiBo"> 
+    <param name="urlScheme" value="wb269848741"/>  
+    <param name="apiKey" value="269848741"/>  
+    <param name="registUrl" value="http://www.apicloud.com"/> 
+  </feature> 
+</widget>

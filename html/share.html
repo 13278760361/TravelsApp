@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+    html,body,#header,#main{
+  	 	background: transparent;
+        padding: 0;
+     }
+    .wrap{width:100%;height:100%;}
+    .x{
+    	position: fixed;
+    	bottom:0px;
+    	left:0px;
+        z-index: 1;
+        width:100%;
+        height:300px;
+        opacity: 0;
+        -webkit-transition: all .2s;
+		transition:all .2s;
+		-webkit-transform: translateY(200px);
+		transform: translateY(200px);
+		background:#f6f4f4;
+    }
+    .x-click{
+    	opacity: 1;
+    	-webkit-transform: translateY(0px);
+		transform: translateY(0px);
+    }
+    .shadow{background-color:#000000;opacity:0.3;width:100%;}
+    .header1{height:50px;line-height:50px;color:808080;text-align:center;}
+	.swipe {	
+			width: 100%;
+	        overflow: hidden;	
+	        position: relative;	
+	    }	
+	    .swipe-wrap {	
+	        overflow: hidden;	
+	        position: relative;	
+	    }	
+	    .swipe-wrap .swipe-box {	
+	    	padding-bottom: 10px;	
+	        float: left;	
+	        width: 100%;	
+	        position: relative;	
+	    }	
+	    .section01 .col {
+		text-align: center;
+		}
+		.col {
+		-webkit-box-flex: 1;
+		-webkit-flex: 1;
+		flex: 1;
+		position: relative;
+		}
+		
+		.section01 .col img {
+		position: relative;
+		width: 60%;
+		}
+		.col img {
+		position: absolute;
+		right: 0;
+		width: 80px;
+		top: 0;
+		}
+		.section01 .col div {
+		font-size: 13px;
+		margin-top: 5px;
+		}
+		.section01 .row {
+		margin-top: 10px;
+		}
+		.row {
+		display: -webkit-box;
+		}
+		.qx-btn{border:1px solid #b3b3b3;padding:10px;margin:10px;text-align:center;border-radius: 5px;background-color:#ffffff;}
+		.tap-active{background-color:#b3b3b3;}
+    </style>
+</head>
+<body>
+<div id="wrap" class="wrap">
+	<div class="shadow" id="shadow" tapmode="tap-active" onclick="closeMenu()"></div>
+	<div class="x" id="x" style="display:block;">
+		<div class="header1">分享文章</div>
+		
+		<div id="swipe" class="swipe section01">	
+			<div class="swipe-wrap">	
+				<div class="swipe-box"> 	
+					<div class="row">	
+						<div class="col" tapmode onclick="shareWx()">	
+							<img src="../image/wx-icon.png" alt="">	
+							<div class="">微信</div>	
+						</div>	
+						<div class="col" tapmode onclick="shareCof()">	
+							<img src="../image/wxf-icon.png" alt="">	
+							<div class="">朋友圈</div>	
+						</div>
+						<div class="col" tapmode onclick="shareQQ()">	
+							<img src="../image/qq-icon.png" alt="">	
+							<div class="">QQ</div>	
+						</div>	
+						<div class="col" tapmode onclick="shareXlwb">	
+							<img src="../image/wb-icon.png" alt="">	
+							<div class="">新浪微博</div>	
+						</div>	
+
+					</div>
+					<div class="row">
+					
+						<div class="col" tapmode onclick="shareTxwb()">	
+							<img src="../image/txwb-icon.png" alt="">	
+							<div class="">腾讯微博</div>	
+						</div>	
+						<div class="col" tapmode onclick="shareRR()">	
+							<img src="../image/rr-icon.png" alt="">	
+							<div class="">人人网</div>	
+						</div>	
+						<div class="col" tapmode onclick="shareEmail()">	
+							<img src="../image/yj-icon.png" alt="">	
+							<div class="">邮件</div>	
+						</div>	
+						<div class="col" tapmode onclick="shareMesg()">	
+							<img src="../image/dx-icon.png" alt="">	
+							<div class="">短信</div>	
+						</div>	
+					</div>
+				</div>	
+			</div>	
+		</div>
+
+		<div class="qx-btn" tapmode="tap-active" onclick="closeMenu()">取消</div>
+	</div>
+</div>  
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/share.js"></script>
+<script type="text/javascript">
+	function closeMenu(){
+		api.closeFrame({name: 'share'});
+	}
+	apiready = function(){
+	  var height=document.getElementById('x').offsetHeight;
+	  height=api.winHeight-height-api.pageParam.height;
+	  document.getElementById('shadow').style.height=height+'px';
+      var menu = $api.dom('.x');
+      $api.addCls(menu, 'x-click');
+    };
+</script>
+</html>

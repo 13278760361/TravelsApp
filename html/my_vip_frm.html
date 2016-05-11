@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>作息</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/vipbuy.css" />
+</head>
+<body>
+    <div class="aui-content my-manager-list">
+        <ul class="aui-list-view">
+            <li class="aui-list-view-cell aui-img">
+                <a class="aui-arrow-right">
+                    <img class="aui-img-object aui-pull-left" src="../image/noavatar.gif" id="avatar">
+                    <div class="aui-pull-left aui-img-body" id="nickname"></div>
+                </a>    
+            </li>
+            <li class="aui-list-view-cell aui-img">
+                <a class="aui-arrow-right">
+                    <div class="aui-pull-left aui-img-body">当前状态：<span id="vipstatus"></span></div>
+                </a>    
+            </li>
+            <li class="aui-list-view-cell aui-img">
+                <a class="aui-arrow-right">
+                    <div class="aui-pull-left aui-img-body">过期时间：<span id="overduedate"></span></div>
+                </a>    
+            </li>
+        </ul>
+    </div>    
+    <div class="aui-content my-manager-list">
+        <ul class="aui-list-view">        
+            <li class="aui-list-view-cell aui-img">
+                <div class="aui-col-xs-12 aui-img-body">续费</div> 
+                <div class="aui-col-xs-12">
+                    <button id="cut" class="aui-btn" tapmode onclick="cut();">－</button>
+                    <input type="number" id="quantity" readonly value="1">
+                    <button id="add" class="aui-btn" tapmode onclick="add();">＋</button>
+                    <span>年</span>
+                    <span style="margin-left:5px; color:#ff9900">300元/年</span>
+                </div>
+            </li>
+            <li class="aui-list-view-cell aui-img">     
+                <div class="aui-col-xs-12 aui-img-body">支付方式</div>
+                <div class="aui-col-xs-12">
+                    <div class="aui-label aui-label-default payment alipay" data-id="alipay">支付宝</div>
+                    <div class="aui-label aui-label-default payment weixin" data-id="wx">微信支付</div>
+                </div>
+            </li>
+            <li class="aui-list-view-cell aui-img">    
+                <div class="aui-col-xs-12">
+                    <div class="aui-btn aui-btn-info" tapmode onclick="pay();">续费</div>
+                </div>
+            </li>
+        </ul>
+    </div>        
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript">
+    function pay(){
+        var quantity = Number($api.val($api.byId('quantity')));
+        var payment = $api.attr($api.dom(".payment.active"),'data-id');
+        var money = quantity*99;
+        if(!payment){
+            api.toast({
+                msg: '请选择支付方式',
+                duration:1500,
+                location: 'top'
+            });
+            return false;
+        }
+        api.confirm({
+            title: '会员支付',
+            msg: '您确定要支付'+money+'元吗',
+            buttons:['确定', '取消']
+        },function(ret,err){
+            if(ret.buttonIndex == 1){
+                var data = {};
+                data['userid'] = userid;
+                data['quantity'] = quantity;
+                data['money'] = money;
+                data['subject'] = "开通会员服务，"+quantity+"年";
+                data['paytype'] = "vip";
+                data['payment'] = payment;
+                api.showProgress({
+                    style: 'default',
+                    animationType: 'fade',
+                    title: '正在加载',
+                    text: '请稍候',
+                    modal: false
+                });
+                var url = '&c=pingpp_app&a=pay';
+                ajaxRequest(url,'post',data,function(ret,err){
+                    if(ret){
+                        var pingpp = api.require('pingpp');
+                        var params = {
+                            charge: JSON.stringify(ret)
+                        };
+                        api.hideProgress();
+                        pingpp.createPayment(params, function(ret, err){
+                            if (ret.result == "success") {
+                                //重新获取我的信息
+                                api.sendEvent({
+                                    name:'reGetMyInfo',
+                                    extra: {key:'true'}
+                                })
+                                //支付成功
+                                api.alert({
+                                    title: '支付确认',
+                                    msg: '支付成功',
+                                    buttons:['确定']
+                                },function(ret,err){
+                                });
+                            }
+                        });
+                    }
+                })
+            }
+        });
+    }
+    function cut(){
+        var quantity = Number($api.val($api.byId('quantity')));
+        if(quantity <= 1){
+            $api.val($api.byId('quantity'),'1');
+        }else{
+            var newQuantity = quantity-1;
+            $api.val($api.byId('quantity'),newQuantity);
+        }
+    }
+    function add(){
+        var quantity = Number($api.val($api.byId('quantity')));
+        var newQuantity = quantity+1;
+        $api.val($api.byId('quantity'),newQuantity);
+    }
+    apiready = function(){
+        api.parseTapmode();
+        //支付方式选择
+        var payments = $api.domAll(".payment");
+        for(var i in payments){
+            $api.addEvt(payments[i], 'click', function(){
+                
+                $api.removeCls($api.dom(".payment.active"),'active');
+                $api.addCls(this,'active');
+            });
+        }
+        //获取最新便签、作息表、签到状态、是否实名
+        var url = '&c=member_app&a=getMyVipInfo&userid='+userid+'&encrypt='+encrypt;
+        ajaxRequest(url, 'GET', '', function (ret, err) {
+            //alert(JSON.stringify(err));
+            if (ret) {
+                $api.attr($api.byId('avatar'),'src',ret.avatar);
+                $api.text($api.byId('nickname'),ret.nickname);
+               
+                if(ret.isvip==1){
+                    $api.text($api.byId('overduedate'),ret.overduedate);
+                    $api.text($api.byId('vipstatus'),'VIP进行中');
+                }else if(ret.isvip==0){
+                    $api.text($api.byId('overduedate'),'-');
+                    $api.text($api.byId('vipstatus'),'非VIP');
+                }
+            }
+        })
+        
+    }
+
+</script>
+</html>

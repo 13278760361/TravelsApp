@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>会员动态</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+</head>
+<body>
+    <header class="aui-bar aui-bar-nav aui-bar-primary" id="header">
+        <div class="aui-btn aui-btn-primary aui-pull-left" tapmode onclick="back();">
+            <span class="aui-iconfont aui-icon-left"></span>
+        </div>
+        <div class="aui-title" id="header-title">会员动态</div>
+    </header>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        api.parseTapmode();
+        var toUserid = api.pageParam.toUserid;
+        var dynamicType = api.pageParam.type;
+        var header = $api.byId('header');
+        $api.fixStatusBar(header);
+        var header_h = $api.offset(header).h;
+        var body = $api.dom('body');
+        var body_h = $api.offset(body).h;
+        var rect_h = body_h - header_h;
+        api.openFrame({
+            name: 'space_dynamic_list_frm',
+            url: 'space_dynamic_list_frm.html',
+            rect:{
+                x:0,
+                y:header_h,
+                w:'auto',
+                h:rect_h
+            },
+            pageParam: {toUserid: toUserid,type:dynamicType},
+            bounces: true,
+            vScrollBarEnabled:false,
+            hScrollBarEnabled:false
+        });
+    }
+    function back(){
+        api.closeWin();
+    }
+</script>
+</html>

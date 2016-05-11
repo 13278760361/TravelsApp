@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>产品详情</title>
+<link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+<link rel="stylesheet" type="text/css" href="../css/common.css"/>
+</head>
+<style>
+.footer {
+    bottom: 0;
+    position: fixed !important;
+    text-align: center;
+    left: 0;
+    right: 0;
+    background-color: #f6f6f6;
+    border-top: #e7e7e7 solid 1px;
+    padding: 4px 14px;
+    z-index: 99;
+}
+.footer button {
+    background: #ff7e00;
+    color: #fff;
+    font-size: 16px;
+    width: 100%;
+    border: 0 none;
+    border-radius: 3px;
+    padding: 12px 0;
+}
+</style>
+<body>
+<header class="aui-bar aui-bar-nav aui-bar-primary" id="header">
+  <div class="aui-btn aui-btn-primary aui-pull-left" tapmode onclick="back();"> <span class="aui-iconfont aui-icon-left"></span> </div>
+  <div class="aui-title" id="header-title">产品详情</div>
+  <div class="aui-btn aui-btn-primary active aui-pull-right" tapmode onclick="fenxiang()"><span class="aui-iconfont aui-icon-share"></span></div>
+</header>
+<footer class="aui-nav footer" id="aui-footer">
+  <button id="shop_click" class="aui-btn-warning" onclick="opLineBuy()">立即购买</button>
+</footer>
+<script type="text/javascript" src="../script/api.js"></script> 
+<script type="text/javascript" >
+	var did;
+    apiready=function(){
+    	api.showProgress(); //显示加载进度框	
+        var $header=$api.byId('header');	
+        $api.fixIos7Bar($header);	
+        var $footer=$api.byId('aui-footer');	
+        var $header_h=$api.offset($header).h;	
+        var $footer_h=$api.offset($footer).h;
+		var body = $api.dom('body');
+        var body_h = $api.offset(body).h;
+        var rect_h = body_h -$header_h-$footer_h;
+        did = api.pageParam['dataId'];
+        api.openFrame({	
+            name:'leader_detail_fra',	
+            url:'leader_detail_fra.html',	
+            rect:{	
+                x:0,	
+                y:$header_h,	
+                w:'auto',	
+                h:rect_h,
+            },
+            pageParam:{dataId:did}
+        })
+       
+    }	
+	 function back(){
+        api.closeWin();
+    }
+    function fenxiang(){
+		api.openFrame({
+                name: 'share_fra2',
+                url: 'share_fra2.html',
+                pageParam:{height:0,dataId:did,type:'leader'},
+                rect: {
+                        x:0,
+                        y:0,
+                        w:'auto',
+                        h:'auto'
+                },
+               //  pageParam:{}
+               bgColor: 'rgba(0,0,0,0.5)',
+        });
+    }
+	function opLineBuy(){
+		var key = $api.getStorage('key');
+		//var did = api.pageParam['dataId'];
+		if(key){
+	    	api.openWin({
+		        name: 'line_buy_win',
+		        url: './line_buy_win.html',
+		        pageParam:{dataId:did}
+	        });    		
+		}else{
+			api.openWin({
+	            name: 'login_win',
+	            url: 'login_win.html',
+	        });
+		}
+	}
+</script>
+</body>
+</html>

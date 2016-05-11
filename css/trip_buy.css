@@ -1,0 +1,94 @@
+    body, html {	
+        height: auto;	
+        background-color: #fdfaf0;	
+    }
+    h3{
+	    font-size:13px; 
+	    text-align: center; 
+	    color:#4D4D4D;
+		overflow: hidden;
+		padding: 6px;
+    }
+    input{outline:none;}
+    p{padding:1em; margin:8px auto;}
+    p span{float:left;}
+    
+    
+    p span.font{font-size:16px!important; line-height:32px; padding-left:8px;font-family:"微软雅黑" !important; color:#0fc4c4;}
+    p .buy-msg,p .buyUser-msg{
+    		height:32px; width:32px;
+    		background-repeat: no-repeat;
+		  	background-position: center top;
+		  	-webkit-background-size: cover;
+		  	
+    }
+    p .buy-msg{ background-image: url(../image/iconfont-goumai.png);}
+    p .buyUser-msg{background-image: url(../image/iconfont-yonghu.png);}
+    .ul-class{
+    	width:94%;
+    	margin:5px auto;
+    	border:1px solid #6A6A6A;
+    	border-radius:6px ;
+    	overflow: hidden;
+    	margin-top:15px;
+    }
+   
+    .ul-class li,div.ul-class tr{
+    	padding: 1.2em;
+    	color:#6A6A6A;
+    	border-bottom:#6A6A6A 1px solid;
+    	line-height:56px;
+    }
+    
+    .ul-class li:last-child(1){
+    	border-bottom:none; 
+    }
+    .pirce-type{
+    	 margin-top:8px;
+    	 padding:3px 12px; text-align: center; line-height:28px; color:#fff;
+         background-color: #0fc4c4;	
+         border-bottom: 1px solid #0fc4c4;	
+         border-radius:8px;
+    }
+    
+	.order-num span:nth-child(2){
+		float:right;
+	}
+	.order-num span i{
+		font-size:20px; text-align:center; height:39px; line-height:39px; background-color:#0fc4c4; color:#fff;
+		font-family:"微软雅黑" !important; float:left;padding:0px 18px;
+	}
+	.order-num span input{border:1px solid #0fc4c4; width:36px; height:37px; line-height:37px;float:left; text-align:center;}
+	.order-num span i:active{
+		background-color:#0ca9a9;
+	}
+	.order-num span i:nth-child(1){
+		border-bottom-left-radius: 6px;
+		border-top-left-radius: 6px;
+	}
+	.order-num span i.num-jia{
+		border-bottom-right-radius: 6px;
+		border-top-right-radius: 6px;
+	}
+	.order-num span i:checked{
+		background-color:#0ca9a9;
+	}
+	
+	
+	.byuser-msg-ul .user-l{
+		width:20%; border-right:1px solid #6A6A6A;
+	}
+	.byuser-msg-ul .user-r{
+		background-color:#fff;
+	}
+	.byuser-msg-ul span:nth-child(odd){
+		padding:15px 10px;
+	}
+	.byuser-msg-ul input{
+		text-indent:1rem;
+	}
+	
+	.buy-pic{
+		margin-right:15px;
+	}
+	table{border:none;}

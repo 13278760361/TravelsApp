@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>动态回复</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/dynamic.css" />
+</head>
+<body>
+    <header class="aui-bar aui-bar-nav aui-bar-primary" id="header">
+        <div class="aui-btn aui-btn-primary aui-pull-left" onclick="back();">
+            <span class="aui-iconfont aui-icon-left"></span>
+        </div>
+        <div class="aui-title" id="header-title">回复</div>
+    </header>
+    <div contentEditable="true" id="demo" style="width:100%;height:200px;border:1px solid #666666">
+    <img src="http://117.78.3.250/icon/1422537241487_IMG_1241.jpg" width="40" height="40">
+    <strong>加粗</strong>
+　　</div> 
+　　<input type="button" name="submit" value="插入图片" onclick="demo()">
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        
+    }
+    function back(){
+        api.closeWin();
+    }
+    function demo(){
+        var dd = $api.byId('demo');
+        var cont = $api.html(dd);
+        alert(cont);
+    }
+</script>
+</html>

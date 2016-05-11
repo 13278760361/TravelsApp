@@ -1,0 +1,496 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>入口页面</title>
+<link rel="stylesheet" type="text/css" href="./css/api.css"/>
+<link rel="stylesheet" type="text/css" href="./css/aui.css"/>
+</head>
+
+<body>
+<header class="aui-bar aui-bar-nav aui-bar-primary">
+  <div class="aui-btn aui-btn-primary aui-pull-left message" tapmode onclick="openTab('message');"> <span class="aui-iconfont aui-icon-mail" id="message"></span> <span class="message-dot" id="messageDot"></span> </div>
+  <div class="aui-btn aui-btn-primary aui-pull-right" id="right-btn" tapmode><span class="aui-iconfont aui-icon-add"></span></div>
+  <div class="aui-btn aui-btn-primary active aui-pull-right" tapmode onclick="dynamicVerify()" id="verify-btn" style="">审</div>
+  <div class="aui-title" id="header-title">旅行故事</div>
+</header>
+<div class="aui-content" id="main"></div>
+<footer class="aui-nav" id="aui-footer">
+  <ul class="aui-bar-tab">
+    <li class="dynamic active-warning" tapmode onclick="openTab('dynamic');"> <span class="aui-iconfont aui-icon-favor"></span>
+      <p>推荐</p>
+    </li>
+    <li class="leader" tapmode onclick="openTab('leader')"> <span class="aui-iconfont aui-icon-mark"></span>
+      <p>领队</p>
+    </li>
+    <li id="tabbar5" onclick="openTab('moretab')"> <span class="aui-iconfont aui-icon-add"></span>
+      <p>游记</p>
+    </li>
+    <li class="circle"  tapmode onclick="openTab('circle')"> <span class="aui-iconfont aui-icon-like"></span>
+      <p>目的地</p>
+    </li>
+    <li  class="my" tapmode onclick="openTab('my')"> <span class="aui-iconfont aui-icon-my"></span>
+      <p>我的</p>
+    </li>
+  </ul>
+</footer>
+</body>
+</html>
+<script type="text/javascript" src="script/api.js"></script>
+<script>
+    //动态审核
+    function dynamicVerify(){
+        api.openWin({
+            name: 'dynamic_verify_win',
+            url: 'html/dynamic_verify_win.html',
+            delay: 300
+        });
+    }
+	
+    //发布动态
+    function dynamicAdd(){
+	    var key = $api.getStorage('key');
+	    if(key){
+	        api.openWin({
+	            name: 'dynamic_add_win',
+	            url: 'html/dynamic_add_win.html',
+	            delay: 300
+	        });
+        }else{
+	        api.openWin({
+	            name: 'login_win',
+	            url: 'html/login_win.html',
+	            delay: 300
+	        });
+        }
+    }
+    //发布活动
+    function activityAddMenu(){
+        api.actionSheet({
+            title: '请选择要发布的类别',
+            cancelTitle: '取消',
+            buttons: ['约伴信息','达人服务']
+        },function(ret,err){
+            if(ret.buttonIndex==1){
+                //AA活动
+                api.openWin({
+                    name: 'activity_add_aa_win',
+                    url: 'html/activity_add_aa_win.html',
+                    delay: 300
+                });
+            }else if(ret.buttonIndex==2){
+                //发布达人服务
+                api.openWin({
+                    name: 'activity_add_service_win',
+                    url: 'html/activity_add_service_win.html',
+                    delay: 300
+                });
+            }
+        });
+    }
+    //搜索圈子
+    function circleSearch(){
+        api.openWin({
+            name: 'search_circle_win',
+            url: 'html/search_circle_win.html',
+            delay: 300
+        });
+    }
+	
+	 //搜索圈子
+    function addleader(){
+        api.openWin({
+            name: 'search_circle_win',
+            url: 'html/search_circle_win.html',
+            delay: 300
+        });
+    }
+    function hideFrames(){
+        api.setFrameAttr({
+            name: 'main_fra',
+            hidden: true
+        });
+        api.setFrameGroupAttr({
+            name: 'activity',
+            hidden: true
+        });
+		api.setFrameAttr({
+            name: 'leader',
+            hidden: true
+        });
+		api.setFrameAttr({
+            name: 'moretab',
+            hidden: true
+        });
+		
+        api.setFrameAttr({
+            name: 'circle',
+            hidden: true
+        });
+        api.setFrameAttr({
+            name: 'my',
+            hidden: true
+        });
+        api.setFrameAttr({
+            name: 'message',
+            hidden: true
+        });
+    }
+    function openTabActivity(it){
+        $api.removeCls($api.dom('#activity .active-warning'),'active-warning');
+        $api.addCls($api.byId('activity_nav_'+it),'active-warning');
+        api.setFrameGroupIndex({
+            name: 'activity',
+            index:it
+        });
+    }
+    function openTab(it){
+      
+        $api.removeCls($api.dom('#aui-footer .active-warning'),'active-warning');
+        $api.addCls($api.dom('#aui-footer .'+it+''),'active-warning');
+        //切换导航操作
+        if(it=='activity'){
+            $api.removeCls($api.byId("activity"),'hide');
+        }else{
+            $api.addCls($api.byId("activity"),'hide');
+        }
+        //隐藏所有frame
+        hideFrames();
+        //隐藏审核按钮
+        $api.css($api.byId("verify-btn"),'display:none');
+        var nav, navPos, headerPos,height;
+        nav = $api.byId('aui-footer');
+        navPos = $api.offset(nav);
+        header = $api.byId('header-title');
+        headerPos = $api.offset(header);//顶部导航
+        height = api.winHeight - navPos.h - headerPos.h;
+        var addBtn = $api.byId('right-btn');
+        switch(it){
+            //动态,故事
+            case 'dynamic':
+                $api.html($api.byId('header-title'),'旅行故事');
+                $api.html(addBtn,'<span class="aui-iconfont aui-icon-add"></span>');
+                $api.attr(addBtn,'add-type','dynamicAdd');
+                $api.css($api.byId("verify-btn"),'display:block');
+                api.openFrame({
+                    name: 'main_fra',
+                    url: 'html/main_fra.html',
+                    bounces: false,
+                    rect: {
+                        x: 0,
+                        y: headerPos.h,
+                        w: 'auto',
+                        h: height
+                    },
+			        vScrollBarEnabled:false,
+			        hScrollBarEnabled:false
+                }); 
+                break;
+				
+			 //圈子    
+            case 'leader':
+                $api.html($api.byId('header-title'),'家人带你玩');
+                $api.html(addBtn,'<span class="aui-iconfont aui-icon-people2"></span>');
+                $api.attr(addBtn,'add-type','addleader');
+                api.openFrame({
+                    name: 'leader',
+                    url: 'html/leader_fra.html',
+                    bounces: false,
+                    rect: {
+                        x: 0,
+                        y: headerPos.h,
+                        w: 'auto',
+                        h: height
+                    },
+                    vScrollBarEnabled: false,
+                    hScrollBarEnabled: false
+                }); 
+                break;	
+			
+				 //圈子    
+            case 'moretab':
+                $api.html($api.byId('header-title'),'精彩游记和专题');
+                $api.html(addBtn,'<span class="aui-iconfont aui-icon-search"></span>');
+                $api.attr(addBtn,'add-type','circleSearch');
+				$api.css($api.byId("message"),'display:none');
+                api.openFrame({
+                    name: 'main',
+                    url: 'html/main.html',
+                    bounces: false,
+					//bgColor:'rgba(0,0,0,0.6)',
+                    rect: {
+                        x: 0,
+                        y:headerPos.h,
+                        w: 'auto',
+                        h: height,
+                    }, 
+				//	reload:true,
+                    vScrollBarEnabled: false,
+                    hScrollBarEnabled: false
+                }); 
+                break;	
+			
+            //活动    
+            case 'activity':
+
+                $api.html($api.byId('header-title'),'活动');
+                $api.html(addBtn,'创建<span class="aui-iconfont aui-icon-right"></span>');
+                $api.attr(addBtn,'add-type','activityAddMenu');
+
+                var framesArr = [{
+                    name: 'activity_club_list', 
+                    url: 'html/activity_club_list.html',
+                    bounces: false,
+                    vScrollBarEnabled: false,
+                    hScrollBarEnabled: false
+                },{
+                    name: 'actvity_aa', 
+                    url: 'html/activity_aa_list.html',
+                    bounces: false,
+                    vScrollBarEnabled: false,
+                    hScrollBarEnabled: false
+                },{
+                    name: 'actvity_service', 
+                    url: 'html/activity_service_index.html',
+                    bounces: false,
+                    vScrollBarEnabled: false,
+                    hScrollBarEnabled: false
+                }];
+                api.openFrameGroup({
+                    name: 'activity',
+                    scrollEnabled: true,
+                    rect: {
+                        x: 0,
+                        y: headerPos.h,
+                        w: 'auto',
+                        h: height
+                    },
+                    index: 0,
+                    frames: framesArr
+                }, function(ret, err){
+                    $api.removeCls($api.dom('#activity .active'),'active');
+                    $api.addCls($api.byId('activity_nav_'+ret.index),'active');
+                });
+                break;
+            //圈子    
+            case 'circle':
+                $api.html($api.byId('header-title'),'主题游 游天下');
+                $api.html(addBtn,'<span class="aui-iconfont aui-icon-search"></span>');
+                $api.attr(addBtn,'add-type','circleSearch');
+				$api.css($api.byId("message"),'display:none');
+                api.openFrame({
+                    name: 'circle',
+                    url: 'html/theme_fra.html',
+                    bounces: false,
+                    rect: {
+                        x: 0,
+                        y: headerPos.h,
+                        w: 'auto',
+                        h: height
+                    },
+                    vScrollBarEnabled: false,
+                    hScrollBarEnabled: false
+                });
+                break;
+            //我的    
+            case 'my':
+	            
+	                $api.html($api.byId('header-title'),'会员中心');
+	                $api.html(addBtn,'');
+	                api.openFrame({
+	                    name: 'my_fra',
+	                    url: 'html/my_fra.html',
+	                    bounces: false,
+	                    rect: {
+	                x: 0,
+	                y: headerPos.h,
+	                w: 'auto',
+	                h: height
+	                    },
+	                    vScrollBarEnabled: false,
+	                    hScrollBarEnabled: false,
+	                   
+	                }); 
+	                
+                break;
+            case 'message':
+                $api.html($api.byId('header-title'),'我的消息');
+                $api.html(addBtn,'');
+                api.openFrame({
+                    name: 'message',
+                    url: 'html/message_list.html',
+                    bounces: false,
+                    rect: {
+                        x: 0,
+                        y: headerPos.h,
+                        w: 'auto',
+                        h: height
+                    },
+                    vScrollBarEnabled: false,
+                    hScrollBarEnabled: false
+                }); 
+                break;
+        }
+        //消息红点监听的处理
+        if(it=='message'){
+            //当消息页面打开时取消监听,并去掉红点
+            api.removeEventListener({
+                name: 'getNewMessage'
+            });
+            var dotDom = $api.byId("messageDot");
+            $api.css(dotDom,'display:none;');
+        }else{
+            //消息页面隐藏时开始监听
+            api.addEventListener({
+                name: 'getNewMessage'
+            }, function(ret){
+                if(ret && ret.value){
+                    var value = ret.value;
+                    if(value.key=='true'){
+                        //当有消息时设置红点显示
+                        var dotDom = $api.byId("messageDot");
+                        $api.css(dotDom,'display:block;');
+                    }
+                }
+            });
+        }
+    }
+    function isLogin(){
+        api.openFrame({
+            name: 'login_frm',
+            url: 'html/login_frm.html',
+            bounces: false,
+            rect: {
+                x: 0,
+                y: 0,
+                w: 'auto',
+                h: 'auto'
+            }
+        });
+    }
+    var first;
+    apiready = function(){
+        var header = $api.byId('header');
+        $api.fixStatusBar(header);
+        openTab('message');
+        openTab('dynamic');
+        api.setFrameAttr({
+            name: 'message',
+            hidden: true
+        });
+       //切换账号
+        api.addEventListener({
+            name: 'reLogin'
+        }, function(ret){
+            if(ret && ret.value){
+               // var mate = $api.getStorage('mate');
+                if(mate==0 || !mate){
+                    api.openFrame({
+                        name: 'member_mate',
+                        url: 'html/member_mate_frm.html',
+                        bounces: false,
+                        rect: {
+                            x: 0,
+                            y: 0,
+                            w: 'auto',
+                            h: 'auto'
+                        }
+                    });
+                }
+            }
+        });    
+        
+        //右侧发布按钮点击
+        var addBtn = $api.byId('right-btn');
+        $api.addEvt(addBtn, 'click', function(){
+            var addType = $api.attr(this,'add-type');
+            if(addType=='dynamicAdd'){
+                dynamicAdd();
+            }else if(addType=='activityAddMenu'){
+                activityAddMenu();
+            }else if(addType=='circleSearch'){
+                circleSearch();
+            }else if(addType=='addleader'){
+                addleader();
+            }
+        });
+        api.parseTapmode();
+        setTimeout(function(){
+            updateLocation();
+        },400)
+        //双击退出
+        api.addEventListener({
+            name: 'keyback'
+        }, function(ret, err){
+            if (!first) {
+                first = new Date().getTime();
+                api.toast({
+                    msg: '再按一次回到桌面',
+                    duration:1500,
+                    location: 'bottom'
+                });
+                setTimeout(function() {
+                    first = null;
+                }, 1500);
+            } else {
+                if (new Date().getTime() - first < 1500) {
+                    api.toLauncher();
+                }
+            }
+        });
+        //监听云修复
+        api.addEventListener({
+            name:'smartupdatefinish'
+            },function(ret,err){
+                api.toast({
+                    msg: 'APP有新的更新了，请重新启动查看',
+                    duration:2000,
+                    location: 'top'
+                }); 
+        });
+
+        //监听通知栏点击事件
+        api.addEventListener({
+            name:'noticeclicked'
+        },function(ret,err){
+            var value = ret.value;
+            if(ret.type == 0){
+                openTab('message_list',4,'消息');
+            } else if(ret.type == 1){
+                openTab('message_list',4,'消息');
+            }
+        });
+    }
+    function updateLocation(){
+        //更新位置信息
+        var baiduLocation = api.require('baiduLocation');
+        baiduLocation.startLocation({
+            accuracy: '100m',
+            filter:1,
+            autoStop: true
+        }, function(ret, err){
+            var data = {};
+            var lat = ret.latitude;
+            var lon = ret.longitude;
+            data['lat'] = lat;
+            data['lon'] = lon;
+		
+            //data['userid'] = $api.getStorage('userid');
+            var url = 'http://www.qinghuwai.com/index.php?m=app&c=member_app&a=updateLocation';
+            api.ajax({
+                url: url,
+                method: 'post',
+                cache: false,
+                timeout: 60,
+                dataType: 'json',
+                data: {
+                    values: data
+                }
+            }, function (ret, err) {
+                
+            });
+        })
+    }
+
+</script>

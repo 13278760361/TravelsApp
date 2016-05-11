@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>故事</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/dynamic_show.css" />
+</head>
+<body>
+	<div id="wrap">
+		<div class="aui-content" id="dynamic-content"></div>
+		<div class="aui-content" style="padding:15px;">
+			<p>审核规则：</p>
+			<p>1、如果当前故事对你有用而且内容丰富、健康，你可以选择有用，否则选择没用；</p>
+			<p>2、如果当前故事涉及暴力、色情、不文明语言、低俗、谣言、破坏团结等内容时您可以选择举报；</p>
+			<p>3、当故事有用数量（跟点赞同步）超过10次时该故事自动审核成功，动态发布者获得相应的驴豆奖励。</p>
+			<p>4、这是一个公开自由的审核方式，请谨慎认真做出自己的选择</p>
+		</div>
+    </div> 
+	<script id="dynamic-template" type="text/x-dot-template">
+	{{? it.nickname}}
+	<div class="aui-list-view dynamic-list">
+		<div class="aui-col-xs-12 aui-padded-10">
+			<div class="dynamic-user-avatar">
+				<img src="../image/noavatar.gif" {{? it.avatar}}data-echo="{{=it.avatar}}"{{? }}>
+			</div>
+			<div class="dynamic-user-info">
+				<div class="aui-pull-right dynamic-time">{{=it.inputtime}}</div>
+				<div class="dynamic-user-nickname">
+					<span {{? it.isvip==1 }}class="aui-text-danger"{{? }}>{{=it.nickname}}</span>
+					{{? it.sex==1 }}
+					<small class="aui-iconfont aui-icon-man boy"> {{=it.age}}岁</small>
+					{{?? it.sex==2 }}
+					<small class="aui-iconfont aui-icon-women girl"> {{=it.age}}岁</small>
+					{{? }}
+				</div>
+				<p>{{=it.member_mobile}}</p>
+			</div>
+		</div>
+		<div class="aui-line-x aui-clearfix"></div>
+		<div class="aui-col-xs-12 aui-padded-10 dynamic-content">{{=it.nickname}}</div>
+		{{? it.photos}}
+		<ul class="aui-thumb-view">
+			{{ for(var k in it.photos) { }}
+				{{? it.photos.length>=3}}
+		            <li class="aui-list-view-cell aui-img aui-col-xs-4" tapmode onclick="imageBrowser({{=k}});">
+		                <img class="aui-img-object" src="../image/nophoto.png" data-echo="{{=it.photos[k].des_img}}">
+		            </li>
+		        {{?? it.photos.length==2}}
+		        	<li class="aui-list-view-cell aui-img aui-col-xs-6" tapmode onclick="imageBrowser({{=k}});">
+		                <img class="aui-img-object" src="../image/nophoto.png" data-echo="{{=it.photos[k].des_img}}">
+		            </li>
+		        {{?? it.photos.length==1}}
+		        	<li class="aui-list-view-cell aui-img aui-col-xs-12" tapmode onclick="imageBrowser({{=k}});">
+		                <img class="aui-img-object" src="../image/nophoto.png" data-echo="{{=it.photos[k].des_img}}">
+		            </li>
+		        {{? }}
+		    {{ } }}    
+        </ul>
+		{{? }}
+    </div>
+    {{??}}
+    <div class="aui-list-view aui-text-center"><p>暂没有动态推荐审核</p></div>
+    {{? }}
+    </script>
+      
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+
+<script type="text/javascript" src="../script/echo.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+<script type="text/javascript" src="../script/dynamic_verify.js"></script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>领队线路</title>
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" type="text/css" href="../css/api.css" />
+<link rel="stylesheet" type="text/css" href="../css/common.css" />
+<link rel="stylesheet" type="text/css" href="../css/leader.css" />
+</head>
+<body>
+<div class="list we-cont-bd">
+  <ul class="we-cont-list" id="leader-content">
+  </ul>
+</div>
+<script id="leader-template" type="text/x-dot-template">
+		{{ for(var i=0; i<it.datas.zb_list.length; i++) { }}
+<li tapmode onclick="showdetail('{{=it.datas.zb_list[i].id}}');"> 
+               <div class="we-list-img">
+                   <img src="../image/nophoto.png"  {{? it.datas.zb_list[i].trip_images_url}}data-echo="{{=it.datas.zb_list[i].trip_images_url}}"{{? }} >
+                      <div class="we-list-msg">
+                 <span class="we-list-date">{{=it.datas.zb_list[i].tuanqi}}</span>
+                 <span class="we-list-price"><dfn>￥</dfn> {{=it.datas.zb_list[i].price}}/人起</span>
+                </div>
+               </div>
+               <div class="we-list-info">
+                 <p class="we-list-tit"><span class="we-dest-name">{{=it.datas.zb_list[i].city_id}} </span>|{{=it.datas.zb_list[i].names}}</p>
+                 <p class="we-list-crowd">出游性质:
+				 {{? it.datas.zb_list[i].line_type == '0' }}
+				 <span class="sale-type">跟团</span>
+				 {{??}}
+				 <span class="sale-type">自驾</span>
+				 {{? }}</p></div>
+             
+           </li>
+{{ } }}
+</script>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/echo.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/leader.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+</html>

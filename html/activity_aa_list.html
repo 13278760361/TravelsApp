@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>活动</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../css/activity.css" />
+</head>
+<style type="text/css">
+.aui-content {
+	padding-left:0;
+	padding-right: 0;
+}
+</style>
+<body>
+    <div class="activity-type" id="activity-type">
+        <div class="aui-col-5 aui-text-center activity-type-list" data-id="default">
+            <span class="aui-iconfont aui-icon-more bg-1"></span>
+            <p>默认</p>
+        </div>
+        <div class="aui-col-5 aui-text-center activity-type-list" data-id="boy">
+            <span class="aui-iconfont aui-icon-man bg-2"></span>
+            <p>男多</p>
+        </div>
+        <div class="aui-col-5 aui-text-center activity-type-list" data-id="girl">
+            <span class="aui-iconfont aui-icon-women bg-10"></span>
+            <p>女多</p>
+        </div>
+        <div class="aui-col-5 aui-text-center activity-type-list" data-id="1">
+            <span class="iconfont icon-quanjing bg-4"></span>
+            <p>徒步</p>
+        </div>
+        <div class="aui-col-5 aui-text-center activity-type-more" tapmode onclick="expandMore();">
+            <span class="aui-iconfont aui-icon-unfold bg-more" id="more-icon"></span>
+            <p id="more-text">更多</p>
+        </div>
+    </div>
+    <div class="activity-type type-category" id="category">
+        <div class="tip-left aui-text-center">请选择您喜欢的活动类别</div>
+        <div class="aui-col-5 aui-text-center activity-type-more" tapmode onclick="foldMore();">
+            <span class="aui-iconfont aui-icon-fold bg-more" id="more-icon"></span>
+            <p id="more-text">收起</p>
+        </div>
+    </div>
+    <div class="aui-content-padded aui-clearfix">
+        <div id="activity-content"></div>
+    </div>
+    <script id="activity-template" type="text/x-dot-template">
+    {{ for(var i in it) { }}
+    <div class="aui-list-view activity-aa-list" tapmode onclick="show({{=it[i].act_id}});">
+        <div class="aui-col-xs-12">
+            <div class="activity-aa-thumb">
+                <img src="../image/nophoto.png" {{? it[i].act_img_url}}data-echo="{{=it[i].act_img_url}}"{{? }}>
+            </div>
+            <div class="activity-aa-info">
+                <div class="activity-aa-title">{{=it[i].act_title}}</div>
+                <p>
+                    <span class="aui-iconfont aui-icon-location"></span>
+                    <span>{{=it[i].act_address}}</span>
+                </p>
+                <div class="aui-col-xs-12">
+                    <div class="aui-pull-right">
+                        <span class="aui-iconfont aui-icon-friends"></span>
+                        <span id="attendTotal_{{=it[i].act_id}}">12</span>
+                    </div>
+                    <div class="aui-pull-left">
+                        <span class="aui-iconfont aui-icon-history"></span>
+                        <span>{{=it[i].startdate}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ } }}
+    </script>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/activity_aa_list.js"></script>
+
+
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/echo.js"></script>
+</html>

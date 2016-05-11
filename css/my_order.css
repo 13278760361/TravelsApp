@@ -1,0 +1,114 @@
+body {
+    background-color: #efeff4;
+}
+.aui-content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    overflow: hidden;
+}
+#header {
+    background-color: #1abc9c;
+}
+/*列表样式重置*/
+.aui-list-view:after {
+    height: 0px;
+}
+.aui-list-view:before {
+    height: 0px;
+}
+.aui-content .aui-list-view:last-child {
+    margin-bottom: 0;
+}
+.activity-tab {
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    background: #ffffff;
+    font-size: 14px;
+    color: #8f8f94;
+    border-bottom: 1px solid #efeff4;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+.activity-tab .active {
+    color: #16A085;
+}
+.activity-tab .active:after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    content: '';
+    background-color: #16A085;
+    -webkit-transform: scaleY(1);
+          transform: scaleY(1);
+}
+.order-list {
+    float: left;
+    width: 100%;
+}
+.aui-list-view.order-list {
+    margin-bottom: 5px;
+}
+.order-list .order-thumb {
+    float: left;
+    width: 96px;
+    height: 128px;
+    position: relative;
+    
+}
+.order-list .order-thumb img {
+    width: 100%;
+    height: 100%;
+}
+.order-list .order-info {
+    overflow: hidden;
+    width: 100%;
+    float: left;
+    padding: 10px;
+}
+
+.order-list .order-info .order-title {
+    font-size: 16px;
+    color: #333333;
+    line-height: 20px;
+    margin-bottom: 5px;
+}
+
+.order-list .order-info p {
+    margin-bottom: 0px;
+    font-size: 12px;
+    color: #8f8f94;
+}
+
+.order-list span.aui-iconfont{
+    font-size: 14px;
+}
+span.service-price {
+    font-size: 14px;
+    color: #E67E22;
+}
+.order-btn {
+    width: 100%;
+    padding: 10px;
+    overflow: hidden;
+    text-align: center;
+    color: #8f8f94;
+}
+.order-btn div {
+    font-size: 14px;
+    border-right: 1px solid #efeff4;
+    color: #8f8f94;
+}
+.order-btn {
+    color: #8f8f94;
+}
+.order-btn .aui-iconfont {
+    color: #8f8f94;
+}
+.order-btn div:last-child {
+    border: none;
+}

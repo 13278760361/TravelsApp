@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>活动</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../css/activity.css" />
+</head>
+<style type="text/css">
+.aui-content {
+	padding-left:0;
+	padding-right: 0;
+}
+</style>
+<body>
+	<div class="activity-type" id="activity-type">
+        <div class="aui-col-xs-3 aui-text-center activity-type-list" data-id="default">
+            <span class="aui-iconfont aui-icon-more bg-1"></span>
+            <p>默认</p>
+        </div>
+        <div class="aui-col-xs-3 aui-text-center activity-type-list" data-id="1">
+            <span class="iconfont icon-meifa bg-4"></span>
+            <p>单身</p>
+        </div>
+        <div class="aui-col-xs-3 aui-text-center activity-type-list" data-id="boy">
+            <span class="aui-iconfont aui-icon-man bg-2"></span>
+            <p>男多</p>
+        </div>
+        <div class="aui-col-xs-3 aui-text-center activity-type-list" data-id="girl">
+            <span class="aui-iconfont aui-icon-women bg-10"></span>
+            <p>女多</p>
+        </div>
+        
+    </div>
+	<div class="aui-content aui-clearfix">
+        <div id="activity-content"></div>
+    </div>
+    <script id="activity-template" type="text/x-dot-template">
+    {{ for(var i in it) { }}
+    <div class="aui-list-view activity-club-list" tapmode onclick="show({{=it[i].id}});">
+		<div class="aui-col-xs-12">
+			<div class="activity-club-thumb">
+				<img src="../image/nophoto.png" data-echo="{{=it[i].thumb}}">
+			</div>
+			<div class="activity-club-info">
+				{{? it[i].isvip==1 }}
+				<div class="activity-club-title aui-text-danger">{{=it[i].title}}<span class="aui-label aui-label-pink">VIP</span></div>
+				{{??}}
+				<div class="activity-club-title">{{=it[i].title}}</div>
+				{{? }}
+				<p>
+					<span class="aui-iconfont aui-icon-location"></span>
+					<span> 目的地：{{=it[i].playadr}}</span>
+					<span class="aui-pull-right">{{=it[i].distance}} km</span>
+				</p>
+				<p class=" aui-clearfix aui-ellipsis-1">
+					<span class="aui-iconfont aui-icon-location"></span>
+					<span> 集合地：{{=it[i].setadr}}</span>
+				</p>
+				<p>
+					<span class="aui-iconfont aui-icon-history"></span>
+					<span> {{=it[i].gotime}} {{? it[i].totalDay>0}}（共 {{=it[i].totalDay}} 天）{{? }}</span>
+					<span class="aui-pull-right price">{{=it[i].money}} 元</span>
+				</p>
+				
+			</div>
+        </div>
+    </div>
+    {{ } }}
+    </script>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/activity_club_list.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/echo.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+</html>

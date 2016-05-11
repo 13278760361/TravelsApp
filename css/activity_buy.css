@@ -1,0 +1,151 @@
+body {
+    background-color: #efeff4;
+}
+.aui-content {
+    padding: 10px 0 0 0;
+    overflow: hidden;
+}
+#header {
+    background-color: #1abc9c;
+}
+input[type="number"]{
+    width: 60px;
+    margin-bottom: 0;
+    height: 35px;
+    border: none;
+    background: #eeeeee;
+    color: #1abc9c;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+input[type="text"]{
+    border: none;
+    font-size: 16px;
+    color: #666666;
+    margin: 0;
+    padding: 0;
+}
+
+/*列表样式重置*/
+.aui-list-view:after {
+    height: 0px;
+}
+.aui-list-view:before {
+    height: 0px;
+}
+.aui-content .aui-list-view:last-child {
+    margin-bottom: 0;
+}
+.footerBtn {
+    width: 100%;
+    height: 55px;
+    text-align: center;
+    line-height: 55px;
+    background: #ffffff;
+    color: #ffffff;
+}
+#payInfo {
+    background: #F39C12;
+}
+#payBtn {
+    background: #34495E;
+}
+#payMoney {
+    font-weight: 700;
+    font-size: 20px;
+}
+.buyinfo {
+    width: 100%;
+    background: #ffffff;
+    margin-bottom: 15px;
+}
+
+.title{
+    width: 100%;
+    border-bottom: 1px solid #eeeeee;
+}
+p.re-title {
+    color: #666666;
+    margin-bottom: 5px;
+}
+p.re-title-desc {
+    color: #ff9900;
+}
+.info {
+    padding: 15px;
+}
+.info strong {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ff9900;
+}
+.info span {
+    font-size: 14px;
+    color: #999999;
+}
+.type-list{
+    padding: 10px;
+    position: relative;
+}
+.type-list:after {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    background-color: #c8c7cc;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5); 
+}
+.type-list .aui-label {
+    padding: 10px 14px;
+    font-size: 14px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+.type-list .aui-label.active {
+    background-color: #1ABC9C;
+    color: #ffffff;
+    -webkit-animation: fadeIn .7s ease both;
+    animation: fadeIn .7s ease both;
+}
+
+.aui-label.payment {
+    text-align: center;
+    padding-left: 30px;
+    border: 1px solid #dddddd;
+}
+.payment.alipay {
+    background:url('../image/alipay.png') no-repeat;
+    background-size: 16px;
+    background-position: 8px 9px;
+}
+.payment.weixin {
+    background:url('../image/weixin.png') no-repeat;
+    background-size: 16px;
+    background-position: 10px 9px;
+}
+.type-list .aui-label.payment.active {
+    border: 1px solid #1ABC9C;
+    -webkit-animation: fadeIn .7s ease both;
+    animation: fadeIn .7s ease both;
+}
+@-webkit-keyframes fadeIn {
+    from { opacity: 0.3; }
+    to {  }
+}
+@keyframes fadeIn {
+    from { opacity: 0.3; }
+    to {  }
+}
+@-webkit-keyframes fadeOut {
+    from { }
+    to { opacity: 0.3;  }
+}
+@keyframes fadeOut {
+    from {  }
+    to { opacity: 0.3; }
+}

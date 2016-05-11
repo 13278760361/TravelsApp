@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<meta name="format-detection" content="telephone=no"/>
+<title>注册</title>
+<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+</head>
+<style type="text/css">
+body {
+	background: #f5f5f5;
+	overflow: hidden;
+}
+.aui-input-row {
+	position: relative;
+	display: block;
+ padding:0;
+}
+.aui-input-row {
+	overflow: hidden;
+	clear: left;
+}
+.aui-content, .aui-input-group, .aui-input-group input {
+	background: none;
+}
+.aui-content {
+	overflow: hidden;
+}
+.aui-input-row label {
+	text-align: center;
+	color: #999999;
+}
+.logo {
+	width: 100%;
+	background: url('../image/logo.png') no-repeat;
+	background-size: 136px 48px;
+	background-position: center top;
+	padding-top: 60px;
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 60px;
+}
+#sendVerify {
+	font-size: 12px;
+}
+#wrap {
+	width: 100%;
+	-webkit-animation: fadeIn .5s ease both;
+	animation: fadeIn .5s ease both;
+}
+@-webkit-keyframes fadeIn {
+ from {
+opacity: 0.3;
+}
+ to {
+}
+}
+@keyframes fadeIn {
+ from {
+opacity: 0.3;
+}
+ to {
+}
+}
+</style>
+<body>
+<div id="wrap">
+  <div class="aui-content">
+    <div class="logo">
+      <p>只为彼此 让我们的距离更近一点</p>
+    </div>
+    <div class="aui-input-group">
+      <div class="aui-input-row">
+        <label>手机号：</label>
+        <input type="number" name="mobile" id="mobile" placeholder="输入手机号">
+      </div>
+      <div class="aui-input-row">
+        <label>验证码：</label>
+        <input type="text" size="10" name="verify" id="verify" placeholder="验证码" style="width:90px; float:left;">
+        <div class="aui-btn aui-btn-default" id="sendVerify" tapmode onclick="get_verify()" style="float:left;width:100px; margin-top:3px;">获取验证码</div>
+      </div>
+      <div class="aui-input-row">
+        <label>密码：</label>
+        <input type="password" placeholder="输入密码" id="password" name="password">
+      </div>
+      <div class="aui-input-row">
+        <label>确认密码：</label>
+        <input type="password" id="passwordr" placeholder="再次输入密码">
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    var isinerval,times;
+    apiready = function(){
+        api.parseTapmode();
+        //var mobile = api.pageParam.mobile;
+    }
+    function writeData(){
+        var regMobile = $api.val($api.byId('mobile'));
+        var regVerify = $api.val($api.byId('verify'));
+        var regPassword = $api.val($api.byId('password'));
+        var regSpreadid = $api.val($api.byId('spreadid'));
+        $api.setStorage('regMobile',''+regMobile+'');
+        $api.setStorage('regPassword',''+regPassword+'');
+        $api.setStorage('regVerify',''+regVerify+'');
+        $api.setStorage('regSpreadid',''+regSpreadid+'');
+        if($api.getStorage('regMobile') && $api.getStorage('regPassword') && $api.getStorage('regVerify')){
+            api.sendEvent({
+                name:'registerOneDone',
+                extra:{
+                    status:'true',
+                    mobile:$api.getStorage('regMobile'),
+                    password:$api.getStorage('regPassword'),
+                    verify:$api.getStorage('regVerify')
+                }
+            })
+        }else{
+            api.toast({
+                msg: '请输入完整信息',
+                duration:1000,
+                location: 'top'
+            });
+        }
+    }
+    function get_verify() {
+        var mobile = $api.val($api.byId('mobile'));
+        var partten = /^1[3-9]\d{9}$/;
+        if(!partten.test(mobile)){
+            api.toast({
+                msg: '请输入手机号',
+                duration:1000,
+                location: 'top'
+            });
+            return false;
+        }
+        api.ajax({
+            url: 'http://www.ynypw.com/mobile/index.php?act=login&op=check_mobile&mobile='+mobile,
+            method: 'GET',
+            cache: false,
+            timeout: 60,
+            dataType: 'json'
+        }, function (ret, err) {
+            if(ret.datas.status==1) {
+                var sendVerify = $api.byId('sendVerify');
+                $api.removeAttr(sendVerify,'onclick');
+                $api.html(sendVerify,'已发送(<span id="GetVerify">0</span>)');
+                times = 120;
+                isinerval = setInterval("CountDown()", 1000);
+            }else if(ret.datas.status=="-1" || ret.datas.status=="-3") {
+                api.toast({
+                    msg: '今日获取验证码数额超出',
+                    duration:1000,
+                    location: 'top'
+                });
+            }else if(ret.datas.status==0){
+            	api.toast({
+                    msg: '手机号已经被注册',
+                    duration:1000,
+                    location: 'top'
+                });
+            }else{
+                api.toast({
+                    msg: '短信发送失败',
+                    duration:1000,
+                    location: 'top'
+                });
+            }
+        });
+        
+    }
+    function CountDown() {
+        if (times < 1) {
+            var sendVerify = $api.byId('sendVerify');
+            $api.attr(sendVerify,'onclick','get_verify()');
+            $api.html(sendVerify,'重新获取');
+            clearInterval(isinerval);
+            return;
+        }
+        var getVerify = $api.byId('GetVerify');
+        $api.html(getVerify,''+times+'');
+        times--;
+    }
+    
+</script>
+</html>

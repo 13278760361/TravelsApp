@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>我的资料</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/my_realname.css" />
+</head>
+<style>
+.aui-content {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+</style>
+<body>
+    <div class="aui-content">
+        <div class="aui-input-group">
+            <div class="aui-input-row">
+                <label>真实姓名</label>
+                <input type="text" id="realname" placeholder="真实姓名" value="">
+            </div>
+            <div class="aui-input-row">
+                <label>身份证</label>
+                <input type="number" id="idcard" placeholder="身份证号码">
+            </div>
+        </div>
+    </div> 
+    <div class="aui-content">
+        <div class="aui-input-group edit">
+            <div class="aui-input-row">
+                <label>身份证照片</label>
+                <span class="aui-pull-right aui-iconfont aui-icon-unfold"></span>
+                <div class="aui-col-xs-12 aui-clearfix cardpic">
+                    <div class="takephoto" tapmode onclick="getPicture(0);">
+                        请拍一张手持身份证的自拍照
+                    </div>
+                    <input type="hidden" id="realphoto">
+                </div>
+            </div>
+        </div>
+    </div>     
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+<script type="text/javascript" src="../script/my_realname.js"></script>
+</html>

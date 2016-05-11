@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>订单</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/my_order.css" />
+</head>
+<body>
+	<div class="aui-content">
+		<p class="aui-text-center">你还没有发布过AA活动</p>
+		<div class="aui-list-view order-list">
+            <div class="order-info">
+                <div class="order-title"><span class="aui-text-primary">[AA活动]</span>这个周末美食烧烤，别说我不叫你来哈别说我不叫你来哈</div>
+                <p>单号：2015050980309983</p>
+                <p>报名人数：1人</p>
+                <p>下单时间：2015/05/29 09:00<span class="aui-pull-right service-price">88 元</span></p>
+            </div>
+            <div class="aui-line-x aui-clearfix"></div>
+            <div class="order-btn">
+	        	<div class="aui-col-xs-4">已支付</div>
+	        	<div class="aui-col-xs-4">订单详情</div>
+	        	<div class="aui-col-xs-4">活动浏览</div>
+	        </div>
+        </div>
+        <div class="aui-list-view order-list">
+            <div class="order-info">
+                <div class="order-title"><span class="aui-text-primary">[AA活动]</span>这个周末美食烧烤，别说我不叫你来哈</div>
+                <p>单号：2015050980309983</p>
+                <p>报名人数：1人</p>
+                <p>下单时间：2015/05/29 09:00</p>
+            </div>
+            <div class="aui-line-x aui-clearfix"></div>
+            <div class="order-btn">
+	        	<div class="aui-col-xs-4">马上支付</div>
+	        	<div class="aui-col-xs-4">订单详情</div>
+	        	<div class="aui-col-xs-4">活动浏览</div>
+	        </div>
+        </div>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+    	api.setRefreshHeaderInfo({
+            visible: true,
+            // loadingImgae: 'wgt://image/refresh-white.png',
+            bgColor: '#efeff4',
+            textColor: '#4d4d4d',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...',
+            showTime: true
+        }, function (ret, err) {
+            api.refreshHeaderLoadDone();
+        });
+    };
+</script>
+</html>

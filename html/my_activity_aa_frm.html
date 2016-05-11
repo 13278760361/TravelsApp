@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>我的AA活动</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/my_activity.css" />
+</head>
+<body>
+    <script id="activity-template" type="text/x-dot-template">
+    {{? it.length>0}}
+    {{ for(var i in it) { }}
+    <div class="aui-list-view activity-aa-list" id="activity-{{=it[i].act_id}}">
+        <div class="activity-aa-info">
+            <div class="activity-aa-title">{{=it[i].act_title}}</div>
+            <p>
+                <span class="aui-iconfont aui-icon-location"></span>
+                <span> {{=it[i].act_address}}</span>
+            </p>
+            <p>
+                <span class="aui-iconfont aui-icon-friends"></span>
+                <span> 121</span>
+            </p>
+            <p>
+                <span class="aui-iconfont aui-icon-history"></span>
+                <span> {{=it[i].startdate}}</span>
+            </p>
+
+        </div>
+        <div class="aui-line-x aui-clearfix"></div>
+        <div class="activity-btn">
+            <div class="aui-col-xs-4" tapmode onclick="activityDelete({{=it[i].act_id}});">删除</div>
+            <div class="aui-col-xs-4">订单</div>
+            <div class="aui-col-xs-4" tapmode onclick="activityShow({{=it[i].act_id}});">浏览</div>
+        </div>
+    </div>
+    {{ } }}
+    {{??}}
+    <p class="aui-text-center">你还没有发布过AA活动</p>
+    {{? }}
+    </script>
+	<div class="aui-content" id="activity-content"></div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/my_activity_aa.js"></script>
+</html>

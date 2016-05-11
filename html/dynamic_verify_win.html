@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<meta name="format-detection" content="telephone=no"/>
+<title>故事审核</title>
+<link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+<link rel="stylesheet" type="text/css" href="../css/dynamic_show.css" />
+</head>
+<style type="text/css">
+.footerBtn {
+	width: 100%;
+	height: 55px;
+	text-align: center;
+	line-height: 55px;
+	background: #ffffff;
+	color: #ffffff;
+}
+#step {
+	background: #34495E;
+}
+#laud {
+	background: #F39C12;
+}
+</style>
+<body>
+<header class="aui-bar aui-bar-nav aui-bar-primary" id="header">
+  <div class="aui-btn aui-btn-primary aui-pull-left" tapmode onclick="back();"> <span class="aui-iconfont aui-icon-left"></span> </div>
+  <div class="aui-title" id="header-title">故事审核</div>
+  <div class="aui-btn aui-btn-primary aui-pull-right" tapmode onclick="report();"> 举报 </div>
+</header>
+<div class="aui-nav aui-bar-tab footerBtn" id="footer">
+  <div class="aui-col-xs-6" id="step" tapmode onclick="step();">没用</div>
+  <div class="aui-col-xs-6" id="laud" tapmode onclick="laud();">有用</div>
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        api.parseTapmode();
+        var header = $api.byId('header');
+        $api.fixIos7Bar(header);
+        var header_h = $api.offset(header).h;
+        var body = $api.dom('body');
+        var body_h = $api.offset(body).h;
+        var footer_h = $api.offset($api.byId('footer')).h;
+        var rect_h = body_h - header_h - footer_h;
+        api.openFrame({
+            name: 'dynamic_verify_frm',
+            url: 'dynamic_verify_frm.html',
+            rect:{
+                x:0,
+                y:header_h,
+                w:'auto',
+                h:rect_h
+            },
+            bounces: true,
+            vScrollBarEnabled:false,
+            hScrollBarEnabled:false
+        });
+    }
+    function back(){
+        api.closeWin();
+    }
+    function step(){
+        api.execScript({
+            frameName:'dynamic_verify_frm',
+            script:'step()'
+        })
+    }
+    function laud(){
+        api.execScript({
+            frameName:'dynamic_verify_frm',
+            script:'laud()'
+        })
+    }
+    function report(){
+        api.execScript({
+            frameName:'dynamic_verify_frm',
+            script:'report()'
+        })
+    }
+</script>
+</html>

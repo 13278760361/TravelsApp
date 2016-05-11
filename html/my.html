@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no" />
+		<title>我的</title>
+		<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+		<link rel="stylesheet" type="text/css" href="../css/my.css" />
+	</head>
+
+	<body>
+		<div class="my-header" tapmode>
+			<div class="my-today-manager">
+				<div class="aui-pull-left aui-col-xs-8">
+					<p>今日便笺</p>
+					<p id="notepaperToday">
+						<!--今日便笺-->
+					</p>
+				</div>
+				<div class="aui-pull-right aui-col-xs-4 aui-text-center my-sign" id="signStatus" tapmode onclick="sign();"> <span class="aui-iconfont aui-icon-emoji" id="signEmoji"></span>
+					<p id="signText">点我签到</p>
+				</div>
+			</div>
+			<div class="my-resttime"> 作息：<span id="myRestTime"><!--作息时间--></span> </div>
+		</div>
+		<div class="aui-content my-manager-btn">
+			<div class="aui-col-5 aui-text-center" tapmode onclick="my('dynamic_add_win');"> <span class="aui-iconfont aui-icon-edit bg-white text-10"></span>
+				<p>分享故事</p>
+			</div>
+			<div class="aui-col-5 aui-text-center" tapmode onclick="my('my_notepaper_win');"> <span class="aui-iconfont aui-icon-enclosure bg-white text-4"></span>
+				<p>写便笺</p>
+			</div>
+			<div class="aui-col-5 aui-text-center" tapmode onclick="my('my_rest_win');"> <span class="aui-iconfont aui-icon-history bg-white text-3"></span>
+				<p>作息表</p>
+			</div>
+			<div class="aui-col-5 aui-text-center" tapmode onclick="my('activity_add_aa_win');"> <span class="aui-iconfont aui-icon-mark bg-white text-2"></span>
+				<p>发约伴</p>
+			</div>
+			<div class="aui-col-5 aui-text-center" tapmode onclick="my('activity_add_service_win');"> <span class="aui-iconfont aui-icon-emoji bg-white text-6"></span>
+				<p>做达人</p>
+			</div>
+		</div>
+		<div class="aui-content spread-my">
+			<div class="aui-text-left aui-col-xs-4 spread-nums"> <span class="aui-iconfont aui-icon-people3"></span> <span>我的邀请码</span> </div>
+			<div class="aui-text-center aui-pull-right"> <span><strong id="spreadid"></strong></span> <span class="aui-iconfont aui-icon-right"></span> </div>
+		</div>
+		<div class="aui-content my-manager-list">
+			<ul class="aui-list-view">
+				<li class="aui-list-view-cell aui-img">
+					<a class="aui-arrow-right">
+						<div class=" aui-pull-left" tapmode onclick="spaceShow();"> <img class="aui-pull-left aui-img-object" src="../image/noavatar.gif" id="avatar">
+							<div class="aui-pull-left aui-img-body" id="nickname">sdf</div>
+						</div>
+						<div class="aui-pull-right" tapmode onclick="vipBuy();"> <span class="vipicon" id="vipstatus">VIP</span> </div>
+					</a>
+				</li>
+				<li class="aui-list-view-cell aui-img" tapmode onclick="my('my_datum_win');">
+					<a class="aui-arrow-right"> <span class="aui-img-object aui-pull-left aui-iconfont aui-icon-person bg-white text-1"></span>
+						<div class="aui-img-body">资料修改</div>
+					</a>
+				</li>
+				<li class="aui-list-view-cell aui-img" tapmode onclick="my('my_realname_win');">
+					<a class="aui-arrow-right">
+						<span class="aui-img-object aui-pull-left aui-iconfont aui-icon-card bg-white text-5"></span>
+						<div class="aui-img-body">
+							实名认证
+						</div>
+						<span class="aui-badge" id="realNameStatus"></span>
+					</a>
+				</li>
+				<li class="aui-list-view-cell aui-img" tapmode onclick="my('my_wallet_win')">
+					<a class="aui-arrow-right"> 
+					<span class="aui-img-object aui-pull-left aui-iconfont aui-icon-money bg-white text-10"></span>
+						<div class="aui-img-body">我的钱包</div>
+					</a>
+				</li>
+				<li class="aui-list-view-cell aui-img" tapmode onclick="my('my_notepaper_win');">
+					<a class="aui-arrow-right"> 
+					<span class="aui-img-object aui-pull-left aui-iconfont aui-icon-enclosure bg-white text-4"></span>
+						<div class="aui-img-body">我的便笺</div>
+					</a>
+				</li>
+				<li class="aui-list-view-cell aui-img" tapmode onclick="my('my_activity_win');">
+					<a class="aui-arrow-right"> <span class="aui-img-object aui-pull-left aui-iconfont aui-icon-emoji bg-white text-6"></span>
+						<div class="aui-img-body">我的活动/服务</div>
+					</a>
+				</li>
+				<li class="aui-list-view-cell aui-img" tapmode onclick="my('my_order_win');">
+					<a class="aui-arrow-right"> <span class="aui-img-object aui-pull-left aui-iconfont aui-icon-file2 bg-white text-1"></span>
+						<div class="aui-img-body">活动/服务订单</div>
+					</a>
+				</li>
+				<li class="aui-list-view-cell aui-img">
+					<a class="aui-arrow-right">
+						<span class="aui-img-object aui-pull-left aui-iconfont aui-icon-share bg-white text-2"></span>
+						<div class="aui-img-body">我的推广</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="aui-content my-manager-list">
+			<ul class="aui-list-view">
+				<li class="aui-list-view-cell aui-img">
+					<a class="aui-arrow-right">
+						<span class="aui-img-object aui-pull-left aui-iconfont aui-icon-sitting bg-white text-3"></span>
+						<div class="aui-img-body">智能设置</div>
+					</a>
+				</li>
+				<li class="aui-list-view-cell aui-img" tapmode onclick="changeAccount();">
+					<a class="aui-arrow-right"> <span class="aui-img-object aui-pull-left aui-iconfont aui-icon-order bg-white text-5"></span>
+						<div class="aui-img-body">切换账号</div>
+					</a>
+				</li>
+				<li class="aui-list-view-cell aui-img">
+					<a class="aui-arrow-right">
+						<span class="aui-img-object aui-pull-left aui-iconfont aui-icon-upload bg-white text-12"></span>
+						<div class="aui-img-body">检查更新</div>
+					</a>
+				</li>
+				<li class="aui-list-view-cell aui-img" tapmode onclick="clearCache();">
+					<a class="aui-arrow-right"> <span class="aui-img-object aui-pull-left aui-iconfont aui-icon-delete bg-white text-6"></span>
+						<div class="aui-img-body">清除缓存</div>
+					</a>
+				</li>
+				<li class="aui-list-view-cell aui-img" tapmode onclick="loginout();">
+					<a class="aui-arrow-right"> <span class="aui-img-object aui-pull-left aui-iconfont aui-icon-delete bg-white text-6"></span>
+						<div class="aui-img-body">退出登陆</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript" src="../script/config.js"></script>
+	<script type="text/javascript" src="../script/my_info.js"></script>
+	<script type="text/javascript" src="../script/my.js"></script>
+	<script type="text/javascript" src="../script/common.js"></script>
+
+</html>

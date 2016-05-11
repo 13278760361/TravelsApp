@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>活动报名</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/activity_buy.css" />
+</head>
+<body>
+    <header class="aui-bar aui-bar-nav aui-bar-primary" id="header">
+        <div class="aui-btn aui-btn-primary aui-pull-left" tapmode onclick="back();">
+            <span class="aui-iconfont aui-icon-left"></span>
+        </div>
+        <div class="aui-title" id="header-title">活动报名</div>
+    </header>
+    <div class="aui-nav aui-bar-tab footerBtn" id="footer">
+        <div class="aui-col-xs-8" id="payInfo">共 <strong id="payMoney">0</strong> 元</div>
+        <div class="aui-col-xs-4" id="payBtn" tapmode onclick="pay();">立即支付</div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        var activityId = api.pageParam.activityId;
+        api.parseTapmode();
+        var header = $api.byId('header');
+        $api.fixIos7Bar(header);
+        var header_h = $api.offset(header).h;
+        var footer_h = $api.offset($api.byId('footer')).h;
+        var body = $api.dom('body');
+        var body_h = $api.offset(body).h;
+        var rect_h = body_h - header_h - footer_h;
+        api.openFrame({
+            name: 'activity_club_buy_frm',
+            url: 'activity_club_buy_frm.html',
+            rect:{
+                x:0,
+                y:header_h,
+                w:'auto',
+                h:rect_h
+            },
+            pageParam: {activityId: activityId},
+            bounces: true,
+            vScrollBarEnabled:false,
+            hScrollBarEnabled:false
+        });
+    }
+    function back(){
+        api.closeWin();
+    }
+    function updateMoney(newMoney){
+        $api.text($api.byId('payMoney'),newMoney);
+    }
+    function pay(){
+        api.execScript({
+            frameName:'activity_club_buy_frm',
+            script:'pay()'
+        })
+    }
+</script>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>活动/服务</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/my_activity.css" />
+</head>
+<body>
+    <div id="header">
+        <header class="aui-bar aui-bar-nav aui-bar-primary" id="aui-header">
+            <div class="aui-btn aui-btn-primary aui-pull-left" tapmode onclick="back();">
+                <span class="aui-iconfont aui-icon-left"></span>
+            </div>
+            <div class="aui-title" id="header-title">活动/服务</div>
+        </header>
+        <div class="activity-tab" id="activity-tab">
+            <div class="aui-col-xs-6 aui-text-center active" id="activity-aa" tapmode onclick="randomSwitchBtn(0);">我的AA活动</div>
+            <div class="aui-col-xs-6 aui-text-center" id="activity-service" tapmode onclick="randomSwitchBtn(1);">我的达人服务</div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        api.parseTapmode();
+        var header = $api.byId('header');
+        $api.fixIos7Bar($api.byId('aui-header'));
+        var header_h = $api.offset(header).h;
+        var body = $api.dom('body');
+        var body_h = $api.offset(body).h;
+        var rect_h = body_h - header_h;
+        
+        api.openFrameGroup ({
+            name: 'myActivityGroup',
+            scrollEnabled:true,
+            rect:{x:0, y:header_h, w:'auto', h:rect_h},
+            index:0,
+            frames:
+            [{
+                name: 'my_activity_aa_frm', 
+                url: 'my_activity_aa_frm.html', 
+                bounces:false, 
+                vScrollBarEnabled:false,
+                hScrollBarEnabled:false
+            },{
+                name: 'my_activity_service_frm', 
+                url: 'my_activity_service_frm.html', 
+                bounces:false,
+                vScrollBarEnabled:false,
+                hScrollBarEnabled:false
+            }]
+        }, function(ret, err){
+            var $activityTab = $api.byId('activity-tab');
+            var $activityTabBar = $api.domAll($activityTab, 'div');
+            for (var j = 0; j < $activityTabBar.length; j++) {
+                $api.removeCls($activityTabBar[j], 'active');
+            }
+            var index = ret.index;
+            if(index==0){
+                var $obj = $api.byId('activity-aa');
+                $api.addCls($obj, 'active');
+            }else if(index==1){
+                var $obj = $api.byId('activity-service');
+                $api.addCls($obj, 'active');
+            }
+        })
+    };
+    //切换按钮
+    function randomSwitchBtn(index) {
+        var $activityTab = $api.byId('activity-tab');
+        var $activityTabBar = $api.domAll($activityTab, 'div');
+        for (var j = 0; j < $activityTabBar.length; j++) {
+            $api.removeCls($activityTabBar[j], 'active');
+        }
+        if(index==0){
+            var $obj = $api.byId('activity-aa');
+            $api.addCls($obj, 'active');
+        }else if(index==1){
+            var $obj = $api.byId('activity-service');
+            $api.addCls($obj, 'active');
+        }
+        api.setFrameGroupIndex({
+            name: 'myActivityGroup',
+            index: index
+        });
+    }
+    function back(){
+        api.closeWin();
+    }
+</script>
+</html>

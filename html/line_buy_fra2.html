@@ -1,0 +1,54 @@
+<!DOCTYPE html>	
+<html>	
+<head>	
+    <meta charset="utf-8">	
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>	
+    <title>frame</title>	
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>	
+    <link rel="stylesheet" type="text/css" href="../css/trip_buy.css"/>	
+</head>		
+<body>
+<script id="buy-template" type="text/x-dot-template">
+	<h3>{{=it.names}}</h3>
+	<p><span class="buy-msg"></span><span class="font">购买信息</span></p>
+	<ul class="ul-class">
+		<li>
+			<span>价格类型</span><br>
+			<span class="pirce-type">体验价</span>
+		</li>
+		<li class="order-num">
+			<span>订单数量</span>
+			<span class=""><input type="text" size="4" class="buy-num" id="tripNum" maxlength="11" value="{{=it.goods_num}}"  readonly="readonly"/></span>
+		</li>
+		<li>
+		
+			<span class="buy-pic">购买价格</span>
+			<span class="" id="buy-price">{{=it.price_sum}}</span><i>元</i>
+			
+		</li>
+
+	</ul>
+	<p><span class="buyUser-msg"></span><span class="font">联系人信息</span></p>
+	<div class="ul-class">
+	<table class="byuser-msg-ul" >
+		<tbody>
+			<tr>
+				<td class="user-l"><span>真实姓名</span></td>
+				<td class="user-r"><input type="text" name="buyName" id="buyName" placeholder="真实姓名" autocapitalize="off" />	</td>
+			</tr>
+			<tr>
+				<td class="user-l"><span>联系电话</span></td>
+				<td class="user-r"><input type="text" name="buyTelp" id="buyTelp" placeholder="有效的手机号" autocapitalize="off"/></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+	</script>
+<div id="buy-content"></div>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/line_buy2.js"></script>
+</html>	

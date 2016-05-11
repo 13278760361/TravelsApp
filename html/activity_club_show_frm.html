@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>活动详情</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/activity_club_show.css" />
+</head>
+<body>
+	<script id="activity-template" type="text/x-dot-template">
+		<div class="aui-content activity-show-header" style="background:url('{{=it.thumb}}') no-repeat center;background-size: cover;">
+			<div class="activity-title">{{=it.title}}</div>
+		</div>
+		<div class="aui-content">
+			<div class="activity-show-basicinfo">
+				<p>
+					<span class="aui-iconfont aui-icon-location"></span>
+					<span> 目的地：{{=it.playadr}}</span>
+				</p>
+				<p>
+					<span class="aui-iconfont aui-icon-location"></span>
+					<span> 集合地：{{=it.setadr}}</span>
+				</p>
+				<p>
+					<span class="aui-iconfont aui-icon-history"></span>
+					<span> 出发：{{=it.gotime}} {{? it.totalDay>0}}（共 {{=it.totalDay}} 天）{{? }}</span>
+				</p>
+			</div>
+		</div>
+	</script>
+	<script id="activityOther-template" type="text/x-dot-template">
+	<div class="aui-content activity-attend">
+		<div class="aui-pull-left">
+			<div class="aui-btn" tapmode onclick="buy();">马上报名</div>
+		</div>
+		<div class="aui-pull-right">
+			<span class="aui-iconfont aui-icon-money"> {{=it.activityInfo.money}} 元</span>
+			{{? it.activityInfo.status==1}}
+			<span> 支持{{it.coin}}驴豆抵现金</span>
+			{{? }}
+		</div>
+	</div>
+	
+	<div class="activity-info">
+	    <div class="aui-content activity-show-info">
+			<div class="activity-list-title tab-menu" data-id="line">
+				行程安排
+				<span class="aui-pull-right aui-iconfont aui-icon-unfold"></span>
+			</div>
+			<div class="aui-col-xs-12 activity-list-desc show" id="activity-line">
+				<ul class="line-day">
+					{{ for(var i=1;i<=it.activityInfo.days;i++) { }}
+					<li>
+						<div class="line-day-title">D{{=i}} {{=it.activityInfo.dates[i].daytitle}}</div>
+						{{ for(var ii in it.activityInfo.dates[i].daycont) { }}
+						<div class="line-day-time">
+							<span class="aui-iconfont aui-icon-history"></span> {{=it.activityInfo.dates[i].daycont[ii].daydate}}
+						</div>
+						<div class="line-day-content">
+							{{? it.activityInfo.dates[i].daycont[ii].daydesc}}
+							<p>{{=it.activityInfo.dates[i].daycont[ii].daydesc}}</p>
+							{{? }}
+							{{? it.activityInfo.dates[i].daycont[ii].dayimg}}
+							<p><img src="../image/nophoto.png" data-echo="{{=it.activityInfo.dates[i].daycont[ii].dayimg}}"></p>
+							{{? }}
+						</div>
+						{{ } }}
+					</li>
+					{{ } }}
+				</ul>
+			</div>
+	    </div>
+	    <div class="aui-content activity-show-info">
+			<div class="activity-list-title tab-menu" data-id="introd">
+				活动介绍
+				<span class="aui-pull-right aui-iconfont aui-icon-unfold"></span>
+			</div>
+			<div class="aui-col-xs-12 activity-list-desc" id="activity-introd">
+				<p>{{=it.activityInfo.content}}</p>
+			</div>
+		</div>
+		<div class="aui-content activity-show-info">
+			<div class="activity-list-title tab-menu" data-id="price">
+				费用说明
+				<span class="aui-pull-right aui-iconfont aui-icon-unfold"></span>
+			</div>
+			<div class="aui-col-xs-12 activity-list-desc" id="activity-price">
+				<p>{{=it.activityInfo.costdesc}}</p>
+				{{ for(var i in it.activityInfo.cost){ }}
+				<p><strong>{{=it.activityInfo.cost[i].costtype}}</strong>: {{=it.activityInfo.cost[i].costinfo}}</p>
+				{{ } }}
+			</div>
+		</div>
+		<div class="aui-content activity-show-info">
+			<div class="activity-list-title tab-menu" data-id="tip">
+				出行事项
+				<span class="aui-pull-right aui-iconfont aui-icon-unfold"></span>
+			</div>
+			<div class="aui-col-xs-12 activity-list-desc" id="activity-tip">
+				<p>{{=it.activityInfo.equip}}</p>
+				<p>{{=it.activityInfo.tip}}</p>
+			</div>
+		</div>
+	</div>
+	<div class="aui-content">
+		<div class="activity-list-title">俱乐部信息</div>
+		<div class="aui-col-xs-12 activity-show-add-userinfo aui-arrow-right" tapmode onclick="chat({{=it.clubInfo.userid}});">
+			<div class="activity-show-add-avatar">
+				<img src="../image/noavatar.gif" data-echo="{{=it.clubInfo.logo}}">
+			</div>
+			<div class="activity-show-add-user">
+				<div class="activity-show-add-username">
+					{{=it.clubInfo.nickname}}
+				</div>
+				<p>俱乐部：{{=it.clubInfo.shortname}}</p>
+			</div>
+        </div>
+    </div>
+    <div class="aui-content">
+		<div class="activity-list-title">报名会员</div>
+		{{? it.attendInfo}}
+		{{ for(var i in it.attendInfo){ }}
+		<div class="aui-col-xs-12 activity-attend-list aui-arrow-right" tapmode onclick="spaceShow({{=it.attendInfo[i].userid}});">
+			<div class="activity-attend-useravatar">
+				<img src="../image/noavatar.gif" data-echo="{{=it.attendInfo[i].avatar}}">
+			</div>
+			<div class="activity-attend-userinfo">
+				<div class="activity-attend-username">{{=it.attendInfo[i].nickname}}</div>
+				<p>
+					{{? it.attendInfo[i].sex==1 }}
+					<small class="boy"><span class="aui-iconfont aui-icon-man"></span> {{=it.attendInfo[i].age}}岁</small>
+					{{?? it.attendInfo[i].sex==2 }}
+					<small class="girl"><span class="aui-iconfont aui-icon-women"></span> {{=it.attendInfo[i].age}}岁</small>
+					{{? }}
+					{{? it.attendInfo[i].mate==2 }}
+					<small class="feidanshen">非单身</small>
+					{{?? }}
+					<small class="danshen">单身</small>
+					{{? }}
+				</p>
+			</div>
+        </div>
+        {{ } }}
+        {{??}}
+        <div class="aui-col-xs-12 activity-attend-list aui-text-center">暂无会员参与</div>
+	    {{? }}
+    </div> 
+	</script>
+	<div id="activity-content"></div>
+	<div id="activityOther-content"></div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/activity_club_show.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/echo.js"></script>
+</html>

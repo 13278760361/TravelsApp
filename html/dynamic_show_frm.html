@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>故事</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/dynamic_show.css" />
+</head>
+<body>
+	<div id="wrap">
+		<div class="aui-content" id="dynamic-content"></div>
+		<div  id="dynamic-reward"></div>
+		<div class="aui-content aui-clearfix dynamic-reply aui-padded-10">
+			<div class="dynamic-reply-title">
+				回复
+				<span class="aui-pull-right aui-iconfont aui-icon-unfold"></span>
+			</div>
+			<div id="dynamic-reply">
+				<div class="dynamic-reply-no" id="noReply">
+					<img src="../image/noreply.png">
+					<p>暂无评论，赶快抢沙发</p>
+				</div>
+			</div>
+	    </div>
+    </div> 
+	<script id="dynamicShow-template" type="text/x-dot-template">
+	<div class="aui-list-view dynamic-list">
+		
+    	<div class="vipicon">
+			<img src="../image/vipicon.png">
+		</div>
+		
+		<div class="aui-col-xs-12 aui-padded-10" tapmode onclick="spaceShow({{=it.datas.travels_info['userid']}});">
+			<div class="dynamic-user-avatar">
+				<img src="../image/noavatar.gif" {{? it.datas.travels_info['avatar']}}data-echo="{{=it.datas.travels_info['avatar']}}"{{? }}>
+			</div>
+			<div class="dynamic-user-info">
+				{{? it.datas.travels_info['tra_addtime']==0}}
+					<div class="aui-pull-right synchro-loading">
+						<span><img src="../image/synchro.gif"></span>
+						<span>同步中</span>
+					</div>
+				{{??}}
+				<div class="aui-pull-right dynamic-time">{{=it.datas.travels_info['tra_addtime']}}</div>
+				{{? }}
+				<div class="dynamic-user-nickname">
+					<span class="aui-text-danger">{{=it.datas.travels_info['user_name']}}</span>
+					
+					<small class="boy"><span class="aui-iconfont aui-icon-man"></span>24岁</small>
+					
+				
+					<small class="feidanshen">非单身</small>
+					
+					
+				</div>
+				<p>
+					
+				</p>
+			</div>
+		</div>
+		<div class="aui-line-x aui-clearfix"></div>
+		<div class="aui-col-xs-12 aui-padded-10 dynamic-content">{{=it.datas.travels_info['tra_content']}}</div>
+		{{? it.datas.travels_info['tra_img'] }}
+		<ul class="aui-thumb-view">
+			{{ for(var k in it.datas.travels_info['tra_img']) { }}
+				{{? it.datas.travels_info['tra_img'].length>=3}}
+		            <li class="aui-list-view-cell aui-img aui-col-xs-4" tapmode onclick="imageBrowser({{=k}});">
+		                <img class="aui-img-object" src="../image/nophoto.png" data-echo="{{=it.datas.travels_info['tra_img'][k]}}">
+		            </li>
+		        {{?? it.datas.travels_info['tra_img'].length==2}}
+		        	<li class="aui-list-view-cell aui-img aui-col-xs-6" tapmode onclick="imageBrowser({{=k}});">
+		                <img class="aui-img-object" src="../image/nophoto.png" data-echo="{{=it.datas.travels_info['tra_img'][k]}}">
+		            </li>
+		        {{?? it.datas.travels_info['tra_img'].length==1}}
+		        	<li class="aui-list-view-cell aui-img aui-col-xs-12" tapmode onclick="imageBrowser({{=k}});">
+		                <img class="aui-img-object" src="../image/nophoto.png" data-echo="{{=it.datas.travels_info['tra_img'][k]}}">
+		            </li>
+		        {{? }}
+		    {{ } }}    
+        </ul>
+		{{? }}
+        <div class="dynamic-otherinfo aui-clearfix">
+        	
+	        <p><small class="aui-iconfont aui-icon-phone">XXX</small></p>
+	       
+	        <p><small>地址</small></p>
+	        
+	        
+        </div>
+        <div class="aui-line-x"></div>
+        <div class="aui-col-xs-12 dynamic-btn">
+        	<div class="aui-col-xs-4 aui-iconfont aui-icon-duihuaxinxi" id="replyTotal" tapmode onclick="reply({{=it.datas.travels_info['tra_user_id']}},'{{=it.datas.travels_info['tra_user_name']}}');"> 不知道什么</div>
+        	<div class="aui-col-xs-4 aui-iconfont aui-icon-zan" id="laudTotal" tapmode onclick="laud({{=it.datas.travels_info['tra_user_id']}});"> 收拾收拾</div>
+        	<div class="aui-col-xs-4 aui-iconfont aui-icon-goods" tapmode onclick="reward()"> 打赏</div>
+        </div>
+    </div>
+    </script>
+    <script id="dynamicReply-template" type="text/x-dot-template">
+    {{ for(var i in it) { }}
+    <div class="aui-list-view dynamic-reply-list">
+		<div class="aui-col-xs-12">
+			<div class="dynamic-reply-avatar">
+				<img src="../image/noavatar.gif" {{? it[i].useravatar}}data-echo="{{=it[i].useravatar}}"{{? }}>
+			</div>
+			<div class="dynamic-reply-info" tapmode onclick="reply({{=it[i].userid}},'{{=it[i].usernickname}}');">
+				<div class="dynamic-reply-info-title">
+					<span class="nickname">{{=it[i].usernickname}}</span>
+					{{? it[i].userid != it[i].touid}}
+					<span class="aui-text-primary"> 回复 </span>
+					<span class="nickname">{{=it[i].tonickname}}</span>
+					{{? }}
+					<span class="aui-pull-right">{{=it[i].inputtime}}</span>
+				</div>
+				<p>{{=it[i].content}}</p>
+			</div>
+        </div>
+    </div>
+    {{ } }}
+    </script>
+    <script id="reward-template" type="text/x-dot-template">
+    <div class="aui-content" style="padding-top:0; padding-bottom:0;">
+    {{? it.total>0}}
+    <div class="aui-content aui-clearfix dynamic-reward aui-padded-10">
+		<div class="dynamic-reward-title">
+			感谢以下土豪打赏的驴豆
+			<span class="aui-pull-right">共获得了 {{=it.total}} 驴豆</span>
+		</div>
+		<div>
+			
+		    <div class="aui-list-view dynamic-reward-list" >
+		    	{{ for(var i in it.datas) { }}
+				<div class="aui-col-xs-2" tapmode onclick="spaceShow({{=it.datas[i].userid}})">
+					<img src="../image/noavatar.gif" {{? it.datas[i].avatar}}data-echo="{{=it.datas[i].avatar}}"{{? }}>
+				</div>
+				{{ } }}
+		    </div>
+		    
+		</div>
+    </div>
+    {{? }}
+    </div>
+    </script>
+      
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/dynamic_show.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/echo.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+</html>

@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<meta name="format-detection" content="telephone=no"/>
+<title>活动报名</title>
+<link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+<link rel="stylesheet" type="text/css" href="../css/activity_buy.css" />
+</head>
+<style type="text/css">
+input[type="number"], input[type="text"] {
+	width: 80%;
+	margin-bottom: 0;
+	height: 45px;
+	border: none;
+	background: #eeeeee;
+	color: #16a085;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+	font-weight: 700;
+}
+</style>
+<body>
+<script id="club-template" type="text/x-dot-template">
+        <div class="title">
+            <p class="aui-text-center re-title">活动报名</p>
+            <p class="aui-text-center re-title-desc">带上你的小伙伴一起出发</p>
+        </div>
+        <div class="info">
+            <p><span id="activityTitle">{{=it.title}}</span></p>
+            <p>价格：<strong>{{=it.money}}</strong> 元/人
+            {{? it.coin_status==1 && it.coin>0}}
+              —— 支持使用<strong>{{=it.coin}}</strong>驴豆抵现金
+            {{? }}
+            </p>
+            <p>集合时间：{{=it.settime}} - {{=it.days}}天</p>
+            <p>集合地址：{{=it.setadr}}</p>
+            <p>目的地：{{=it.playadr}}</p>
+        </div>
+        {{? it.coin_status==1 && it.coin>0}}
+        <div class="title">
+            <p class="aui-text-center re-title">优惠信息</p>
+            <p class="aui-text-center re-title-desc">辛辛苦苦赚来的驴豆终于发挥作用了</p>
+        </div>
+        <div class="info type-list">
+            <p class="aui-text-left">您最多可以使用<strong>{{=it.needcoin}}</strong>驴豆抵现金</p>
+            <div class="aui-col-xs-12">
+                <input type="number" id="needcoin" placeholder="请输入您要使用的驴豆数量" onchange="payCoin();">
+            </div>
+        </div>
+        {{? }}
+    </script>
+<div class="aui-content buyinfo" id="club-content"></div>
+<div class="aui-content buyinfo" style="margin-bottom:0;">
+  <div class="title">
+    <p class="aui-text-center re-title">订单信息</p>
+    <p class="aui-text-center re-title-desc">请填写您的报名信息</p>
+  </div>
+  <div class="info type-list">
+    <p class="aui-text-left">姓名</p>
+    <div class="aui-col-xs-12">
+      <input type="text" id="contact" placeholder="参与者姓名" >
+    </div>
+  </div>
+  <div class="info type-list">
+    <p class="aui-text-left">联系电话</p>
+    <div class="aui-col-xs-12">
+      <input type="text" id="mobile" placeholder="" value="">
+    </div>
+  </div>
+  <div class="info type-list">
+    <p class="aui-text-left">身份证号</p>
+    <div class="aui-col-xs-12">
+      <input type="text" id="idcard_no" placeholder="请输入您的身份证号" value="">
+    </div>
+  </div>
+  <div class="info type-list">
+    <p class="aui-text-left">支付方式</p>
+    <div class="aui-col-xs-12">
+      <div class="aui-label aui-label-default payment alipay" data-id="alipay">支付宝</div>
+      <div class="aui-label aui-label-default payment weixin" data-id="wx">微信支付</div>
+    </div>
+  </div>
+  <div class="info type-list">
+    <p>预约说明</p>
+    <p>1.报名前请与俱乐部进行交流，确认名额及出发时间等信息；</p>
+    <p>2.为方便交流报名成功后您的基本信息将会展示给俱乐部，方便进行购买保险及联系等</p>
+  </div>
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript">
+    var activityId,money,newMoney,needcoin;
+    function payCoin(){
+        var coin = Number($api.val($api.byId('needcoin')));
+        var cutCoin = coin/100;
+        
+        if(coin > needcoin){
+            cutCoin = needcoin/100;
+            $api.val($api.byId('needcoin'),needcoin);
+        }
+        newMoney = money-cutCoin;
+        api.execScript({
+            name:'activity_club_buy_win',
+            script:'updateMoney('+newMoney+')'
+        });
+        
+    }
+    function pay(){
+        var data = {};
+        data['paytype'] = 'activityClub';
+        data['subject'] = $api.text($api.byId('activityTitle'));
+        data['userid'] = userid;
+        data['activityid'] = activityId;
+        data['money'] = newMoney;
+        data['contact_name'] = $api.val($api.byId('contact'));
+        data['contact_mobile'] = $api.val($api.byId('mobile'));
+        data['idcard_no'] = $api.val($api.byId('idcard_no'));
+        data['payment'] = $api.attr($api.dom(".payment.active"),'data-id');
+        if($api.byId('needcoin')){
+            data['coin'] = $api.val($api.byId('needcoin'));
+        }
+        if(!data['contact_name']){
+            api.toast({
+                msg: '请填写姓名',
+                duration:1500,
+                location: 'top'
+            });
+            return false;
+        }
+        if(!data['contact_mobile']){
+            api.toast({
+                msg: '请填写联系人电话',
+                duration:1500,
+                location: 'top'
+            });
+            return false;
+        }
+        if(!data['idcard_no']){
+            api.toast({
+                msg: '请填写身份证号码',
+                duration:1500,
+                location: 'top'
+            });
+            return false;
+        }
+
+        if(!data['payment']){
+            api.toast({
+                msg: '请选择支付方式',
+                duration:1500,
+                location: 'top'
+            });
+            return false;
+        }
+        api.showProgress({
+            style: 'default',
+            animationType: 'fade',
+            title: '正在加载',
+            text: '请稍候',
+            modal: false
+        });
+        var url = '&c=pingpp_app&a=pay';
+        ajaxRequest(url,'post',data,function(ret,err){
+            if(ret){
+                var pingpp = api.require('pingpp');
+                var params = {
+                    charge: JSON.stringify(ret)
+                };
+                api.hideProgress();
+                pingpp.createPayment(params, function(ret, err){
+                    if (ret.result == "success") {
+                        //支付成功
+                        api.alert({
+                            title: '支付确认',
+                            msg: '您已成功参与活动',
+                            buttons:['确定']
+                        },function(ret,err){
+                        });
+                        //发送一个支付成功事情，在内容页监听刷新
+                        api.sendEvent({
+                            name: 'activityClubPaySuccess',
+                            extra: {status:'success'}
+                        });
+                    }
+                });
+            }
+        })
+    }
+    apiready = function(){       
+        api.parseTapmode();
+        activityId = api.pageParam.activityId;
+        //获取基本信息
+        var url = '&c=activity_club_app&a=getDataForBuy&userid='+userid+'&encrypt='+encrypt+'&activityId='+activityId;
+        ajaxRequest(url,'GET','',function(ret,err){
+            if(ret){
+                needcoin = ret.needcoin;
+                money = newMoney = ret.money;
+                var content = $api.byId('club-content');
+                var tpl = $api.byId('club-template').text;
+                var tempFn = doT.template(tpl);
+                $api.html(content,tempFn(ret));
+
+                $api.val($api.byId('mobile'),ret.mymobile);
+                api.execScript({
+                    name:'activity_club_buy_win',
+                    script:'updateMoney('+money+')'
+                });
+
+                //驴豆输入框变化
+                if(ret.coin>0 && ret.coin_status==1){
+
+                }
+            }
+        })
+        
+        //支付方式选择
+        var paymentList = $api.domAll(".payment");
+        for(var i in paymentList){
+            $api.addEvt(paymentList[i], 'click', function(){
+                $api.removeCls($api.dom(".payment.active"),'active');
+                $api.addCls(this,'active');
+            });
+        }
+    }
+    function back(){
+        api.closeWin();
+    }
+</script>
+</html>

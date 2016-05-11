@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>创建AA活动</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/activity_add.css" />
+</head>
+<body>
+    <div class="aui-content">
+        <div class="aui-input-group activity-add">
+	        <script type="text/x-dot-template" id="type-template">
+	    	{{? it }}
+	    	{{for(var i in it){ }}
+	    		<div class="aui-label aui-label-default theme" data-id="{{=it[i].type_id}}" tapmode isOn='0'>{{=it[i].type_name}}</div>
+		   	{{ } }}
+		   	{{? }}
+	        </script>
+            <div class="aui-input-row">
+                <input type="text" id="title" placeholder="活动标题" class="activity-add-input">
+            </div>
+            <div class="aui-input-row">
+                <input type="hidden" id="thumb">
+               
+                <div class="activity-add-thumb" tapmode onclick="getPicture(0);">
+                    上传封面
+                </div>
+                <div class="activity-add-right">
+                    <div class="aui-input-row">
+                        <label>开始</label>
+                        <input type="text" id="startdate" placeholder="年/月/日 00:00" readonly tapmode onclick="openPicker('startdate');">
+                    </div>
+                    <div class="aui-input-row">
+                        <label>结束</label>
+                        <input type="text" id="enddate" placeholder="年/月/日 00:00" readonly tapmode onclick="openPicker('enddate');">
+                    </div>
+                    <div class="aui-input-row">
+                        <label>人数</label>
+                        <input type="number" placeholder="0" id="count">
+                    </div>  
+                </div>
+            </div>
+            <div class="aui-input-row">
+                <label>目的地</label>
+                <input type="text" id="place" placeholder="点击选择目的地" readonly onclick="showMap();" style="width:60%;">
+                <input type="hidden" id="address">
+                <input type="hidden" id="lat">
+                <input type="hidden" id="lon">
+                <span class="aui-pull-right aui-iconfont aui-icon-right"></span>
+            </div>
+            <div class="aui-input-row">
+                <label>预算费用</label>
+                <input type="number" id="money" placeholder="0" style="width:60px;">
+                <span class="aui-pull-left aui-iconfont">元</span>
+            </div>
+        </div>
+    </div>
+    <div class="aui-content">
+        <div class="aui-input-group activity-add">
+            <div class="aui-input-row">
+                <label>性别要求</label>
+                <span class="aui-pull-right aui-iconfont aui-icon-unfold"></span>
+                <div class="aui-col-xs-12 aui-clearfix type-list">
+                    <div class="aui-label aui-label-default sex active" data-id="0" tapmode>不限</div>
+                    <div class="aui-label aui-label-default sex" data-id="1" tapmode>男</div>
+                    <div class="aui-label aui-label-default sex" data-id="2" tapmode>女</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="aui-content">
+        <div class="aui-input-group activity-add">
+            <div class="aui-input-row">
+                <label>年龄限制</label>
+                <span class="aui-pull-right aui-iconfont aui-icon-unfold"></span>
+                <div class="aui-col-xs-12 aui-clearfix type-list">
+                    <div class="aui-label aui-label-default age active" data-id="1" tapmode isOn='0'>不限</div>
+                    <div class="aui-label aui-label-default age" data-id="00" tapmode isOn='0'>00后</div>
+                    <div class="aui-label aui-label-default age" data-id="90" tapmode isOn='0'>90后</div>
+                    <div class="aui-label aui-label-default age" data-id="80" tapmode isOn='0'>80后</div>
+                    <div class="aui-label aui-label-default age" data-id="70" tapmode isOn='0'>70后</div>
+                    <div class="aui-label aui-label-default age" data-id="60" tapmode isOn='0'>60后</div>
+                    <div class="aui-label aui-label-default age" data-id="2" tapmode isOn='0'>其他</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="aui-content">
+        <div class="aui-input-group activity-add">
+            <div class="aui-input-row">
+                <label>活动类别</label>
+                <span class="aui-pull-right aui-iconfont aui-icon-unfold"></span>
+                <div class="aui-col-xs-12 aui-clearfix type-list" id="type-content">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="aui-content">
+        <div class="aui-input-group activity-add">
+            <div class="aui-input-row textarea">
+                <textarea rows="5" placeholder="介绍一下活动（最多不超过500字）" id="content"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="aui-content">
+        <div class="aui-input-group activity-add">
+            <div class="aui-input-row">
+                <label>上传3张照片</label>
+                <span class="aui-pull-right aui-iconfont aui-icon-unfold"></span>
+                <ul class="aui-thumb-view type-list aui-clearfix">
+                    <li class="aui-list-view-cell aui-img aui-col-xs-4" onclick="getPicture(1);" tapmode>
+                        <img class="aui-img-object" id="photos-1" src="../image/addImgBtn.png">
+                    </li>
+                    <li class="aui-list-view-cell aui-img aui-col-xs-4" onclick="getPicture(2);" tapmode>
+                        <img class="aui-img-object" id="photos-2" src="../image/addImgBtn.png">
+                    </li>
+                    <li class="aui-list-view-cell aui-img aui-col-xs-4" onclick="getPicture(3);" tapmode>
+                        <img class="aui-img-object" id="photos-3" src="../image/addImgBtn.png">
+                    </li>
+                    <input type="hidden" id="photoval-1" class="photovals">
+                    <input type="hidden" id="photoval-2" class="photovals">
+                    <input type="hidden" id="photoval-3" class="photovals">
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/activity_aa_add.js"></script>
+
+<script type="text/javascript" src="../script/my_info.js"></script>
+</html>

@@ -1,0 +1,124 @@
+html, body{
+    background: transparent;
+}
+.aui-content {
+    height: 100%;
+    padding: 15px;
+    padding-top: 25px;
+    overflow: hidden;
+    background: #ffcc66;
+}
+#mark {
+    width: 100%;
+    height: 60%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #000000;
+    opacity: 0.5;
+    z-index: 0;
+    -webkit-animation: fadeIn .7s ease both;
+    animation: fadeIn .7s ease both;
+}
+#reward {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: #ffffff;
+    width: 100%;
+    height: 40%;
+    z-index: 1;
+    border-top: 3px solid #ff9900;
+    -webkit-transition: all .3s;
+            transition:all .3s;
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+    
+}
+#reward.in {
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+}
+.close {
+    width: 120px;
+    height: 60px;
+    background: url('../image/rewardbtn.png') no-repeat;
+    background-size: 100%;
+    color: #ffffff;
+    position: absolute;
+    left: 50%;
+    margin-left: -60px;
+    top: -60px;
+
+}
+.confirm {
+    width: 36px;
+    height: 36px;
+    background: #faa732;
+    color: #ffffff;
+    position: absolute;
+    right: 10px;
+    top: -18px;
+    line-height: 36px;
+    text-align: center;
+}
+.close .aui-iconfont,.confirm .aui-iconfont {
+    font-size: 18px;
+    font-weight: 700;
+}
+.rewardprice {
+    margin: 5px auto;
+    color: #ff6600;
+    text-align: center;
+    line-height: 60px;
+    width: 66px;
+    height: 66px;
+    background: #ffffff;
+    background-size: 100%;
+    font-size: 20px;
+    border-radius: 50%;
+    border: 3px solid #eeeeee;
+    font-weight: 700;
+}
+.rewardprice.in {
+    display: block;
+    -webkit-animation: fadeIn 1s ease both;
+    animation: fadeIn 1s ease both;
+}
+.rewardprice.active span.aui-iconfont {
+    background: #ffffff;
+    color: #1abc9c;
+}
+.rewardprice span.aui-iconfont {
+    padding: 3px;
+    margin-right: 15px;
+    color: #ffffff;
+    background: #ff9900;
+    border-radius: 2px;
+}
+.mycoin {
+    padding-top: 15px;
+    margin-bottom: 0;
+    color: #ffffff;
+}
+strong#mycoin {
+    font-size: 18px;
+    color: #ff6600;
+    
+}
+@-webkit-keyframes fadeIn {
+    from { opacity: 0.3; }
+    to {  }
+}
+@keyframes fadeIn {
+    from { opacity: 0.3; }
+    to {  }
+}
+@-webkit-keyframes fadeOut {
+    from { }
+    to { opacity: 0.3;  }
+}
+@keyframes fadeOut {
+    from {  }
+    to { opacity: 0.3; }
+}

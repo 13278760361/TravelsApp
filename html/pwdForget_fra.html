@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/pwdForget.css"/>
+    <style>
+    body{	
+	
+    }
+    </style>
+</head>
+<body>
+	<div class="pwd-forget">
+		<h1>找回密码</h1>
+		
+		<ul>
+			<li> </li>
+			<li>
+				<span>+86</span><input type="text" value="" placeholder="请填写手机号码" name="tel" id="tel"/>
+			</li>
+			<li>
+				<input type="text" size="6" maxlength="6" name="code" placeholder="验证码" id="code" />
+				<span class="get-code" id="get-code" onclick="getCode()">获取验证码</span>
+				<span class="settime" id="settime"></span>
+			</li>
+		</ul>
+		<footer class="footer">	
+		    <a class="order" onclick="next()">立即找回</a>	
+		</footer>
+	</div>
+	<div class="set-pwd">
+		<h1>修改密码</h1>
+		<h4>请输入新的密码，并且区分大小写</h4>
+		<ul>
+			<li>
+				<input type="password" value="" placeholder="输入新密码" name="tel" id="newpwd"/>
+			</li>
+			<li>
+				<input type="password"  value="" name="code" placeholder="确认密码" id="ag-newpwd" />
+				
+			</li>
+		</ul>
+		<footer class="footer">	
+		    <a class="order" onclick="setpwd()">立即修改</a>	
+		</footer>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/pwdForget.js"></script>
+<script type="text/javascript">
+	apiready = function(){
+    	
+	};
+
+</script>
+</html>

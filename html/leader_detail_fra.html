@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<title>产品详情</title>
+<link rel="stylesheet" type="text/css" href="../css/api.css"/>
+<link rel="stylesheet" type="text/css" href="../css/au-add.css"/>
+<link rel="stylesheet" type="text/css" href="../css/leaderdetail.css"/>
+<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+<style>
+	
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div id="main">
+    <div id="act-content"></div>
+  </div>
+</div>
+<script id="act-template" type="text/x-dot-template">
+	
+	<div id='slide' class='swipe'>
+		<div class='swipe-wrap' id="banner-content">
+		
+		{{ for(var i=0; i<it.is_banner.length; i++) { }}
+		<div>
+			<img src="{{=it.is_banner[i].hotel_image}}" />
+		</div>
+		{{ } }}
+		</div>
+		<ul id="pointer">
+		 {{ for(var i=0; i<it.is_banner.length; i++) { }}
+			<li><a {{? i=='0'}}class="active"{{? }}></a></li>
+			 {{ } }}
+			
+		</ul>
+	</div>
+	<div class="nameinfo">
+        <h2 class="title">{{=it.names}}</h2>
+       
+        <p class="">
+            <span><i>￥</i>{{=it.line_price}}<i>/人起</i></span>
+            <em>31人购买</em>	          		
+        </p>
+		
+		
+    </div>
+	<div class="lc_date">
+        <div class="lc">
+            <span class="icn-area"></span>
+            <span class="lcicon">集合地点</span><br>
+            <span class="greentag">{{=it.city_id}}</span>
+        </div>
+        <div class="date">
+            <span class="icn-time"></span>
+            <span class="dateicon">目的地点</span><br>
+            <span class="greentag">{{=it.target_type}}</span>
+        </div>
+    </div>
+	
+	<div class="date_tel">
+        <a class="date">
+            <span class="dateicon">活动时间</span>
+            <span class="dateinfo">
+               {{=it.line_starttime}}至{{=it.line_endtime}}            </span>
+            <em class="grayarrow_right"></em>
+        </a>
+        <div class="tel">
+            <span class="telicon">客服电话</span>
+            <a href="tel:4008824315" class="telinfo">400-882-4315</a>
+            <em class="grayarrow_right"></em> 
+        </div>
+    </div>
+    <div class="tagtitle">
+    <span id="xcbq" class="hover" tapmode onclick="tabswitch(1)">精彩图文</span>
+        <span id="xlbq" tapmode onclick="tabswitch(2)">线路概要</span>
+		
+    </div>
+
+<div class="tagcon">
+        
+<div class="journey-detail">	
+    <div class="day-title">	
+        <span>图文详情</span>	
+    </div>	
+    <div class="arrow-down">
+    	
+    </div>
+     {{ for(var i=0; i<it.goods_content.length;i++){ }}
+    <div class="day-time">
+    	<span class="day-time-t">{{=i+1}}Day</span>
+    	<span class="day-title-t">{{=it.goods_content[i].title}}</span>
+    </div>
+    <div class="day-con">
+    	<p>{{=it.goods_content[i].content}}</p>
+		{{ for(var j=0;j<it.goods_content[i].slide.length;j++){ }}
+      		<img  src="../image/nophoto.png" data-echo="{{=it.goods_content[i].slide[j]}}"/>
+      	{{ } }}
+    </div>	
+    {{ } }}
+	
+</div>
+        <div class="lineinfo" id="xlcon">
+            <div class="cost titletag" id="sz1">
+                费用明细
+                <span class="grayarrow_bottom"></span>
+            </div>
+            <div class="tripinfocon graybg" id="con1">
+             <p><strong>费用包含：</strong></p>
+             <ul>
+             {{=it.contain}}
+             </ul>
+             <p><strong>费用不含：</strong></p>
+             <ul>
+             {{=it.notcontain}}
+             </ul>
+            </div>
+            <div class="security titletag" id="sz2">
+                报名须知
+                <span class="grayarrow_bottom grayarrow_right"></span>
+            </div>
+            <div class="tripinfocon graybg displaynone" id="con2">
+			    {{=it.tip}}
+                {{=it.book_info}}
+            </div>
+ <!--           <div class="ask titletag" id="qa_title">
+                景点介绍
+                <span class="grayarrow_bottom grayarrow_right"></span>
+            </div>
+            <div class="tripinfocon graybg ask_answer displaynone" id="qa_content">
+               {{=it.mb_goods_tip}}
+            </div>-->
+           
+        </div>
+        
+    </div>
+<div id="back-to-top" class="back-to-top"> <a href="javascript:;" title="返回顶部"></a> </div>
+
+</script> 
+<script type="text/javascript" src="../script/api.js"></script> 
+<script type="text/javascript" src="../script/zepto.js"></script> 
+<script type="text/javascript" src="../script/jquery.js"></script> 
+<script type="text/javascript" src="../script/template.js"></script> 
+<script src='../script/swipe.js'></script>
+<script type="text/javascript" src="../script/doT.min.js"></script> 
+<script type="text/javascript" src="../script/common.js"></script> 
+<script type="text/javascript" src="../script/config.js"></script> 
+<script type="text/javascript" src="../script/echo.js"></script> 
+<script type="text/javascript" src="../script/leader_detail.js"></script> 
+<script>
+    function gotop(){
+        $("#back-to-top").hide();
+        $(window).scroll(function(){
+            if ($(window).scrollTop()>100){
+                $("#back-to-top").fadeIn();
+            }else{
+                $("#back-to-top").fadeOut();
+            }
+        });
+        $("#back-to-top").click(function(){
+            $('body,html').animate({scrollTop:0},100);
+            return false;
+        });
+        $("#sz1").click( function () {
+            var t = $(this).offset().top;
+            console.log(t);
+            if(   $("#con1").hasClass('displaynone') ){
+                $("#con1").removeClass('displaynone'); 
+                $("span",this).removeClass('grayarrow_right');
+                $("body").animate({scrollTop: t});
+
+            }else{
+                $("#con1").addClass('displaynone');
+                $("span",this).addClass('grayarrow_right');
+                $("body").animate({scrollTop: t});
+            }
+         });
+
+        $("#sz2").click( function () {
+            var t = $(this).offset().top;
+            if(   $("#con2").hasClass('displaynone') ){
+                $("#con2").removeClass('displaynone');
+                $("span",this).removeClass('grayarrow_right');
+                $("body").animate({scrollTop: t});
+
+            }else{
+                $("#con2").addClass('displaynone');
+                $("span",this).addClass('grayarrow_right');
+                $("body").animate({scrollTop: t});
+            }
+         });
+
+
+        $("#qa_title").click( function () {
+            var t = $(this).offset().top;
+            if(   $("#qa_content").hasClass('displaynone') ){
+                $("#qa_content").removeClass('displaynone');
+                $("span",this).removeClass('grayarrow_right');
+                $("body").animate({scrollTop: t});
+
+            }else{
+                $("#qa_content").addClass('displaynone');
+                $("span",this).addClass('grayarrow_right');
+                $("body").animate({scrollTop: t});
+            }
+         });
+
+        $("#xcbq").click(function(){
+            $(this).addClass('hover');
+            $("#xlbq").removeClass('hover');
+            $("#xccon").show();
+            $("#xlcon").hide();
+
+        });
+        $("#xlbq").click(function(){
+            $(this).addClass('hover');
+            $("#xcbq").removeClass('hover');
+            $("#xccon").hide();
+            $("#xlcon").show();
+        })
+    };
+</script> 
+<script type="text/javascript">	
+
+	function tabswitch (type) {	
+			var col1 = $api.byId('xcbq');	
+			var col2 = $api.byId('xlbq');	
+			var list1 = $api.byId("xccon");	
+			var list2 = $api.byId("xlcon");	
+			if (type == 1) {	
+			   $api.addCls(col1, 'hover');
+			   $api.removeCls(col2, 'hover');
+			   $api.css(list1,'display:block');
+			   $api.css(list2,'display:none');
+			}	
+			else if (type == 2) {	
+				$api.removeCls(col1, 'hover');
+			    $api.addCls(col2, 'hover');
+			    $api.css(list1,'display:none');
+			    $api.css(list2,'display:block');
+			}
+	}	
+
+</script>
+</body>
+</html>

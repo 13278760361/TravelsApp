@@ -1,0 +1,71 @@
+body {
+    background-color: #efeff4;
+}
+.aui-content {
+    padding: 10px;
+    overflow: hidden;
+}
+#header {
+    background-color: #1abc9c;
+}
+
+
+.edit label {
+    padding-top: 13px;
+    font-size: 14px;
+}
+.edit .textarea {
+    padding: 10px;
+}
+.edit .aui-pull-right, .edit .aui-pull-left {
+    padding-top: 10px;
+    padding-right: 10px;
+    color: #8f8f94;
+}
+.edit textarea {
+    font-size: 14px;
+    padding: 5px;
+    border: none;
+}
+.edit .aui-input-row:last-child:after {
+    height: 0;
+}
+
+
+.edit .cardpic {
+    width: 100%;
+    padding: 20px;
+    position: relative;
+}
+.edit .cardpic:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    background-color: #c8c7cc;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+}
+
+.cardpic img {
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+}
+
+.takephoto {
+    width: 100%;
+    padding: 5px;
+    border: 1px dashed #BDC3C7;
+    color: #8f8f94;
+    font-size: 14px;
+    float: left;
+    position: relative;
+    text-align: center;
+}
+.takephoto img {
+    width: 100%;
+    height: 100%;
+}

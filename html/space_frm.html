@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>我的</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/dynamic.css" />
+</head>
+<style>
+.my-header {
+    background-repeat: no-repeat ;
+    background-size: cover;
+    min-height: 240px;
+    position: relative;
+}
+.my-info {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    width: 160px;
+    bottom: 0;
+    text-align: center;
+    vertical-align: center;
+
+}
+.my-info img {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+}
+.my-info p.nickname {
+    margin-top: 5px;
+    color: #666666;
+    font-size: 14px;
+}
+.my-menu {
+    position: absolute;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    background: #000000;
+    filter:Alpha(opacity=50);
+    background:rgba(0, 0, 0, 0.3) none repeat scroll 0 0 !important;
+    color: #ffffff;
+    font-size: 14px;
+}
+.my-menu .aui-col-xs-4 {
+    border-right: 1px solid #cccccc;
+}
+.my-menu .aui-col-xs-4:last-child {
+    border-right: none;
+}
+.my-menu > div:active {
+    background: #ffffff;
+    filter:Alpha(opacity=50);
+    background:rgba(255, 255, 255, 0.2) none repeat scroll 0 0 !important;
+}
+.aui-list-view-cell {
+    line-height: 26px;
+}
+span.boy {
+    font-size: 16px;
+    font-weight: 700;
+    padding-left: 2px;
+    color: #3498DB;
+}
+span.girl {
+    font-size: 16px;
+    font-weight: 700;
+    padding-left: 2px;
+    color: #E74C3C;
+}
+p small.danshen {
+    font-size: 12px;
+    margin-left: 5px;
+    background: #66ccff;
+    padding: 0 1px;
+    color: #ffffff;
+}
+p small.feidanshen {
+    font-size: 12px;
+    margin-left: 5px;
+    background: #ff99ff;
+    padding: 0 1px;
+    color: #ffffff;
+}
+</style>
+<body>
+	<script id="space-template" type="text/x-dot-template">
+        {{? it}}
+        <div class="my-info">
+            <img src="../image/noavatar.gif" {{? it.avatar}}data-echo="{{=it.avatar}}"{{? }}>
+            <p class="nickname">
+            {{=it.nickname}}
+            {{? it.sex==1 }}
+            <span class="aui-iconfont aui-icon-man boy"></span>
+            {{?? it.sex==2 }}
+            <span class="aui-iconfont aui-icon-women girl"></span>
+            {{? }}
+            </p>
+            <p>
+            {{=it.age}} 岁
+            {{? it.mate==2 }}
+            <small class="feidanshen">非单身</small>
+            {{?? }}
+            <small class="danshen">单身</small>
+            {{? }}
+            </p>
+        </div>
+        {{? userid!=toUserid}}
+        <div class="my-menu">
+            <div class="aui-col-xs-4" tapmode {{? it.iscare==1}}onclick="personDelete();"{{?? }}onclick="doCare();"{{? }} id="care_status">{{? it.iscare==1}}已关注{{?? }}关注{{? }}</div>
+            <div class="aui-col-xs-4" tapmode onclick="chat();">聊天</div>
+            <div class="aui-col-xs-4" tapmode onclick="report();">举报</div>
+        </div>
+        {{? }}
+        {{? }}
+    </script>
+    <script id="dynamic-template" type="text/x-dot-template">
+    {{ for(var i=0;i< it.length;i++) { }}
+    <div class="aui-list-view dynamic-list" id="dynamic_{{=it[i].travels_id}}">
+        <div class="aui-line-x aui-clearfix"></div>
+        <div class="aui-col-xs-12" tapmode onclick="show('{{=it[i].travels_id}}');">
+            <div class="aui-col-xs-12 aui-padded-10 aui-text-center" style="color:#999999;">{{=it[i].tra_addtime}}</div>
+            <div class="aui-line-x"></div>
+            <div class="aui-padded-10 dynamic-content">{{=it[i].tra_content}}</div>
+          
+            <ul class="aui-thumb-view">
+                
+                <li class="aui-list-view-cell aui-img aui-col-xs-4">
+                    <img class="aui-img-object" src="../image/nophoto.png" data-echo="{{=it[i].tra_mimg}}">
+                </li>
+            </ul>
+
+        </div>  
+        <div class="dynamic-otherinfo aui-clearfix">
+           
+            <p><small class="aui-iconfont aui-icon-phone">{{=it[i].member_mobile}}</small></p>
+           
+            <p><small>{{=it[i].tra_address}}</small></p>
+          
+        </div>
+        <div class="aui-line-x"></div>
+        <div class="aui-col-xs-12 dynamic-btn">
+            <div class="aui-col-xs-4 aui-iconfont aui-icon-duihuaxinxi"  tapmode {{? it[i].tra_addtime!=0}}onclick="show('{{=it[i].travels_id}}');"{{? }} id="replyTotal_{{=it[i].travels_id}}"></div>
+            <div class="aui-col-xs-4 aui-iconfont aui-icon-zan" tapmode {{? it[i].tra_addtime!=0}}onclick="show('{{=it[i].travels_id}}');"{{? }} id="laudTotal_{{=it[i].travels_id}}"></div>           
+            <div class="aui-col-xs-4 aui-iconfont aui-icon-delete" tapmode onclick="deleteDynamic({{=it[i].travels_id}})">删除</div>
+        </div>
+    </div>
+    {{ } }}
+    </script>
+    <div class="aui-content my-header" id="space-content" style="background-image: url(../image/mybg.png)">
+    	
+    </div>
+    <div class="aui-content" id="dynamic-content"></div>
+</body>
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/echo.js"></script>
+<script type="text/javascript" src="../script/space.js"></script>
+</html>

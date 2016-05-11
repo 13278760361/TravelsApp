@@ -1,0 +1,243 @@
+<!DOCTYPE html>	
+<html>	
+<head>	
+    <meta charset="utf-8">	
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>	
+    <title>window</title>	
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>	
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>	
+</head>	
+<style>	
+    body{	
+        display: -webkit-box;	
+        display: -webkit-flex;	
+        display: flex;	
+        -webkit-box-orient: vertical;	
+        -webkit-flex-direction: column;	
+        flex-direction: column;	
+    }	
+	
+    /*header*/	
+	
+    header {	
+        background-color: #0fc4c4;	
+        border-bottom: 1px solid #0fc4c4;
+        
+    }	
+	
+    .header {	
+        display: -webkit-box;	
+        -webkit-box-pack: center;	
+        -webkit-box-align: center;	
+    }	
+	
+    .bell {	
+        
+        background-image: url("../image/iconfont-follow.png");	
+    }	
+
+    .dock {	
+        background-image: url("../image/iconfont-fenxiang.png");	
+    }	
+	
+    .title {	
+        -webkit-box-flex: 1;	
+        text-align: center;	
+        font-size: 20px;color:#fff;	
+    }	
+	
+    .header a, .footer a {	
+        display: block;	
+        background-size: 30px;	
+        background-repeat: no-repeat;	
+        background-position: center;	
+        padding: 20px;	
+    }
+    .back {	
+        background-image: url("../image/iconfont-fanhui.png");	
+    }	
+
+    /*header*/	
+    .content {	
+        -webkit-box-flex: 1;	
+        -webkit-flex: 1;	
+        flex: 1;	
+    }	
+    .order {	
+        color: #6ab494;	
+        font-size: 16px;	
+        background-image: url("../image/order.png");	
+        background-position-x: 35% !important;	
+        padding: 15px !important;	
+        text-align: center;	
+    }	
+	
+    .footer {	
+        background-color: #E5E5E5;	
+    }
+ 	.follow{
+		
+		background-image: url("../image/iconfont-guanzhu_c.png");
+	}
+</style>	
+<body>	
+<header>	
+    <div class="header">	
+        <a class="back" tapmode="" onclick="api.closeWin()"></a>	
+        <div class="title" id="title">产品详情</div>	
+        <a class="bell" id="bell" tapmode="" onclick="follow()"></a>	
+        <a class="follow" id="follow" tapmode="" style="display:none;" onclick="unfollow()"></a>	
+        <a class="dock" tapmode="" onclick="fenxiang()"></a>	
+    </div>	
+</header>	
+<div class="content">	
+	
+</div>	
+<footer class="footer">	
+    <a class="order" onclick="opTripBuy()">立即预定</a>	
+</footer>	
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/zepto.min.js"></script>	
+<script>	
+var did;
+var type = "trip";
+    apiready=function(){
+    	if($api.getStorage('key')){
+    		getFollow();
+    	}
+    	api.showProgress(); //显示加载进度框	
+        var $header=$api.dom('.header');	
+        $api.fixIos7Bar($header);	
+        var $footer=$api.dom('.footer');	
+        var $header_h=$api.offset($header).h;	
+        var $footer_h=$api.offset($footer).h;
+        did = api.pageParam['dataId'];
+        api.openFrame({	
+            name:'tripDetail_frame1',	
+            url:'tripDetail_frame1.html',	
+            rect:{	
+                x:0,	
+                y:$header_h,	
+                w:'auto',	
+                h:api.winHeight-$header_h-$footer_h	
+            },
+            pageParam:{dataId:did}
+        })
+      
+    }
+    function getFollow(){
+    	api.ajax({
+	        url:ApiUrl + '/index.php?act=member_follow&op=check_follow&trip_id='+api.pageParam['dataId']+'&key='+$api.getStorage('key'),
+	        method:'get',
+	        dataType:'json'
+        },function(ret,err){
+        	//coding...
+        	if(ret.datas.data.stats==1){
+        		$('.bell').hide();
+        		$('.follow').show();
+        	}
+        });
+    }
+    function opTripBuy(){
+    	var key = $api.getStorage('key');
+    	var did = api.pageParam['dataId'];
+    	if(key){
+	    	api.openWin({
+		        name: 'tripBuy_window',
+		        url: './tripBuy_window.html',
+		        pageParam:{dataId:did}
+	        });    		
+    	}else{
+    		api.openWin({
+	            name: 'login_win',
+	            url: 'login_win.html',
+            });
+    	}
+    }
+    function back(){
+    	api.closeWin();
+    }
+function follow(){
+	var trip_id = api.pageParam['dataId'];
+	if($api.getStorage('key')){
+		changeStatus(trip_id);
+	}else{
+		api.openWin({
+	        name: 'login_win',
+	        url: 'login_win.html'
+        });
+	}
+}
+function unfollow(){
+	
+	api.ajax({
+	    url:ApiUrl + '/index.php?act=member_follow&op=unfollow&trip_id='+api.pageParam['dataId']+'&key='+$api.getStorage('key'),
+	    method:'get',
+	    dataType:'json'
+    },function(ret,err){
+    	//coding...
+    	if(ret.datas.data.stats==1){
+    		$('#follow').hide();
+    		$('.bell').show();
+
+	        api.toast({
+	            msg: '取消关注',
+	            duration:2000,
+	            location: 'top'
+	        })
+    	}else{
+	        api.toast({
+	            msg: '取消关注失败',
+	            duration:2000,
+	            location: 'top'
+	        })
+    	}
+    });
+}
+function changeStatus(trip_id){
+	api.ajax({
+	    url: ApiUrl + '/index.php?act=member_follow&op=follow&trip_id=' + trip_id + '&key=' + $api.getStorage('key'),
+	    method: 'get',
+	    dataTpye: 'json'
+    },function(ret,err){
+    	//coding...
+    	if(ret.datas.data.stats==1){
+    		$('.bell').hide();
+    		$('#follow').show();
+	        api.toast({
+	            msg: '关注成功',
+	            duration:2000,
+	            location: 'top'
+	        })
+	        api.execScript({
+	        	name:'tripDetail_window',
+	            script: 'getFollow();'
+            });
+    	}else{
+	        api.toast({
+	            msg: '关注失败',
+	            duration:2000,
+	            location: 'top'
+	        })
+    	}
+    });
+}
+    function fenxiang(){
+		api.openFrame({
+                name: 'share_fra2',
+                url: 'share_fra2.html',
+                pageParam:{height:0,dataId:did,type:type},
+                rect: {
+                        x:0,
+                        y:0,
+                        w:'auto',
+                        h:'auto'
+                },
+               //  pageParam:{}
+        });
+
+    }
+</script>	
+</body>	
+</html>	

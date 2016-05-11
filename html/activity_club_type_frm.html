@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>俱乐部活动筛选主题</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../css/activity_type.css" />
+</head>
+<style type="text/css">
+.aui-content {
+	padding-left:0;
+	padding-right: 0;
+}
+</style>
+<body>
+    <div class="activity-type" id="activity-type">
+        <div class="aui-col-xs-3 aui-text-center activity-type-list" data-id="1">
+            <span class="iconfont icon-xingren bg-1 text-white"></span>
+            <p>徒步</p>
+        </div>
+        <div class="aui-col-xs-3 aui-text-center activity-type-list" data-id="2">
+            <span class="iconfont icon-quanjing bg-2 text-white"></span>
+            <p>登山</p>
+        </div>
+        <div class="aui-col-xs-3 aui-text-center activity-type-list" data-id="3">
+            <span class="iconfont icon-sheyinglvxing bg-3 text-white"></span>
+            <p>摄影</p>
+        </div>
+        <div class="aui-col-xs-3 aui-text-center activity-type-list" data-id="4">
+            <span class="iconfont icon-zhangpeng bg-4 text-white"></span>
+            <p>露营</p>
+        </div>
+        <div class="aui-col-xs-3 aui-text-center activity-type-list" data-id="7">
+            <span class="iconfont icon-meishi bg-5 text-white"></span>
+            <p>吃货</p>
+        </div>
+        <div class="aui-col-xs-3 aui-text-center activity-type-list" data-id="9">
+            <span class="iconfont icon-yongjing bg-6 text-white"></span>
+            <p>玩水</p>
+        </div>
+        <div class="aui-col-xs-3 aui-text-center activity-type-list" data-id="10">
+            <span class="iconfont icon-chuzu bg-7 text-white"></span>
+            <p>自驾</p>
+        </div>
+        <div class="aui-col-xs-3 aui-text-center activity-type-list" data-id="15">
+            <span class="iconfont icon-zixingche bg-7 text-white"></span>
+            <p>单车</p>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    function slideUp(){
+        var type = $api.byId('activity-type');
+        $api.removeCls(type, 'in');
+        setTimeout(function(){
+            api.closeFrame();
+        },350);
+    }
+    apiready = function(){
+        var type = $api.byId('activity-type');
+        $api.addCls(type, 'in');
+        api.addEventListener({
+            name: 'swipeup'
+        }, function(ret, err){
+            api.execScript({
+                frameName: 'activity_club_list',
+                script: 'foldMore()'
+            });
+        });
+        //筛选
+        var searchTypeList = $api.domAll(".activity-type-list");
+        for(var i in searchTypeList){
+            $api.addEvt(searchTypeList[i], 'click', function(){
+                $api.removeCls($api.dom(".activity-type-list.active"),'active');
+                $api.addCls(this,'active');
+                var searchType = $api.attr(this,'data-id');
+                //发送筛选事件
+                api.sendEvent({
+                    name:"activityClubSearch",
+                    extra:{
+                        searchType:searchType
+                    }
+                });
+                slideUp();
+            });
+        }
+        
+    };
+</script>
+</html>

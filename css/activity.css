@@ -1,0 +1,389 @@
+body {
+    background-color: #efeff4;
+}
+.aui-content {
+    padding: 10px;
+    overflow: hidden;
+}
+#header {
+    background-color: #1abc9c;
+}
+
+/*列表样式重置*/
+.aui-list-view:after {
+    height: 0px;
+}
+.aui-list-view:before {
+    height: 0px;
+}
+.aui-content .aui-list-view:last-child {
+    margin-bottom: 0;
+}
+
+/*活动列表页*/
+.activity-tab {
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    background: #ffffff;
+    font-size: 14px;
+    color: #8f8f94;
+    border-bottom: 1px solid #efeff4;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+.activity-tab .active {
+    color: #16A085;
+}
+.activity-tab .active:after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    content: '';
+    background-color: #16A085;
+    -webkit-transform: scaleY(1);
+          transform: scaleY(1);
+}
+.activity-type {
+    width: 100%;
+    height: 90px;
+    background: #ffffff;
+    font-size: 12px;
+    color: #8f8f94;
+    overflow: hidden;
+    padding: 15px 0;
+}
+.activity-type .activity-type-list,.activity-type .activity-type-more {
+    padding: 5px;
+    
+}
+.activity-type .activity-type-list.active {
+    background: #f0f0f4;
+    -webkit-animation: fade .7s ease both;
+    animation: fade .7s ease both;
+}
+.activity-type .activity-type-list .aui-iconfont,.activity-type .activity-type-more .aui-iconfont {
+    
+    border-radius: 3px;
+    font-size: 20px;
+    color: #ffffff;
+    display: block;
+    width: 30px;
+    height: 30px;
+    text-indent: center;
+    line-height: 30px;
+    margin: 0 auto;
+}
+.activity-type .activity-type-list .iconfont,.activity-type .activity-type-more .iconfont {
+    
+    border-radius: 3px;
+    font-size: 20px;
+    color: #ffffff;
+    display: block;
+    width: 30px;
+    height: 30px;
+    text-indent: center;
+    line-height: 30px;
+    margin: 0 auto;
+}
+.activity-type .activity-type-list p,.activity-type .activity-type-more p {
+    padding-top: 5px;
+    margin-bottom: 0;
+    font-size: 12px;
+}
+.type-category {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+.category-show {
+    display: block;
+    -webkit-animation: fadeIn .7s ease both;
+    animation: fadeIn .7s ease both;
+}
+.category-hide {
+    -webkit-animation: fadeOut .7s ease both;
+    animation: fadeOut .7s ease both;
+}
+.tip-left {
+    width: 80%;
+    float: left;
+    line-height: 60px;
+}
+.activity-aa-list, .activity-service-list {
+    float: left;
+    width: 100%;
+    -webkit-animation: fadeIn .5s ease both;
+    animation: fadeIn .5s ease both;
+}
+.aui-list-view.activity-aa-list, .aui-list-view.activity-service-list {
+    margin-bottom: 5px;
+}
+.activity-aa-list .activity-aa-thumb, .activity-service-list .activity-service-thumb {
+    float: left;
+    width: 96px;
+    height: 128px;
+    position: relative;
+    
+}
+.activity-aa-list .activity-aa-thumb img, .activity-service-list .activity-service-thumb img {
+    width: 100%;
+    height: 100%;
+}
+.activity-aa-list .activity-aa-info, .activity-service-list .activity-service-info {
+    overflow: hidden;
+    padding-left: 106px;
+    width: 100%;
+    margin-left: -96px;
+    float: left;
+    padding-right: 10px;
+}
+
+.activity-aa-list .activity-aa-info .activity-aa-title{
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333333;
+    line-height: 20px;
+    margin-bottom: 5px;
+    /*
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;*/
+}
+.activity-service-list .activity-service-info .activity-service-title {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.activity-aa-list .activity-aa-info p, .activity-service-list .activity-service-info p {
+    margin-bottom: 0px;
+}
+.activity-aa-list span, .activity-service-list span {
+    font-size: 12px;
+    color: #8f8f94;
+}
+.activity-aa-list span.aui-iconfont, .activity-service-list span.aui-iconfont {
+    font-size: 14px;
+}
+.activity-service-list span.service-price {
+    font-size: 14px;
+    color: #E67E22;
+}
+
+.activity-club-list {
+    float: left;
+    width: 100%;
+    -webkit-animation: fadeIn .5s ease both;
+    animation: fadeIn .5s ease both;
+}
+.activity-club-list .vipicon {
+    height: 15px;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: -6px;
+    text-align: right;
+    z-index: 9;
+}
+.activity-club-list .vipicon img {
+    height: 100%;
+}
+.activity-club-list .activity-club-thumb {
+    width: 100%;
+    height: 180px;
+}
+.activity-club-list .activity-club-thumb img {
+    width: 100%;
+    height: 100%;
+}
+.activity-club-list .activity-club-info {
+    background: #ffffff;
+    padding: 10px;
+}
+.activity-club-list .activity-club-info .activity-club-title {
+    font-size: 16px;
+    color: #333333;
+    line-height: 22px;
+    margin: 2px 0 8px 0;
+}
+.activity-club-title .aui-label {
+    margin-left: 8px;
+}
+.activity-club-list p {
+    margin-bottom: 5px;
+}
+.activity-club-list p span {
+    font-size: 12px;
+    color: #8f8f94;
+}
+.activity-club-list span.aui-iconfont {
+    font-size: 14px;
+}
+.activity-club-list .price {
+    color: #E67E22;
+    font-size: 16px;
+}
+
+
+
+/*目的地搜索*/
+.map-search {
+    
+}
+.map-search .aui-iconfont {
+    font-size: 20px;
+    padding-top: 10px;
+    padding-left: 5px;
+    position: absolute;
+    z-index: 2;
+    color: #8f8f94;
+}
+.map-search-input {
+    width: 100%;
+    margin-left: -30px;
+    margin-right: -50px;
+    padding-left: 30px;
+    padding-right: 50px;
+    position: absolute;
+
+}
+.map-search-input input {
+    border: none;
+    padding-left: 30px;
+}
+.map-search .map-searchbtn {
+    padding: 10px 0;
+    width: 50px;
+    background: #34495E;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 3px;
+    font-size: 14px;
+    position: relative;
+    z-index: 9;
+}
+.map-place-list {
+    float: left;
+    width: 100%;
+    position: relative;
+    padding: 0 10px;
+}
+.aui-list-view.map-place-list {
+    margin-bottom: 5px;
+}
+.aui-list-view.map-place-list .aui-pull-right {
+    font-size: 12px;
+    color: #8f8f94;
+}
+.map-place-list .map-place-title {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333333;
+    line-height: 20px;
+    margin-bottom: 0px;
+}
+
+/*筛选背景颜色类*/
+.bg-normal {
+    background-color: #1ABC9C;
+}
+.bg-more {
+    background-color: #BDC3C7;
+}
+.bg-white {
+    background-color: #ECF0F1;
+}
+.bg-1 {
+    background-color: #1ABC9C;
+}
+.bg-2 {
+    background-color: #3498DB;
+}
+.bg-3 {
+    background-color: #34495E;
+}
+.bg-4 {
+    background-color: #F39C12;
+}
+.bg-5 {
+    background-color: #E67E22;
+}
+.bg-6 {
+    background-color: #E74C3C;
+}
+.bg-7 {
+    background-color: #F1C40F;
+}
+.bg-8 {
+    background-color: #D35400;
+}
+.bg-9 {
+    background-color: #F1C40F;
+}
+.bg-10 {
+    background-color: #9B59B6;
+}
+
+.text-1, .aui-iconfont.text-1 {
+    color: #1ABC9C;
+}
+.text-2, .aui-iconfont.text-2 {
+    color: #3498DB;
+}
+.text-3, .aui-iconfont.text-3 {
+    color: #34495E;
+}
+.text-4, .aui-iconfont.text-4 {
+    color: #F39C12;
+}
+.text-5, .aui-iconfont.text-5 {
+    color: #E67E22;
+}
+.text-6, .aui-iconfont.text-6 {
+    color: #E74C3C;
+}
+.text-7, .aui-iconfont.text-7 {
+    color: #F1C40F;
+}
+.text-8, .aui-iconfont.text-8 {
+    color: #D35400;
+}
+.text-9, .aui-iconfont.text-9 {
+    color: #F1C40F;
+}
+.text-9, .aui-iconfont.text-10 {
+    color: #9B59B6;
+}
+.text-9, .aui-iconfont.text-11 {
+    color: #95A5A6;
+}
+.text-9, .aui-iconfont.text-12 {
+    color: #2ECC71;
+}
+
+@-webkit-keyframes fadeIn {
+    from { opacity: 0.3; }
+    to {  }
+}
+@keyframes fadeIn {
+    from { opacity: 0.3; }
+    to {  }
+}
+@-webkit-keyframes fadeOut {
+    from { }
+    to { opacity: 0.3;  }
+}
+@keyframes fadeOut {
+    from {  }
+    to { opacity: 0.3; }
+}

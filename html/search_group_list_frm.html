@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>附近的圈子</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/search.css" />
+</head>
+<body>
+	<div class="aui-content search-circle">
+        <div class="aui-iconfont aui-icon-search"></div>
+        <div class="search-circle-input"><input type="text" id="keyword" placeholder="输入圈子名称或圈号" required></div>
+        <div class="search-circlebtn aui-pull-right" onclick="search();">搜索</div>
+    </div>
+	<script id="circle-template" type="text/x-dot-template">
+    {{ for(var i in it) { }}
+    <div class="aui-list-view search-list" onclick="showCircleSpace({{=it[i].circleid}});">
+		<div class="aui-col-xs-12">
+			<div class="search-avatar">
+				<img src="../image/blank.gif" data-echo="{{=it[i].circlelogo}}">
+			</div>
+			<div class="search-info">
+				<div class="search-title">
+					{{=it[i].circletitle}}
+					<span class="aui-pull-right"><span class="aui-iconfont aui-icon-friends"></span> {{=it[i].circlemembertotal}}人</span>
+				</div>
+				<p class="aui-ellipsis-1">{{=it[i].circledescription}}</p>
+			</div>
+	    </div>
+	</div>
+    {{ } }}
+    </script>
+	<div class="aui-content aui-clearfix" style="padding-top:0;" id="circle-content"></div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/circle_group_search.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/echo.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+</html>

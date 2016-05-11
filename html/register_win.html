@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<meta name="format-detection" content="telephone=no"/>
+<title>注册</title>
+<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+</head>
+<style>
+.aui-bar {
+	background: #f5f5f5;
+	color: #666666;
+}
+.aui-bar .aui-iconfont {
+	color: #666666;
+}
+#next-btn, #pre-btn {
+	font-size: 16px;
+	color: #666666;
+	height: 45px;
+	line-height: 45px;
+}
+#pre-btn {
+	display: none;
+}
+.aui-pull-left, .aui-pull-right {
+	height: 45px;
+	line-height: 45px;
+}
+</style>
+<body>
+<div class="aui-bar aui-bar-nav aui-bar-primary" id="header">
+  <div class="aui-pull-left" id="login-btn" tapmode onclick="back();"> <span class="aui-iconfont aui-icon-left"></span> </div>
+  <div class="aui-pull-left" id="pre-btn" tapmode>上一步</div>
+  <div class="aui-pull-right" id="next-btn" tapmode>下一步</div>
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    var mobile,thisIndex;
+    apiready = function(){
+        var header = $api.byId('header');
+         $api.fixIos7Bar(header);
+        var header_h = $api.offset(header).h;
+        api.parseTapmode();
+        api.addEventListener({
+            name: 'register'
+        }, function(ret){
+            if(ret && ret.value){
+                var mobile = ret.value.mobile;
+                var index = ret.value.index;
+                if(index==0){
+                    api.setFrameGroupIndex({
+                        name: 'register',
+                        index: 1
+                    });
+                }else if(index==1){
+                    api.setFrameGroupIndex({
+                        name: 'register',
+                        index: 2
+                    });
+                }else if(index==2){
+
+                }
+                
+            }
+        });
+        api.openFrameGroup ({
+            name: 'register',
+            background:'#fff',
+            scrollEnabled:false,
+            rect:{x:0, y:header_h, w:'auto', h:'auto'},
+            index:0,
+            preload:0,
+            frames:
+            [{
+                name: 'register_one', 
+                url: 'register_one.html', 
+                pageParam:{}, 
+                bounces:false,
+                bgColor: '#fff', 
+                vScrollBarEnabled:false,
+                hScrollBarEnabled:false
+            },{
+                name: 'register_two', 
+                url: 'register_two.html', 
+                pageParam:{
+                    mobile:'1111'
+                }, 
+                bounces:false,
+                bgColor: '#fff', 
+                vScrollBarEnabled:false,
+                hScrollBarEnabled:false
+            },{
+                name: 'register_three', 
+                url: 'register_three.html', 
+                pageParam:{}, 
+                bounces:false,
+                bgColor: '#fff', 
+                vScrollBarEnabled:false,
+                hScrollBarEnabled:false
+            }]
+        }, function(ret, err){
+            var name = ret.name;
+            thisIndex = ret.index;
+            var loginDom = $api.byId('login-btn');
+            var preDom = $api.byId('pre-btn');
+            var nextDom = $api.byId('next-btn');
+            if(thisIndex==0){
+                $api.css(loginDom,'display:block');
+                $api.css(preDom,'display:none');
+                $api.css(nextDom,'display:block');
+                $api.attr(nextDom,'onclick','stepSwitch(1)');
+                $api.html(nextDom,'下一步');
+            }else if(thisIndex==1){
+                $api.css(loginDom,'display:none');
+                $api.css(preDom,'display:block');
+                $api.css(nextDom,'display:block');
+                $api.attr(preDom,'onclick','stepSwitch(0)');
+                $api.attr(nextDom,'onclick','stepSwitch(2)');
+                $api.html(nextDom,'下一步');
+            }else if(thisIndex==2){
+                $api.css(loginDom,'display:none');
+                $api.attr(preDom,'onclick','stepSwitch(1)');
+                $api.css(preDom,'display:block');
+                $api.html(nextDom,'确认完成注册');
+                $api.attr(nextDom,'onclick','confirmDone()');
+            }
+        });
+    }
+    function confirmDone(){
+        api.execScript({
+            frameName:'register_three',
+            script:'confirm()'
+        })
+    }
+    function stepSwitch(index){
+        if(index==0){
+            api.setFrameGroupIndex({
+                name: 'register',
+                index: index
+            });
+        }else if(index==1){
+            api.execScript({
+                frameName:'register_one',
+                script:'writeData()'
+            })
+            api.addEventListener({
+                name: 'registerOneDone'
+            }, function(ret){
+                if(ret && ret.value){
+                    var mobile = ret.value.mobile;
+                    var verify = ret.value.verify;
+                    if(ret.value.status=='true'){
+                        api.ajax({
+                            url: 'http://www.ynypw.com/mobile/index.php?act=login&op=check_mbone&mobile='+mobile,
+                            method: 'GET',
+                            cache: false,
+                            timeout: 60,
+                            dataType: 'json'
+                        }, function (retI, errI) {
+                            if(retI.datas.status=='-1') {
+                                api.toast({
+                                    msg: '该手机号已被注册',
+                                    duration:1000,
+                                    location: 'top'
+                                });
+                            }else{
+                                api.ajax({
+                                    url: 'http://www.ynypw.com/mobile/index.php?act=login&op=check_verify&mobile_verify='+verify,
+                                    method: 'GET',
+                                    cache: false,
+                                    timeout: 60,
+                                    dataType: 'json'
+                                }, function (retII, errII) {
+                                    if(retII.datas.status==1) {
+                                        api.setFrameGroupIndex({
+                                            name: 'register',
+                                            index: index
+                                        });
+                                    }else{
+                                        api.toast({
+                                            msg: '请输入正确的验证码',
+                                            duration:1000,
+                                            location: 'top'
+                                        });
+                                    }
+                                });
+                            }
+                        });
+
+                        
+                        
+                    }
+                }
+            });
+        }else if(index==2){
+            api.execScript({
+                frameName:'register_two',
+                script:'writeData()'
+            })
+            if(thisIndex>index){
+                api.setFrameGroupIndex({
+                    name: 'register',
+                    index: index
+                });
+            }else{
+                api.addEventListener({
+                    name: 'registerTwoDone'
+                }, function(ret){
+                    if(ret && ret.value){
+                        var avatar = ret.value.avatar;
+                        if(ret.value.status=='true'){
+                            api.setFrameGroupIndex({
+                                name: 'register',
+                                index: index
+                            });
+                        }
+                    }
+                });
+                
+            }
+            
+        }
+        /*api.setFrameGroupIndex({
+            name: 'register',
+            index: index
+        });*/
+    }
+    function back(){
+        api.closeWin();
+    }
+    
+</script>
+</html>

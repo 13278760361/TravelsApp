@@ -1,0 +1,420 @@
+body {
+    background-color: #efeff4;
+}
+.aui-content {
+    padding: 0 0 10px 0;
+    overflow: hidden;
+    -webkit-animation: fadeIn .5s ease both;
+    animation: fadeIn .5s ease both;
+}
+#header {
+    background-color: #1abc9c;
+}
+
+/*列表样式重置*/
+.aui-list-view:after {
+    height: 0px;
+}
+.aui-list-view:before {
+    height: 0px;
+}
+.aui-content .aui-list-view:last-child {
+    margin-bottom: 0;
+}
+
+
+/*AA service 活动详情*/
+.activity-show-header {
+    width: 100%;
+    height: 260px;
+    position: relative;
+    background: url('../image/mybg.jpg') no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.activity-show-header .mask {
+    width: 100%;
+    height: 260px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #000000;
+    background:rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+.activity-show-title {
+    width: 100%;
+    padding: 50px 15px 10px 15px;
+    color: #ECF0F1;
+    font-size: 18px;
+    position: relative;
+    z-index: 2;
+}
+.activity-show-basicinfo {
+    width: 100%;
+    padding: 10px 15px;
+    color: #BDC3C7;
+    font-size: 14px;
+    position: relative;
+    z-index: 2;
+}
+.activity-show-basicinfo p {
+    color: #BDC3C7;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.activity-show-attend {
+    width: 100%;
+    height: 68px;
+    padding: 0 15px;
+    color: #ECF0F1;
+    font-size: 14px;
+    position: relative;
+    z-index: 2;
+}
+.activity-show-attend-btn {
+    width: 160px;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #ECF0F1;
+    border-radius: 3px;
+}
+.activity-show-attend-btn.active {
+    font-size: 18px;
+    -webkit-animation: fade .7s ease both;
+    animation: fade .7s ease both;
+}
+.activity-show-attend .aui-iconfont {
+    line-height: 48px;
+    font-size: 14px;
+}
+.activity-show-attend .aui-icon-man {
+    color: #3498DB;
+}
+.activity-show-attend .aui-icon-women {
+    color: #E74C3C;
+}
+.activity-show-attend .aui-icon-money {
+    font-size: 18px;
+    color: #E67E22;
+}
+
+.activity-show-add-title {
+    height: 45px;
+    line-height: 45px;
+    font-size: 14px;
+    background-color: #ffffff;
+    padding: 0 15px;
+}
+.activity-show-add-userinfo {
+    padding: 10px 15px;
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+.activity-show-add-userinfo:before {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    background-color: #c8c7cc;
+    -webkit-transform: scaleY(.3);
+          transform: scaleY(.3);
+}
+.activity-show-add-avatar {
+    width: 48px;
+    height: 48px;
+    float: left;
+}
+.activity-show-add-avatar img {
+    width: 100%;
+    height: 100%;
+}
+.activity-show-add-user {
+    overflow: hidden;
+    padding-left: 58px;
+    width: 100%;
+    margin-left: -48px;
+    float: left;
+    padding-right: 10px;
+    position: relative;
+}
+.activity-show-add-user .activity-show-add-username {
+    font-size: 14px;
+    color: #333333;
+    line-height: 20px;
+    margin-bottom: 5px;
+}
+.activity-show-add-username span {
+    color: #8f8f94;
+    font-size: 12px;
+}
+.activity-show-add-user p {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #8f8f94;
+}
+.activity-show-add-user .aui-label.aui-iconfont {
+    font-size: 10px;
+}
+
+.activity-show-info {
+    width: 100%;
+}
+.activity-show-desc {
+    background-color: #ffffff;
+    width: 100%;
+    font-size: 14px;
+    padding: 15px;
+    position: relative;
+    color: #8f8f94;
+}
+.activity-show-desc:before {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    background-color: #c8c7cc;
+    -webkit-transform: scaleY(.3);
+          transform: scaleY(.3);
+}
+.activity-show-add-title .aui-iconfont {
+    color: #8f8f94;
+}
+
+.activity-show-pic .aui-thumb-view {
+    padding: 10px 13px;
+    background-color: #ffffff;
+
+}
+.activity-show-pic .aui-img {
+    padding-bottom: 0;
+}
+
+/*报名会员列表*/
+.activity-show-attend-title {
+    height: 45px;
+    line-height: 45px;
+    font-size: 14px;
+    background-color: #ffffff;
+    padding: 0 15px;
+}
+.activity-show-attend-title .aui-iconfont {
+    color: #8f8f94;
+}
+.activity-show-attend-title .aui-pull-right {
+    color: #8f8f94;
+    font-size: 12px;
+}
+.activity-show-attend-userlist {
+    background-color: #ffffff;
+    float: left;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    height: 68px;
+    padding: 10px 15px;
+}
+.activity-show-attend-info .aui-list-view:before {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    background-color: #c8c7cc;
+    -webkit-transform: scaleY(.3);
+          transform: scaleY(.3);
+}
+.aui-list-view.activity-show-attend-userlist {
+    margin-bottom: 0;
+}
+.activity-show-attend-userlist .activity-show-attend-useravatar {
+    float: left;
+    width: 48px;
+    height: 48px;
+    position: relative;
+    
+}
+.activity-show-attend-userlist .activity-show-attend-useravatar img {
+    width: 100%;
+    height: 100%;
+}
+.activity-show-attend-userlist .activity-show-attend-userinfo {
+    overflow: hidden;
+    padding-left: 58px;
+    width: 100%;
+    margin-left: -48px;
+    float: left;
+    padding-right: 10px;
+    position: relative;
+}
+
+.activity-show-attend-userinfo .activity-show-attend-username {
+    font-size: 14px;
+    color: #333333;
+    line-height: 20px;
+    margin-bottom: 5px;
+}
+.activity-show-attend-userinfo .activity-show-attend-username span {
+    color: #8f8f94;
+    font-size: 12px;
+}
+.activity-show-attend-userinfo p {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #8f8f94;
+}
+.activity-show-attend-userinfo .aui-label.aui-iconfont {
+    font-size: 10px;
+}
+.activity-show-attend-userlist:before {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    background-color: #c8c7cc;
+    -webkit-transform: scaleY(.3);
+          transform: scaleY(.3);
+}
+
+.activity-show-attend-userlist .meet {
+    position: absolute;
+    right:0;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+    background: url('../image/icon/like.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.activity-show-attend-userlist .meet.active {
+    position: absolute;
+    right:0;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+    background: url('../image/icon/like-pull.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+    -webkit-animation: meetFade .5s ease both;
+    animation: meetFade .5s ease both;
+}
+
+
+.activity-show-attend-userinfo span.aui-iconfont, .activity-show-add-user span.aui-iconfont {
+    font-size: 12px;
+    color: #ffffff;
+}
+small.boy {
+    font-size: 12px;
+    background: #66ccff;
+    color: #ffffff;
+    padding: 1px;
+    border-radius: 1px;
+}
+small.girl {
+    font-size: 12px;
+    background: #ffccff;
+    color: #ffffff;
+    padding: 1px;
+    border-radius: 1px;
+}
+small.danshen {
+    font-size: 12px;
+    margin-left: 3px;
+    background: #66ccff;
+    color: #ffffff;
+    padding: 1px;
+    border-radius: 1px;
+}
+small.feidanshen {
+    font-size: 12px;
+    margin-left: 3px;
+    background: #ffccff;
+    color: #ffffff;
+    padding: 1px;
+    border-radius: 1px;
+}
+.aui-tra_describe{
+  background: #FFFFFF;
+  color: #101313;
+  font-size: 14px;
+  font-family: "微软雅黑";
+  padding:10px;
+}
+.aui-describe{
+	position: absolute;
+	margin-top:-45px;
+	text-align: right;
+}
+.aui-describe span{
+	padding:3px 10px;
+	background-color:rgba(0,0,0,0.5);
+	margin-left: 1rem;
+	float:left;
+}
+.aui-describe span:nth-child(1){
+ 	
+}
+.aui-describe span:nth-child(2){
+	
+	
+}
+.aui-describe span i{
+	padding:16px;
+    background-size: 16px;	
+    background-repeat: no-repeat;	
+    background-position: center;
+}
+.aui-describe i.aui-follow{
+	background-image: url(../image/iconfont-unfollow.png);
+}
+.aui-describe i.aui-pinglun{
+	background-image: url(../image/iconfont-pinglun.png);
+}
+.aui-describe i.aui-unfollow{
+	background-image: url(../image/iconfont-follow.png);
+	display: none;
+}
+.aui-describe i.aui-follow-hide{
+	display: none;
+}
+
+.aui-describe i.aui-unfollow-show{
+	padding:10px 16px;
+    background-size: 16px;	
+	display: block;
+}
+@-webkit-keyframes fadeIn {
+    from { opacity: 0.3; }
+    to {  }
+}
+@keyframes fadeIn {
+    from { opacity: 0.3; }
+    to {  }
+}
+@-webkit-keyframes fade {
+    from { opacity: 0.3; font-size: 30px;}
+    to { font-size: 18px;}
+}
+@keyframes fade {
+    from { opacity: 0.3; font-size: 30px;}
+    to { font-size: 18px;}
+}
+@-webkit-keyframes meetFade {
+    from { opacity: 0.3; }
+    to { }
+}
+@keyframes meetFade {
+    from { opacity: 0.3; }
+    to { }
+}

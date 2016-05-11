@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>我的</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/space.css" />
+</head>
+<style>
+#footer {
+    display: none;
+}
+</style>
+<body>
+    <header class="aui-bar aui-bar-nav aui-bar-primary" id="header">
+        <div class="aui-pull-left">
+            <a class="aui-iconfont aui-icon-left" tapmode onclick="back();"></a>
+        </div>
+        <div class="aui-title" id="header-title">空间</div>
+    </header>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+    var toUserid;
+    
+    apiready = function(){
+        api.parseTapmode();
+        
+        toUserid = api.pageParam.toUserid;
+       /* var userid = $api.getStorage('userid');
+        var header = $api.byId('header');
+        $api.fixStatusBar(header);*/
+    	var body = $api.dom('body');
+    	var body_h = $api.offset(body).h;
+        //var header_h = $api.offset(header).h;
+        var rect_h = body_h;
+    	api.openFrame({
+            name: 'space_frm',
+            url: 'space_frm.html',
+            rect:{
+                x:0,
+                y:0,
+                w:'auto',
+                h: rect_h
+            },
+            pageParam:{toUserid:toUserid},
+            bounces: true,
+            vScrollBarEnabled:false,
+            hScrollBarEnabled:false
+        });
+    };
+    function back(){
+        api.closeWin({});
+    }
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>	
+<html>	
+<head>	
+	<meta charset="utf-8">	
+	<title>frame</title>	
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>	
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />	
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />	
+	<link rel="stylesheet" type="text/css" href="../css/orderList.css" />	
+</head>	
+<body>	
+	<!-- 1 列表 -->
+
+<script id="ord-template" type="text/x-dot-template">
+
+{{ for(var i=0; i<it.datas.order_list.length; i++) { }}
+
+<a href="" class="item Fix hightitem" tapmode onclick="">	
+    <div class="cnt" onclick="openTripDetail({{=it.datas.order_list[i].trip_id}})">	
+    	<img class="pic" src="{{=it.datas.order_list[i].goods_image_url}}">	
+        <div class="wrap">	
+            <div class="wrap2">	
+	            <div class="content">	
+	                <div class="shopname">{{=it.datas.order_list[i].goods_name}}</div>	
+	                <div class="comment">	
+	                    <span class="star star-50"></span>	
+	                    <span>￥{{=it.datas.order_list[i].order_amount}} &nbsp;x {{=it.datas.order_list[i].trip_num}}</span>	
+	                </div>	
+	                <span class="classify">	
+	                	{{=it.datas.order_list[i].goods_jingle}}	
+	                </span><span class="distance"><img src="../image/ic_address_big.png" alt="">650m</span>
+	            </div>	
+            </div>           	
+        </div>	
+    </div>	
+</a>
+{{ } }}
+</script>
+<div class="home-tuan-list" id="ord-content">
+  
+    
+</div>
+	
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/zepto.js"></script>
+<script type="text/javascript" src="../script/template.js"></script>
+<script src='../script/swipe.js'></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/orderList.js"></script>
+</body>	
+</html>	

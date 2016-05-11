@@ -1,0 +1,102 @@
+body {
+    background-color: #efeff4;
+}
+.aui-content {
+    padding: 10px;
+    overflow: hidden;
+}
+#header {
+    background-color: #50beec;
+}
+#header .aui-bar {
+    background-color: #50beec;
+}
+#header .aui-pull-right {
+    font-size: 14px;
+}
+.rest {
+    width: 100%;
+    height: 100%;
+    background-color: #50beec;
+    position: relative;
+}
+.rest-day {
+    width: 100%;
+    height: 50%;
+    position: relative;
+    /*height: 100%;
+    background: url('../image/rest-middle.png') repeat-x;
+    background-size: cover;
+    z-index: 1;
+    position: relative;*/
+}
+.rest-night {
+    width: 100%;
+    height: 50%;
+    background-color: #34495E;
+    position: relative;
+}
+.rest-dayimg {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: url('../image/day.png') no-repeat;
+    background-size: cover;
+}
+.rest-nightimg {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: url('../image/night.png') no-repeat;
+    background-size: cover;
+}
+.rest-time {
+    width: 100%;
+    height: 100%;
+    color: #ffffff;
+    padding: 15px;
+}
+.rest-time input {
+    color: #333333;
+}
+.rest-title {
+    font-size: 26px;
+    color: #ffffff;
+}
+.rest-time p {
+    padding: 10px 0;
+    color: #ffffff;
+    font-size: 16px;
+    margin-bottom: 0;
+}
+.aui-input-row {
+    min-height: 80px;
+}
+.aui-input-row label, .aui-input-row p {
+    width: 100%;
+    padding: 15px 0;
+}
+.aui-input-row label ~ input,
+.aui-input-row label ~ select,
+.aui-input-row label ~ textarea {
+    float: left;
+    width: 100px;
+    padding-left: 0;
+    margin-bottom: 0;
+    border: 0;
+    padding-left: 5px;
+    margin-right: 5px;
+}
+.aui-input-row span {
+    background-color: #ffffff;
+    padding: 5px 10px;
+    color: #34495E;
+    border-radius: 3px;
+}
+.aui-input-row span.active {
+    background-color: #F1C40F;
+}

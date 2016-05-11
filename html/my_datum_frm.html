@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>我的资料</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/datum.css" />
+</head>
+<style type="text/css">
+.aui-input-row label {color: #999999;}
+#imageclipTool { display: none; height: 45px; padding-top: 5px; background: #ffffff;}
+#boytag, #girltag { display: none;}
+.type-list {
+    padding-top: 5px;
+}
+</style>
+<body>
+    <div class="aui-content">
+        <div class="avatar" onclick="changeAvatar();">
+            <img src="../image/noavatar.gif" data-echo="" id="avatarImg">
+        </div>
+        <input type="hidden" id="avatar">
+    </div>
+    
+    <div class="aui-content aui-input-group">
+        <div class="aui-input-row">
+            <label>昵称</label>
+            <input type="text" id="nickname" placeholder="昵称" value="">
+        </div>
+        <div class="aui-input-row">
+            <label>公司</label>
+            <input type="text" id="company" placeholder="0" value="">
+        </div>
+        <div class="aui-input-row">
+            <label>性别</label>
+            <div class="type-list" id="sex">
+                <div class="aui-label aui-label-default boy">男</div>
+                <div class="aui-label aui-label-default girl">女</div>
+            </div>
+        </div>
+        <div class="aui-input-row">
+            <label>年龄</label>
+            <input type="text" id="age" placeholder="0" value="">
+        </div>
+        <div class="aui-input-row">
+            <label></label>
+            <div class="type-list" id="mate">
+                <div class="aui-label aui-label-default mate danshen" data-id="1" isOn='0'>单身</div>
+                <div class="aui-label aui-label-default mate feidanshen" data-id="2" isOn='0'>非单身</div>
+            </div>        
+        </div> 
+    </div> 
+    <div class="aui-content">
+        <div class="aui-input-group edit">
+            <div class="aui-input-row">
+                <label>我的标签</label>
+                <span class="aui-pull-right aui-iconfont aui-icon-unfold"></span>
+                <div class="aui-col-xs-12 aui-clearfix type-list">
+                    <div class="aui-label aui-label-default tag" data-id="1" isOn='0'>逗比</div>
+                    <div class="aui-label aui-label-default tag" data-id="2" isOn='0'>土豪</div>
+                    <div class="aui-label aui-label-default tag" data-id="3" isOn='0'>学生仔</div>
+                    <div class="aui-label aui-label-default tag" data-id="4" isOn='0'>文艺青年</div>
+                    <div class="aui-label aui-label-default tag" data-id="5" isOn='0'>待解救</div>
+                    <div class="aui-label aui-label-default tag" data-id="6" isOn='0'>单身</div>
+                    <div class="aui-label aui-label-default tag" data-id="7" isOn='0'>行业精英</div>
+                    <div class="aui-label aui-label-default tag" data-id="8" isOn='0'>奋斗ING</div>
+                    <div class="aui-label aui-label-default tag" data-id="9" isOn='0'>缺爱型</div>
+                    <div class="aui-label aui-label-default tag" data-id="10" isOn='0'>热恋中</div>
+                    <div class="aui-label aui-label-default tag" data-id="11" isOn='0'>寂寞</div>
+                    <div class="aui-label aui-label-default tag" data-id="12" isOn='0'>上班族</div>
+                    <!--<div class="aui-label aui-label-default tag" data-id="13" isOn='0'>民工</div>-->
+                    <div id="boytag">
+                        <div class="aui-label aui-label-default tag" data-id="14" isOn='0'>帅哥</div>
+                        <div class="aui-label aui-label-default tag" data-id="15" isOn='0'>黑社会</div>
+                        <div class="aui-label aui-label-default tag" data-id="16" isOn='0'>大叔</div>
+                        <div class="aui-label aui-label-default tag" data-id="17" isOn='0'>小鲜肉</div>
+                        <div class="aui-label aui-label-default tag" data-id="18" isOn='0'>色狼</div>
+                        <div class="aui-label aui-label-default tag" data-id="19" isOn='0'>宅男</div>
+                    </div>
+                    <div id="girltag">
+                        <div class="aui-label aui-label-default tag" data-id="20" isOn='0'>美女</div>
+                        <div class="aui-label aui-label-default tag" data-id="21" isOn='0'>文静淑女</div>
+                        <div class="aui-label aui-label-default tag" data-id="22" isOn='0'>熟女系列</div>
+                        <div class="aui-label aui-label-default tag" data-id="23" isOn='0'>女汉子</div>
+                        <div class="aui-label aui-label-default tag" data-id="24" isOn='0'>小清新</div>
+                        <div class="aui-label aui-label-default tag" data-id="25" isOn='0'>宅女</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="aui-nav aui-bar-tab" id="imageclipTool">
+        <div class="aui-btn aui-btn-primary aui-pull-left" tapmode onclick="imageClipClose();">
+            <span class="aui-iconfont aui-icon-closed"></span>
+        </div>
+        <div class="aui-btn aui-btn-primary aui-pull-right" tapmode onclick="imageClipSave();">
+            <span class="aui-iconfont aui-icon-check"></span>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/my_datum.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+<script type="text/javascript" src="../script/echo.js"></script>
+<script type="text/javascript" src="../script/aui_compress.min.js"></script>
+</html>

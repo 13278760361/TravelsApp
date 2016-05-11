@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>我的钱包</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/wallet.css" />
+</head>
+<style>
+
+</style>
+<body>
+    <script id="wallet-template" type="text/x-dot-template">
+        <div class="aui-content today-income">
+            <div class="today-income-title aui-iconfont aui-icon-time"> 今日收益</div>
+            <div class="aui-col-xs-12 aui-padded-20 today-income-info">
+                <div class="aui-col-xs-6 aui-text-center">
+                    <strong>{{=it.coinToday}}</strong>驴豆
+                </div>
+                <div class="aui-col-xs-6 aui-text-center">
+                    <strong>{{=it.amountToday}}</strong>元
+                </div>
+            </div>
+        </div> 
+        <div class="aui-content total-income">
+            <div class="total-income-title aui-pull-left">总收益</div>
+            <div class="aui-col-xs-12 aui-padded-20 total-income-info aui-clearfix">
+                <div class="aui-col-xs-6 aui-text-center">
+                    <strong>{{=it.coinTotal}}</strong>驴豆
+                </div>
+                <div class="aui-col-xs-6 aui-text-center">
+                    <strong>{{=it.amountTotal}}</strong>元
+                </div>
+            </div>
+        </div>
+        <div class="aui-content income-bill">
+            <div class="income-bill-title aui-iconfont aui-icon-file2 aui-pull-left"> 账单</div>
+            <div class="income-bill-title aui-iconfont aui-icon-more aui-pull-right"></div>
+            <div class="aui-col-xs-12 aui-clearfix">
+                <ul class="aui-list-view" id="walletInfo-info">
+                    {{ for(var i in it.data) { }}
+                    <li class="aui-list-view-cell">
+                        <a class="aui-arrow-right">
+                            <span class="aui-pull-left">{{=it.data[i].title}}</span>
+                            {{? it.data[i].type==1}}
+                            <span class="aui-pull-right aui-iconfont aui-icon-add aui-text-primary"> {{=it.data[i].total}} {{? it.data[i].coin=='coin'}}驴豆{{?? it.data[i].coin=='money'}}元{{? }}</span>
+                            {{?? it.data[i].type==2}}
+                            <span class="aui-pull-right aui-iconfont aui-icon-minus aui-text-danger"> {{=it.data[i].total}} {{? it.data[i].coin=='coin'}}驴豆{{?? it.data[i].coin=='money'}}元{{? }}</span>
+                            {{? }}
+                        </a>
+                    </li>
+                    {{ } }}
+                </ul>
+            </div>
+        </div>
+    </script>
+    <div id="wallet-content"></div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/my_wallet.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+</html>

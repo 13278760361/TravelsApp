@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>便笺</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/notepaper.css" />
+</head>
+<style>
+.aui-content {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+</style>
+<body>
+    <div class="aui-content">
+        <div class="aui-input-group add">
+            <div class="aui-input-row textarea">
+                <textarea rows="3" placeholder="写写也是一种态度（最多不超过500字）" id="content"></textarea>
+            </div>
+            <div class="aui-input-row">
+            	<button class="aui-pull-right" tapmode onclick="postData();">提交</button>
+            </div>
+        </div>
+    </div>
+    <script id="newNotepaper-template" type="text/x-dot-template">
+    <div class="list" id="notepaper_{{=it.id}}">
+        <div class="aui-pull-left list-time aui-text-right">{{=it.inputtime}}</div>
+        <div class="list-right">
+            <div class="list-info">
+                <div class="aui-col-xs-12 list-title">{{=it.content}}
+                </div>
+                <div class="aui-line-x"></div>
+                <div class="aui-col-xs-12 list-btn">
+                    <div class="aui-pull-right aui-iconfont aui-icon-delete" tapmode onclick="deleteData({{=it.id}});"> 删除</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </script>
+    <script id="notepaper-template" type="text/x-dot-template">
+    {{ for(var i in it) { }}
+    <div class="list" id="notepaper_{{=it[i].note_id}}">
+        <div class="aui-pull-left list-time aui-text-right">{{=it[i].inputtime}}</div>
+        <div class="list-right">
+            <div class="list-info">
+                <div class="aui-col-xs-12 list-title">{{=it[i].content}}
+                </div>
+                <div class="aui-line-x"></div>
+                <div class="aui-col-xs-12 list-btn">
+                    <div class="aui-pull-right aui-iconfont aui-icon-delete" tapmode onclick="deleteData({{=it[i].note_id}});"> 删除</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ } }}
+    </script>
+    <div class="aui-content" id="notepaper-content"></div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/my_notepaper.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>创建圈子</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/circle_add.css" />
+</head>
+<style type="text/css">
+#imageclipTool { display: none; height: 45px; padding-top: 5px; background: #ffffff;}
+</style>
+<body>
+    <div class="aui-content">
+        <div class="logo" onclick="changeLogo();">
+            <img src="../image/blank.gif" data-echo="" id="logoImg">
+        </div>
+        <input type="hidden" id="logo">
+    </div>
+    
+    <div class="aui-content aui-input-group">
+        <div class="aui-input-row">
+            <label>圈名</label>
+            <input type="text" id="title" placeholder="圈子名称" value="">
+        </div>
+    </div>
+    <div class="aui-content">
+        <div class="aui-input-group edit">
+            <div class="aui-input-row">
+                <label>圈子介绍</label>
+                <span class="aui-pull-right aui-iconfont aui-icon-unfold"></span>
+                <div class="aui-col-xs-12 aui-clearfix aui-padded-10">
+                    <textarea rows="5" placeholder="请描述一下你的圈子" id="description"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="aui-nav aui-bar-tab" id="imageclipTool">
+        <div class="aui-btn aui-btn-primary aui-pull-left" tapmode onclick="imageClipClose();">
+            <span class="aui-iconfont aui-icon-closed"></span>
+        </div>
+        <div class="aui-btn aui-btn-primary aui-pull-right" tapmode onclick="imageClipSave();">
+            <span class="aui-iconfont aui-icon-check"></span>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/circle_add.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+<script type="text/javascript" src="../script/echo.js"></script>
+</html>

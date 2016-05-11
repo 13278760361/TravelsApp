@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>活动详情</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/activity_aa_show.css" />
+</head>
+<body>
+	<script id="activity-template" type="text/x-dot-template">
+	<div class="aui-content activity-show-header" style="background:url('{{=it['act_img_url']}}') no-repeat center;background-size: cover;">
+		<div class="mask"></div>
+		<div class="activity-show-title">{{=it.act_title}}</div>
+		<div class="activity-show-basicinfo">
+			<p>
+				<span class="aui-iconfont aui-icon-location"></span>
+				<span> {{=it['act_address']}}</span>
+			</p>
+			<p>
+				<span class="aui-iconfont aui-icon-history"></span>
+				<span> {{=it['startdate']}} - {{=it['enddate']}}</span>
+			</p>
+			<p>
+				<span class="aui-iconfont aui-icon-tag"></span>
+				<span> {{=it.theme}}</span>
+			</p>
+		</div>
+		<div class="activity-show-attend">
+			<div class="aui-pull-left">
+				<div class="activity-show-attend-btn" tapmode onclick="attend();" id="attendBtn">报名参加</div>
+			</div>
+			<div class="aui-pull-right">
+				<span class="aui-iconfont aui-icon-man"> <span id="boy-total">{{=it.attendtotal_boy}}</span>人</span>
+				<span class="aui-iconfont aui-icon-women"> <span id="girl-total">{{=it.attendtotal_girl}}</span>人</span>
+			</div>
+		</div>
+	</div>
+	<div class="aui-content">
+		<div class="activity-show-add-title">发起会员</div>
+		<div class="aui-col-xs-12 activity-show-add-userinfo aui-arrow-right" tapmode onclick="spaceShow({{=it['member_id']}});">
+			<div class="activity-show-add-avatar">
+				<img src="../image/blank.gif" data-echo="{{=it['useravatar']}}">
+			</div>
+			<div class="activity-show-add-user">
+				<div class="activity-show-add-username">
+					{{=it['member_name']}}
+				</div>
+				<p>
+					{{? it.usersex==1 }}
+					<small class="boy"><span class="aui-iconfont aui-icon-man"></span> {{=it.userage}}岁</small>
+					{{?? it.usersex==2 }}
+					<small class="girl"><span class="aui-iconfont aui-icon-women"></span> {{=it.userage}}岁</small>
+					{{? }}
+					{{? it.usermate==2 }}
+					<small class="feidanshen">非单身</small>
+					{{?? }}
+					<small class="danshen">单身</small>
+					{{? }}
+				</p>
+			</div>
+        </div>
+    </div>
+	<div class="aui-content activity-show-info">
+		<div class="activity-show-add-title">
+			活动详情
+			<span class="aui-pull-right aui-iconfont aui-icon-unfold"></span>
+		</div>
+		<div class="aui-col-xs-12 activity-show-desc">{{=it['act_content']}}</div>
+    </div>
+    {{? it.photos}}
+    <div class="aui-content activity-show-pic">
+    	<ul class="aui-thumb-view">
+    		{{ for(var k in it.photos) { }}
+            <li class="aui-list-view-cell aui-img aui-col-xs-4" tapmode onclick="imageBrowser({{=k}});">
+                <img class="aui-img-object" src="../image/nophoto.png" {{? it.photos[k].act_imgs_url}}data-echo="{{=it.photos[k].act_imgs_url}}"{{? }}>
+            </li>
+            {{ } }}
+        </ul>
+    </div>
+    {{? }}
+    </script>
+    <script id="attend-template" type="text/x-dot-template">
+    {{? it}}
+    {{ for(var i in it) { }}
+    <div class="aui-col-xs-12 activity-show-attend-userlist aui-arrow-right" tapmode onclick="spaceShow({{=it[i].userid}});">
+			<div class="activity-show-attend-useravatar">
+				<img src="../image/noavatar.gif" data-echo="{{=it[i].avatar}}">
+			</div>
+			<div class="activity-show-attend-userinfo">
+				<div class="activity-show-attend-username">{{=it[i].member_nickname}}</div>
+				<p>
+					{{? it[i].member_sex==1 }}
+					<small class="boy"><span class="aui-iconfont aui-icon-man"></span> {{=it[i].member_age}}岁</small>
+					{{?? it[i].member_sex==2 }}
+					<small class="girl"><span class="aui-iconfont aui-icon-women"></span> {{=it[i].member_age}}岁</small>
+					{{? }}
+					{{? it[i].member_mate==2 }}
+					<small class="feidanshen">非单身</small>
+					{{?? }}
+					<small class="danshen">单身</small>
+					{{? }}
+					
+				</p>
+			</div>
+       
+    </div>
+    {{ } }}
+    {{??}}
+    <div class="aui-list-view activity-show-attend-userlist" id="noPerson">
+		<div class="aui-col-xs-12 aui-text-center">暂无会员参与</div>
+	</div>	
+    {{? }}
+    </script>
+
+
+    <div id="activity-content"></div>
+    
+	<div class="aui-content activity-show-attend-info aui-padded-15">
+		<div class="activity-show-attend-title">
+			报名会员
+			<span class="aui-pull-right">马上报名 期待相遇</span>
+		</div>
+		<div id="attend-content"></div>
+    </div>    
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/echo.js"></script>
+<script type="text/javascript" src="../script/config.js"></script>
+<script type="text/javascript" src="../script/activity_aa_show.js"></script>
+</html>

@@ -1,0 +1,86 @@
+body {
+    background-color: #efeff4;
+    -webkit-animation: fadeIn .5s ease both;
+    animation: fadeIn .5s ease both;
+}
+.aui-content {
+    padding: 10px 0 0 0;
+    overflow: hidden;
+}
+#header {
+    background-color: #1abc9c;
+}
+.avatar {
+    width: 96px;
+    height: 96px;
+    margin: 20px auto;
+}
+.avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+.edit label {
+    padding-top: 13px;
+    font-size: 14px;
+}
+.edit .textarea {
+    padding: 10px;
+}
+.edit .aui-pull-right, .edit .aui-pull-left {
+    padding-top: 10px;
+    padding-right: 10px;
+    color: #8f8f94;
+}
+.edit textarea {
+    font-size: 14px;
+    padding: 5px;
+    border: none;
+}
+.edit .aui-input-row:last-child:after {
+    height: 0;
+}
+
+.type-list {
+    width: 70%;
+    float: left;
+    position: relative;
+}
+.edit .type-list {
+    width: 100%;
+    padding: 10px;
+    position: relative;
+}
+.edit .type-list:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    background-color: #c8c7cc;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+}
+.type-list .aui-label {
+    padding: 10px 14px;
+    font-size: 14px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+.type-list .aui-label.active {
+    background-color: #1ABC9C;
+    color: #ffffff;
+    -webkit-animation: fadeIn .7s ease both;
+    animation: fadeIn .7s ease both;
+}
+@-webkit-keyframes fadeIn {
+    from { opacity: 0.3; }
+    to {  }
+}
+@keyframes fadeIn {
+    from { opacity: 0.3; }
+    to {  }
+}

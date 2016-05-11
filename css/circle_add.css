@@ -1,0 +1,44 @@
+body {
+    background-color: #efeff4;
+    -webkit-animation: fadeIn .5s ease both;
+    animation: fadeIn .5s ease both;
+}
+.aui-content {
+    padding: 10px 0 0 0;
+    overflow: hidden;
+}
+#header {
+    background-color: #1abc9c;
+}
+.logo {
+    width: 96px;
+    height: 96px;
+    margin: 20px auto;
+}
+.logo img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+.edit label {
+    padding-top: 13px;
+    font-size: 14px;
+}
+.edit .textarea {
+    padding: 10px;
+}
+.edit .aui-pull-right, .edit .aui-pull-left {
+    padding-top: 10px;
+    padding-right: 10px;
+    color: #8f8f94;
+}
+
+@-webkit-keyframes fadeIn {
+    from { opacity: 0.3; }
+    to {  }
+}
+@keyframes fadeIn {
+    from { opacity: 0.3; }
+    to {  }
+}

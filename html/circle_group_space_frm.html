@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>圈子</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/circle_group.css" />
+</head>
+<body>
+	<script id="space-template" type="text/x-dot-template">
+	<div class="aui-content circle-header">
+        <div class="circle-logo">
+        	<img src="{{=it.logo}}">
+        </div>
+        <div class="aui-col-xs-12 aui-text-center circle-name">{{=it.title}}</div>
+        <div class="aui-col-xs-12 aui-text-center circle-basicinfo">
+        	/*圈号：88888888 ｜ */共 {{=it.memberTotal}} 人
+        </div>
+    </div>
+    <div class="aui-content circle-info">
+    	<div class="circle-infolist">
+    		<p>圈子主人</p>
+    		<ul class="aui-list-view">
+				<li class="aui-list-view-cell aui-img" onclick="spaceShow({{=it.createrUserid}})">
+					<img class="aui-img-object aui-pull-left" src="{{=it.createrAvatar}}">
+					<div class="aui-img-body">
+						{{=it.createrNickname}}
+					</div>
+				</li>
+			</ul>
+    	</div>
+        <div class="circle-infolist">
+        	<p>圈子介绍</p>
+        	<p>{{=it.description}}</p>
+        </div>
+        <div class="circle-infolist">
+        	<p>圈子成员</p>
+        	<div class="circle-member">
+        		{{ for (var i in it.memberInfo){ }}
+        		<div class="aui-col-xs-2" onclick="spaceShow({{=it.memberInfo[i].userid}});"><img src="{{=it.memberInfo[i].avatar}}"></div>
+        		{{ } }}
+        	</div>
+        </div>
+    </div>
+    </script>
+    <div id="space-content"></div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/circle_group_space.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+</html>

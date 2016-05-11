@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>我的达人服务</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/my_activity.css" />
+</head>
+<body>
+	<script id="activity-template" type="text/x-dot-template">
+    {{? it.length>0}}
+    {{ for(var i in it) { }}
+    <div class="aui-list-view activity-service-list" id="activity-{{=it[i].service_id}}">
+		<div class="activity-service-info">
+			<div class="activity-service-title">{{=it[i].service_title}}</div>
+			<p>
+				<span class="aui-iconfont aui-icon-location"></span>
+				{{? it[i].service_addresstype==1}}
+				<span> 目的地不限</span>
+				{{?? it[i].service_addresstype==2}}
+				<span> {{=it[i].service_address}}</span>
+				{{? }}
+			</p>
+			<p>
+            	<span class="aui-iconfont aui-icon-friends"></span>
+            	<span> {{=it[i].attendtotal}}</span>
+            </p>
+			<div class="aui-col-xs-12">
+				<div class="aui-pull-right">
+					<span class="service-price">{{=it[i].service_price}} 元</span>
+				</div>
+				<div class="aui-pull-left">
+					<span class="aui-iconfont aui-icon-history"></span>
+					<span> {{=it[i].servicedate}}</span>
+				</div>
+			</div>
+		</div>
+		<div class="aui-line-x aui-clearfix"></div>
+        <div class="activity-btn">
+        	<div class="aui-col-xs-4" tapmode onclick="activityDelete({{=it[i].service_id}});">删除</div>
+        	<div class="aui-col-xs-4" tapmode onclick="">订单</div>
+        	<div class="aui-col-xs-4" tapmode onclick="activityShow({{=it[i].service_id}});">详情</div>
+        </div>
+    </div>
+    {{ } }}
+    {{??}}
+    <p class="aui-text-center">你还没有发布过AA活动</p>
+    {{? }}
+    </script>
+	<div class="aui-content" id="activity-content"></div>
+	
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/my_activity_service.js"></script>
+</html>

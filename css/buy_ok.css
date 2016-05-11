@@ -1,0 +1,118 @@
+    body{	
+        display: -webkit-box;	
+        display: -webkit-flex;	
+        display: flex;	
+        -webkit-box-orient: vertical;	
+        -webkit-flex-direction: column;	
+        flex-direction: column;	
+    }	
+	
+    /*header*/	
+.order-mesg li{padding: 20px 0px; border-bottom:1px solid #ccc; overflow: hidden;}
+.order-mesg li:nth-child(1){
+	  width:100%;
+      padding:50px 0px;
+	  overflow:hidden ; 
+	  background-repeat: no-repeat;
+	  background-position: center top;
+	  -webkit-background-size: cover;
+	  background-size: cover;
+	 
+}
+
+.content{width:96%; margin:0px auto;}
+h4{text-align:center; color:#CBCBCB; padding:25px 0px; border-bottom:1px solid #ccc}
+.title-left{
+	color:#CCCCCC;
+}
+.order-name p{
+	width:60%;
+	float:right;
+	line-height: 20px; 
+	max-height: 40px;
+	
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	padding-bottom:1em;
+	overflow: hidden;
+}
+
+span.wxpay-ic,span.alipay-ic,span.upop-ic{
+	width:26px;
+	height:26px;
+	margin-right:1em;
+    background-repeat: no-repeat;
+    background-position: center top;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+.pay{overflow:hidden;}
+.pay li{
+	width:100%; 
+	overflow:hidden; 
+	line-height: 30px;
+	border-bottom:1px solid #ccc;
+ 	padding:1em 0;
+ }
+.pay span{
+	float: left;
+	line-height:26px;
+}
+span.wxpay-ic{
+	background-image:url("../image/iconfont-wxpay.png");
+}
+span.alipay-ic{
+	background-image:url("../image/iconfont-alipay.png");
+}
+span.upop-ic{
+	background-image:url("../image/iconfont-upop.png");
+}
+.nochecked{
+	float:right;
+	width:16px;
+	height:16px;
+	background-image:url("../image/iconfont-ok02.png");
+}
+.pay li input[type="radio"] {
+    display: none;
+}
+.order-pric i,.order-pric span:nth-child(2){
+	color:#FF6600; 
+	float:right;
+}
+.order-pric span:nth-child(2){
+	font-size:16px;
+}
+.order-pric span.color-pric{
+	color:#FF6600; 
+	float:right;
+	font-size:16px;
+}
+.pay li.checked i{
+	-webkit-filter: grayscale(0); 
+	-moz-filter: grayscale(0); 
+	-ms-filter: grayscale(0); 
+	-o-filter: grayscale(0); 
+	filter: grayscale(0);
+	filter: gray; opacity: 1;
+}
+.pay li i{
+	width:16px;
+	height:16px;
+	float:right;
+	display: inline-block; 
+	margin: 0 auto; 
+	background-image: url("../image/iconfont-ok.png");
+	background-repeat: no-repeat;
+	background-size: 100%; 
+	background-position: 50% 50%;
+
+	-webkit-filter: grayscale(100%); 
+	-moz-filter: grayscale(100%);
+	-ms-filter: grayscale(100%);
+	-o-filter: grayscale(100%); 
+	filter: grayscale(100%); 
+	filter: gray; opacity: 0.5;
+}
+

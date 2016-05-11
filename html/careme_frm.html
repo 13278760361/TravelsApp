@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>圈子</title>
+    <link rel="stylesheet" type="text/css" href="../css/au-add.css" />
+    <link rel="stylesheet" type="text/css" href="../css/circle.css" />
+</head>
+<body>
+    <script id="circle-template" type="text/x-dot-template">
+    {{? it.length>0}}
+    {{ for(var i in it) { }}
+    <div class="aui-list-view circle-list">
+        <div class="aui-col-xs-12">
+            <div class="circle-avatar">
+                <img src="../image/noavatar.gif" {{? it[i].avatar}}data-echo="{{=it[i].avatar}}"{{? }}>
+            </div>
+            <div class="circle-info" onclick="spaceShow({{=it[i].userid}});" data-userid="{{=it[i].userid}}">
+                <div class="circle-title">
+                    {{=it[i].nickname}}
+                    {{? it[i].sex==1 }}
+                    <small class="boy"><span class="aui-iconfont aui-icon-man"></span> {{=it[i].age}} 岁</small>
+                    {{?? it[i].sex==2 }}
+                    <small class="girl"><span class="aui-iconfont aui-icon-women"></span> {{=it[i].age}} 岁</small>
+                    {{? }}
+                    {{? it[i].mate==2 }}
+                    <small class="feidanshen">非单身</small>
+                    {{?? }}
+                    <small class="danshen">单身</small>
+                    {{? }}
+                    
+                    {{? it[i].distance>2000}}
+                    <span class="aui-pull-right">遥远的距离</span>
+                    {{??}}
+                    <span class="aui-pull-right">{{=it[i].distance}} km</span>
+                    {{? }}
+                    
+                </div>
+                {{? it[i].newDynamic}}
+                <p class="aui-ellipsis-1">
+                    {{=it[i].newDynamic}}
+                </p>
+                {{? }}
+            </div>
+        </div>
+    </div>
+    {{ } }}
+    {{? }}
+    </script>
+    <div class="aui-content" id="circle-content"></div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/care_me.js"></script>
+<script type="text/javascript" src="../script/my_info.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/echo.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+</html>
